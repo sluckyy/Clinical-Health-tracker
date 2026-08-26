@@ -1,0 +1,37 @@
+{
+  "_comment": "EDIT THIS FILE to match the real workforce. Names, skills, leave and load targets here drive everything. Skills: ED (emergency on-call), GPO (GP obstetrician), GPA (GP anaesthetist), OBS (obstetric support doctor). 'home' is the doctor's usual site (JT = Jamestown, CB = Crystal Brook) - used as a soft preference for which ED line they cover. 'reduced_load' marks doctors whose on-call burden the solver actively minimises. 'fte' scales their fair-share target (1.0 = full share).",
+
+  "doctors": [
+    { "id": "holly",  "name": "Holly D",          "home": "JT", "skills": ["ED", "GPO"],               "reduced_load": true,  "fte": 1.0 },
+    { "id": "simon",  "name": "Simon J",          "home": "CB", "skills": ["ED", "GPA"],               "reduced_load": true,  "fte": 1.0 },
+    { "id": "rowena", "name": "Rowena",           "home": "JT", "skills": ["ED"],                      "reduced_load": false, "fte": 1.0 },
+    { "id": "dr_a",   "name": "Dr A (senior)",    "home": "JT", "skills": ["ED", "GPO", "GPA", "OBS"], "reduced_load": false, "fte": 1.0 },
+    { "id": "dr_b",   "name": "Dr B",             "home": "CB", "skills": ["ED", "GPO", "OBS"],        "reduced_load": false, "fte": 1.0 },
+    { "id": "dr_c",   "name": "Dr C",             "home": "JT", "skills": ["ED", "GPA"],               "reduced_load": false, "fte": 1.0 },
+    { "id": "dr_d",   "name": "Dr D",             "home": "CB", "skills": ["ED", "OBS"],               "reduced_load": false, "fte": 1.0 },
+    { "id": "dr_e",   "name": "Dr E",             "home": "JT", "skills": ["ED", "OBS"],               "reduced_load": false, "fte": 1.0 },
+    { "id": "dr_f",   "name": "Dr F",             "home": "CB", "skills": ["ED"],                      "reduced_load": false, "fte": 1.0 },
+    { "id": "dr_g",   "name": "Dr G (part-time)", "home": "JT", "skills": ["ED"],                      "reduced_load": false, "fte": 0.6 }
+  ],
+
+  "future_doctors": [
+    { "id": "lauren",  "name": "Lauren (GPO)",  "home": "JT", "skills": ["ED", "GPO"], "reduced_load": false, "fte": 1.0, "available_from_month": 6 },
+    { "id": "krishna", "name": "Krishna (GPO)", "home": "CB", "skills": ["ED", "GPO"], "reduced_load": false, "fte": 1.0, "available_from_month": 12 }
+  ],
+
+  "clare_backup": {
+    "_comment": "Clare network backup, usable 'at a pinch' for maternity roles only (not ED). GPOs rotate weekly, GPAs do 2-3 day stints.",
+    "roles_covered": ["GPO", "GPA", "OBS"],
+    "gpo_pool": 5,
+    "gpa_pool": 4
+  },
+
+  "rules": {
+    "max_consecutive_oncall_days": 4,
+    "min_days_off_after_long_stretch": 2,
+    "long_stretch_length": 3,
+    "maternity_block_target_days": 7,
+    "reduced_load_target_fraction": 0.55,
+    "_comment": "reduced_load_target_fraction: reduced-load doctors are steered toward this fraction of an average full share."
+  }
+}

@@ -1,0 +1,508 @@
+<title>One Team, Two Towns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #f6f8f6;
+    --card: #fcfdfc;
+    --ink: #16211f;
+    --ink-2: #4d5a57;
+    --ink-3: #7d8a86;
+    --hairline: #dde3e0;
+    --grid: #e7ebe9;
+    --accent: #0e6e64;
+    --accent-ink: #0a5750;
+    --accent-wash: #e2efec;
+    --series-old: #eb6834;
+    --series-new: #1baf7a;
+    --status-warn: #fab219;
+    --status-warn-wash: #fdf3d9;
+    --status-crit: #d03b3b;
+    --status-crit-wash: #fbe7e7;
+    --good-text: #006300;
+    --wkend: #eef1ef;
+    --cell-hover: #d5ece5;
+    --shadow: 0 1px 2px rgba(22,33,31,.05), 0 4px 16px rgba(22,33,31,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #101413;
+      --card: #171c1b;
+      --ink: #edf2f0;
+      --ink-2: #a8b4b0;
+      --ink-3: #78847f;
+      --hairline: #2a312f;
+      --grid: #232927;
+      --accent: #3aaf9f;
+      --accent-ink: #52c2b2;
+      --accent-wash: #16302c;
+      --series-old: #d95926;
+      --series-new: #199e70;
+      --status-warn: #fab219;
+      --status-warn-wash: #33290e;
+      --status-crit: #e66767;
+      --status-crit-wash: #391a1a;
+      --good-text: #0ca30c;
+      --wkend: #1b201f;
+      --cell-hover: #1f3b35;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #101413;
+    --card: #171c1b;
+    --ink: #edf2f0;
+    --ink-2: #a8b4b0;
+    --ink-3: #78847f;
+    --hairline: #2a312f;
+    --grid: #232927;
+    --accent: #3aaf9f;
+    --accent-ink: #52c2b2;
+    --accent-wash: #16302c;
+    --series-old: #d95926;
+    --series-new: #199e70;
+    --status-warn: #fab219;
+    --status-warn-wash: #33290e;
+    --status-crit: #e66767;
+    --status-crit-wash: #391a1a;
+    --good-text: #0ca30c;
+    --wkend: #1b201f;
+    --cell-hover: #1f3b35;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent-ink); margin-bottom: 14px;
+  }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Public Sans", system-ui, sans-serif; text-wrap: balance; }
+  h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 800; line-height: 1.08; margin: 0 0 10px; }
+  h2 { font-size: 24px; font-weight: 700; margin: 0 0 6px; }
+  h3 { font-size: 17px; font-weight: 700; margin: 0 0 6px; }
+  .lede { font-size: 18px; color: var(--ink-2); max-width: 64ch; margin: 0; }
+  .lede strong { color: var(--ink); }
+  .answer { color: var(--accent-ink); font-weight: 800; }
+
+  section { margin-top: 52px; }
+  .kicker { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
+  .section-note { color: var(--ink-2); max-width: 68ch; margin: 6px 0 0; }
+  .section-note + .section-note { margin-top: 10px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 26px; }
+  .tile {
+    background: var(--card); border: 1px solid var(--hairline); border-radius: 10px;
+    padding: 18px 20px 16px; box-shadow: var(--shadow);
+  }
+  .tile .label { font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+  .tile .value { font-family: "Bricolage Grotesque", sans-serif; font-size: 36px; font-weight: 800; line-height: 1.1; margin: 6px 0 2px; }
+  .tile .value .unit { font-size: 18px; font-weight: 700; color: var(--ink-2); }
+  .tile .sub { font-size: 13.5px; color: var(--ink-2); }
+  .tile .delta-good { color: var(--good-text); font-weight: 600; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--hairline); border-radius: 12px;
+    padding: 24px 26px; margin-top: 20px; box-shadow: var(--shadow);
+  }
+
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13.5px; color: var(--ink-2); margin: 4px 0 18px; }
+  .legend .key { display: inline-flex; align-items: center; gap: 7px; }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+  /* paired horizontal bars */
+  .barchart { display: grid; grid-template-columns: max-content 1fr; row-gap: 13px; column-gap: 14px; align-items: center; }
+  .barchart .doc { font-size: 14px; font-weight: 600; text-align: right; white-space: nowrap; }
+  .barchart .doc .tag { display: block; font-size: 11px; font-weight: 600; color: var(--accent-ink); }
+  .pair { display: grid; gap: 3px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; min-height: 15px; }
+  .bar { height: 13px; border-radius: 0 4px 4px 0; min-width: 2px; transition: opacity .15s; }
+  .bar.old { background: var(--series-old); }
+  .bar.new { background: var(--series-new); }
+  .bar-val { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .barchart:hover .bar { opacity: .45; }
+  .barchart .pair:hover .bar, .barchart .pair:focus-within .bar { opacity: 1; }
+
+  /* grouped cost bars */
+  .costgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 26px; }
+  .costchart { display: grid; grid-template-columns: max-content 1fr; row-gap: 10px; column-gap: 12px; align-items: center; }
+  .costchart .glabel { font-size: 13.5px; font-weight: 600; text-align: right; }
+  .costchart .glabel small { display: block; font-weight: 400; color: var(--ink-3); font-size: 11.5px; }
+
+  /* scenario explorer */
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .tab {
+    border: 1px solid var(--hairline); background: var(--card); color: var(--ink-2);
+    font: 600 13.5px "Public Sans", sans-serif; padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  }
+  .tab:hover { border-color: var(--accent); color: var(--ink); }
+  .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .tab[aria-selected="true"] { color: #08211d; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tab[aria-selected="true"] { color: #08211d; } }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 4px; }
+  .chip {
+    font-size: 13px; font-weight: 600; border-radius: 999px; padding: 5px 12px;
+    background: var(--accent-wash); color: var(--accent-ink); border: 1px solid transparent;
+  }
+  .chip.warn { background: var(--status-warn-wash); color: var(--ink); border-color: var(--status-warn); }
+  .chip.crit { background: var(--status-crit-wash); color: var(--ink); border-color: var(--status-crit); }
+  .chip .num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+  .scenario-note { font-size: 14px; color: var(--ink-2); margin: 8px 0 14px; max-width: 72ch; }
+
+  .roster-scroll { overflow-x: auto; border: 1px solid var(--hairline); border-radius: 10px; }
+  table.roster { border-collapse: collapse; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; }
+  table.roster th, table.roster td { border: 1px solid var(--grid); text-align: center; min-width: 30px; padding: 5px 2px; }
+  table.roster th { font-weight: 600; color: var(--ink-3); background: var(--card); }
+  table.roster th.dow { font-size: 9.5px; letter-spacing: .02em; }
+  table.roster td.rolename, table.roster th.rolename {
+    position: sticky; left: 0; background: var(--card); text-align: right; padding: 5px 10px;
+    font-family: "Public Sans", sans-serif; font-size: 12.5px; font-weight: 600; color: var(--ink-2);
+    white-space: nowrap; z-index: 2; border-right: 2px solid var(--hairline);
+  }
+  table.roster td { background: var(--card); color: var(--ink); cursor: default; }
+  table.roster td.wkend { background: var(--wkend); }
+  table.roster td.clare { background: var(--status-warn-wash); box-shadow: inset 0 0 0 1.5px var(--status-warn); font-weight: 600; }
+  table.roster td.gapcell { background: var(--status-crit-wash); box-shadow: inset 0 0 0 1.5px var(--status-crit); font-weight: 600; }
+  table.roster td.hl { background: var(--cell-hover); font-weight: 600; }
+  .roster-foot { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink-2); margin-top: 10px; }
+
+  /* per-doctor table */
+  table.loads { border-collapse: collapse; width: 100%; font-size: 13.5px; margin-top: 14px; }
+  table.loads th { text-align: right; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); padding: 6px 10px; border-bottom: 1px solid var(--hairline); }
+  table.loads th:first-child, table.loads td:first-child { text-align: left; }
+  table.loads td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  table.loads td:first-child { font-family: "Public Sans", sans-serif; font-weight: 600; font-size: 13.5px; }
+  table.loads td .tag { font-size: 11px; color: var(--accent-ink); font-weight: 600; }
+
+  .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 18px; }
+  .rules ul { margin: 8px 0 0; padding-left: 20px; color: var(--ink-2); }
+  .rules li { margin: 6px 0; }
+  .rules li strong { color: var(--ink); }
+  code { font-family: "IBM Plex Mono", monospace; font-size: .88em; background: var(--accent-wash); color: var(--accent-ink); padding: 1px 5px; border-radius: 4px; }
+
+  .caveat { border-left: 3px solid var(--status-warn); padding: 2px 0 2px 16px; margin-top: 14px; color: var(--ink-2); max-width: 72ch; }
+  .caveat strong { color: var(--ink); }
+
+  footer { margin-top: 60px; padding-top: 18px; border-top: 1px solid var(--hairline); font-size: 13px; color: var(--ink-3); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Mid North maternity consolidation · 6-month trial · briefing demo</div>
+    <h1>One team, two towns — and the ED roster still fills.</h1>
+    <p class="lede">If Jamestown and Crystal Brook share <strong>one maternity team</strong> (GPO + GPA + obs&nbsp;support, active birthing site alternating) and the ED roster is run separately, does ED coverage collapse? <span class="answer">No — modelled over four months including a deliberate worst case, every ED night fills, nobody holds two pagers at once, and the heaviest-hit doctors' on-call drops by more than half.</span></p>
+    <div class="tiles">
+      <div class="tile">
+        <div class="label">ED nights filled — new model</div>
+        <div class="value">100<span class="unit">%</span></div>
+        <div class="sub">238 of 238 across all four modelled months, including the stress test</div>
+      </div>
+      <div class="tile">
+        <div class="label">Holly D — on-call days / month</div>
+        <div class="value">19 → 8</div>
+        <div class="sub"><span class="delta-good">−58%</span> vs the two-team roster</div>
+      </div>
+      <div class="tile">
+        <div class="label">Simon J — on-call days / month</div>
+        <div class="value">23 → 8</div>
+        <div class="sub"><span class="delta-good">−65%</span> vs the two-team roster</div>
+      </div>
+      <div class="tile">
+        <div class="label">Double-hatted days / month</div>
+        <div class="value">29 → 0</div>
+        <div class="sub">Days one doctor holds ED <em>and</em> an obstetric pager at once</div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="kicker">Why the arithmetic works</div>
+    <h2>The “we can’t fill ED” claim was priced against six obstetric roles, not three</h2>
+    <p class="section-note">The old two-site model needs <strong>8 on-call roles every day</strong>: two ED lines (JT covering Orroroo, CB covering Laura) plus a full GPO + GPA + obs-support team at <em>both</em> sites. The consolidated model needs <strong>5</strong>: the same two ED lines plus one maternity team at the active birthing site.</p>
+    <p class="section-note">With ten ED-credentialed doctors, three on maternity call on any given day, and typical leave, roughly six to seven doctors remain available for the two ED lines — about 11–16 ED nights per doctor per month, inside normal rural on-call territory. The roster generator below confirms it day by day rather than on averages: it found <strong>zero unfillable ED nights in any scenario</strong>, including a month with two of three GPOs and a GPA away simultaneously.</p>
+  </section>
+
+  <section>
+    <div class="kicker">Who carries the load</div>
+    <h2>On-call days per doctor — September, old roster vs new</h2>
+    <p class="section-note">Same month, same leave requests, same workforce. The only change is the model. Holly D and Simon J are flagged in the generator as “reduced load” — under the old model that flag is unactionable because every proceduralist is needed nearly every day; under the new model the solver can actually honour it.</p>
+    <div class="card">
+      <div class="legend">
+        <span class="key"><span class="swatch" style="background:var(--series-old)"></span>Old model (two full teams)</span>
+        <span class="key"><span class="swatch" style="background:var(--series-new)"></span>New model (one alternating team)</span>
+      </div>
+      <div class="barchart" id="loadchart"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">The hidden cost of the status quo</div>
+    <h2>The old roster only “works” by double-hatting and backfill</h2>
+    <p class="section-note">On paper the old roster covers ED too — but only because doctors routinely hold an ED line and an obstetric role at the same time, and because 23–32 person-days a month of maternity cover must come from outside the local workforce. A double-hatted day is exactly the situation behind the Orroroo cord-prolapse near miss: the on-call GPO physically at an outlying site while carrying the obstetric pager. The new model eliminates it as a hard rule, not a hope.</p>
+    <div class="card">
+      <div class="legend">
+        <span class="key"><span class="swatch" style="background:var(--series-old)"></span>Old model</span>
+        <span class="key"><span class="swatch" style="background:var(--series-new)"></span>New model</span>
+      </div>
+      <div class="costgrid">
+        <div>
+          <h3>Double-hatted days / month</h3>
+          <div class="costchart" id="dblchart"></div>
+        </div>
+        <div>
+          <h3>Externally backfilled maternity days / month</h3>
+          <div class="costchart" id="clarechart"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Scenario explorer</div>
+    <h2>Every roster below was generated by the constraint solver</h2>
+    <p class="section-note">Pick a scenario. Hover any cell to trace one doctor’s month. Amber cells are Clare-network backup; a red cell would be an unfilled day — you won’t find one under the new model.</p>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="card">
+      <div class="chips" id="chips"></div>
+      <p class="scenario-note" id="scenario-note"></p>
+      <div class="roster-scroll"><table class="roster" id="rostertable"></table></div>
+      <div class="roster-foot">
+        <span><span class="swatch" style="background:var(--wkend); border:1px solid var(--hairline)"></span> weekend</span>
+        <span><span class="swatch" style="background:var(--status-warn-wash); border:1.5px solid var(--status-warn)"></span> Clare backup</span>
+        <span><span class="swatch" style="background:var(--status-crit-wash); border:1.5px solid var(--status-crit)"></span> unfilled</span>
+        <span>Initials key below · “×2” marks a double-hatted assignment (old model only)</span>
+      </div>
+      <table class="loads" id="loadtable"></table>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">How the generator works</div>
+    <h2>Rules in, roster out — regenerate in under a minute</h2>
+    <div class="rules card">
+      <div>
+        <h3>Hard rules (never broken)</h3>
+        <ul>
+          <li><strong>One role per doctor per day</strong> — ED and maternity can never sit on the same head (the old model’s double-hatting is switched off).</li>
+          <li><strong>Skills match the role</strong> — only credentialed GPOs/GPAs/obs-support doctors are rostered to those lines.</li>
+          <li><strong>Leave is absolute</strong> — a doctor on leave is simply not in the pool.</li>
+          <li><strong>Fatigue cap</strong> — no more than 4 consecutive on-call days for anyone.</li>
+          <li><strong>Every role covered every day</strong> — or the day is flagged in red, never silently dropped.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Preferences (optimised, tweakable)</h3>
+        <ul>
+          <li><strong>Reduced-load doctors</strong> are steered to ~55% of a fair share — this is what gets Holly D and Simon J to 8 days.</li>
+          <li><strong>Fair-share targets</strong> scaled by FTE, with penalties for anyone drifting above.</li>
+          <li><strong>Maternity continuity</strong> — week-style blocks for GPO/GPA/obs support, fewer handovers.</li>
+          <li><strong>Home-site ED preference</strong> — the JT line leans on JT doctors (Orroroo link), CB on CB doctors (Laura link).</li>
+          <li><strong>Clare backup last</strong> — the GPO/GPA/obs-support fallback pool is used only when the local roster genuinely can’t, and every use is counted and shown.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="section-note">Everything above lives in two plain files — <code>rostering/workforce_config.json</code> (doctors, skills, FTE, load flags) and <code>rostering/scenarios.json</code> (month, leave requests, active birthing site) — and <code>python3 roster_solver.py</code> rebuilds every roster on this page. Add Lauren in month 6 or Krishna in month 12 by moving one entry; add a leave request with one line. Occasional gaps get tweaked by hand, exactly as intended.</p>
+  </section>
+
+  <section>
+    <div class="kicker">Read before quoting</div>
+    <h2>What this demo is — and isn’t</h2>
+    <div class="caveat"><strong>The workforce here is a realistic stand-in, not the real July/August roster.</strong> The attached spreadsheets didn’t reach this analysis, so ten doctors with a plausible JT/CB skill mix (3 GPOs, 2 GPAs, 3 obs-support-capable, all ED-credentialed) were modelled. The structure of the argument — 5 roles/day vs 8, no double-hatting, solver-verified coverage — does not depend on the stand-in; the exact per-doctor numbers do. Drop the real workforce into the config and regenerate before circulating numbers beyond the meeting.</div>
+    <div class="caveat"><strong>Consolidation helps, but doesn’t solve, the birthing-experience finding.</strong> Fewer than 50 births a year split across two teams means each roster line attends very few. One team concentrates that exposure — the same births across half as many rostered clinicians — but ~50/year is still low. Structured rotations through Port Pirie (and the Clare link working both ways) are the credible answer to accreditation, and the alternating-site model makes them easier to roster, not harder.</div>
+    <div class="caveat"><strong>Remote cover for Laura and Orroroo is a separate, worthwhile fix.</strong> Reliable Webex/DTN from doctors’ homes reduces the driving that made the old double-hatted model dangerous, and it benefits either roster model.</div>
+  </section>
+
+  <footer>
+    Generated by the constraint-based roster solver (Google OR-Tools CP-SAT) · code and configs on branch <span style="font-family:'IBM Plex Mono',monospace">claude/gp-rostering-ed-obstetrics-wlsndd</span> of the Clinical-Health-tracker repo · figures regenerate from <span style="font-family:'IBM Plex Mono',monospace">rostering/results.json</span>
+  </footer>
+</div>
+
+<script id="roster-data" type="application/json">[{"scenario":"old_sep","label":"OLD model \u2014 Sept 2026, typical leave","model":"old","month":"2026-09","active_site":"JT","days":30,"roles":["ED_JT","ED_CB","GPO_JT","GPO_CB","GPA_JT","GPA_CB","OBS_JT","OBS_CB"],"roster":[{"date":"2026-09-01","weekday":"Tue","ED_JT":"dr_c","ED_CB":"simon","GPO_JT":"holly","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-02","weekday":"Wed","ED_JT":"dr_a","ED_CB":"simon","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-03","weekday":"Thu","ED_JT":"dr_g","ED_CB":"simon","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_b"},{"date":"2026-09-04","weekday":"Fri","ED_JT":"dr_g","ED_CB":"simon","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_d","OBS_CB":"dr_b"},{"date":"2026-09-05","weekday":"Sat","ED_JT":"dr_a","ED_CB":"rowena","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"CLARE","GPA_CB":"CLARE","OBS_JT":"dr_d","OBS_CB":"dr_e"},{"date":"2026-09-06","weekday":"Sun","ED_JT":"dr_g","ED_CB":"dr_f","GPO_JT":"dr_b","GPO_CB":"holly","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_d","OBS_CB":"dr_e"},{"date":"2026-09-07","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_f","GPO_JT":"dr_b","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_d","OBS_CB":"dr_e"},{"date":"2026-09-08","weekday":"Tue","ED_JT":"rowena","ED_CB":"dr_f","GPO_JT":"dr_b","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"CLARE","OBS_CB":"dr_e"},{"date":"2026-09-09","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_d","GPO_JT":"dr_b","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"CLARE","OBS_CB":"dr_d"},{"date":"2026-09-10","weekday":"Thu","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"CLARE","GPO_CB":"dr_a","GPA_JT":"CLARE","GPA_CB":"CLARE","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-11","weekday":"Fri","ED_JT":"dr_g","ED_CB":"dr_d","GPO_JT":"CLARE","GPO_CB":"dr_b","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-12","weekday":"Sat","ED_JT":"dr_a","ED_CB":"dr_f","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"simon","GPA_CB":"CLARE","OBS_JT":"dr_e","OBS_CB":"CLARE"},{"date":"2026-09-13","weekday":"Sun","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-14","weekday":"Mon","ED_JT":"dr_a","ED_CB":"dr_d","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"CLARE","OBS_CB":"dr_d"},{"date":"2026-09-15","weekday":"Tue","ED_JT":"dr_g","ED_CB":"dr_d","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"CLARE","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-16","weekday":"Wed","ED_JT":"dr_g","ED_CB":"dr_f","GPO_JT":"CLARE","GPO_CB":"holly","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-17","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_f","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"simon","GPA_CB":"CLARE","OBS_JT":"dr_e","OBS_CB":"CLARE"},{"date":"2026-09-18","weekday":"Fri","ED_JT":"dr_g","ED_CB":"dr_f","GPO_JT":"dr_a","GPO_CB":"CLARE","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-19","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_f","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"CLARE","OBS_CB":"dr_d"},{"date":"2026-09-20","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_d","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"CLARE","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-21","weekday":"Mon","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"dr_b","GPO_CB":"holly","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-22","weekday":"Tue","ED_JT":"dr_g","ED_CB":"dr_f","GPO_JT":"dr_b","GPO_CB":"holly","GPA_JT":"simon","GPA_CB":"dr_a","OBS_JT":"dr_e","OBS_CB":"CLARE"},{"date":"2026-09-23","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_f","GPO_JT":"dr_b","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-24","weekday":"Thu","ED_JT":"holly","ED_CB":"dr_d","GPO_JT":"holly","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_b","OBS_CB":"dr_d"},{"date":"2026-09-25","weekday":"Fri","ED_JT":"holly","ED_CB":"dr_d","GPO_JT":"holly","GPO_CB":"dr_a","GPA_JT":"CLARE","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-26","weekday":"Sat","ED_JT":"dr_g","ED_CB":"dr_d","GPO_JT":"holly","GPO_CB":"dr_b","GPA_JT":"CLARE","GPA_CB":"CLARE","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-27","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO_JT":"holly","GPO_CB":"dr_a","GPA_JT":"CLARE","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_b"},{"date":"2026-09-28","weekday":"Mon","ED_JT":"dr_g","ED_CB":"dr_d","GPO_JT":"dr_b","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-09-29","weekday":"Tue","ED_JT":"rowena","ED_CB":"dr_d","GPO_JT":"holly","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_b","OBS_CB":"dr_d"},{"date":"2026-09-30","weekday":"Wed","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"holly","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"}],"doctor_stats":{"holly":{"name":"Holly D","total_oncall_days":19,"ed_days":2,"maternity_days":19,"weekend_days":6,"double_hatted_days":2,"longest_stretch":4,"leave_days":7,"reduced_load":false},"simon":{"name":"Simon J","total_oncall_days":23,"ed_days":4,"maternity_days":23,"weekend_days":4,"double_hatted_days":4,"longest_stretch":4,"leave_days":3,"reduced_load":false},"rowena":{"name":"Rowena","total_oncall_days":10,"ed_days":10,"maternity_days":0,"weekend_days":4,"double_hatted_days":0,"longest_stretch":3,"leave_days":2,"reduced_load":false},"dr_a":{"name":"Dr A (senior)","total_oncall_days":24,"ed_days":4,"maternity_days":24,"weekend_days":6,"double_hatted_days":4,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_b":{"name":"Dr B","total_oncall_days":19,"ed_days":0,"maternity_days":19,"weekend_days":5,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_c":{"name":"Dr C","total_oncall_days":24,"ed_days":1,"maternity_days":24,"weekend_days":5,"double_hatted_days":1,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_d":{"name":"Dr D","total_oncall_days":24,"ed_days":14,"maternity_days":24,"weekend_days":6,"double_hatted_days":14,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_e":{"name":"Dr E","total_oncall_days":24,"ed_days":4,"maternity_days":24,"weekend_days":7,"double_hatted_days":4,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_f":{"name":"Dr F","total_oncall_days":11,"ed_days":11,"maternity_days":0,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":5,"reduced_load":false},"dr_g":{"name":"Dr G (part-time)","total_oncall_days":10,"ed_days":10,"maternity_days":0,"weekend_days":2,"double_hatted_days":0,"longest_stretch":2,"leave_days":0,"reduced_load":false}},"summary":{"ed_slots":60,"ed_gaps":0,"ed_fill_pct":100.0,"total_gaps":0,"clare_backup_days":23,"double_hatted_days":29}},{"scenario":"new_sep","label":"NEW model \u2014 Sept 2026, same leave (active site: JT)","model":"new","month":"2026-09","active_site":"JT","days":30,"roles":["ED_JT","ED_CB","GPO","GPA","OBS"],"roster":[{"date":"2026-09-01","weekday":"Tue","ED_JT":"dr_g","ED_CB":"dr_d","GPO":"dr_a","GPA":"dr_c","OBS":"dr_b"},{"date":"2026-09-02","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_a","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-09-03","weekday":"Thu","ED_JT":"dr_g","ED_CB":"dr_b","GPO":"dr_a","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-09-04","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-09-05","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-09-06","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-07","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-08","weekday":"Tue","ED_JT":"dr_g","ED_CB":"dr_b","GPO":"dr_a","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-09-09","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_a","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-09-10","weekday":"Thu","ED_JT":"dr_g","ED_CB":"dr_d","GPO":"dr_b","GPA":"simon","OBS":"dr_e"},{"date":"2026-09-11","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"simon","OBS":"dr_e"},{"date":"2026-09-12","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"simon","OBS":"dr_d"},{"date":"2026-09-13","weekday":"Sun","ED_JT":"dr_e","ED_CB":"dr_f","GPO":"dr_b","GPA":"simon","OBS":"dr_d"},{"date":"2026-09-14","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-15","weekday":"Tue","ED_JT":"dr_e","ED_CB":"simon","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-16","weekday":"Wed","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"holly","GPA":"simon","OBS":"dr_a"},{"date":"2026-09-17","weekday":"Thu","ED_JT":"dr_g","ED_CB":"dr_d","GPO":"holly","GPA":"simon","OBS":"dr_a"},{"date":"2026-09-18","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"holly","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-19","weekday":"Sat","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-20","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-21","weekday":"Mon","ED_JT":"dr_g","ED_CB":"dr_b","GPO":"dr_a","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-09-22","weekday":"Tue","ED_JT":"holly","ED_CB":"dr_f","GPO":"dr_a","GPA":"simon","OBS":"dr_e"},{"date":"2026-09-23","weekday":"Wed","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-24","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_g","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-25","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-26","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-09-27","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"holly","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-09-28","weekday":"Mon","ED_JT":"dr_c","ED_CB":"dr_f","GPO":"holly","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-09-29","weekday":"Tue","ED_JT":"rowena","ED_CB":"dr_d","GPO":"holly","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-09-30","weekday":"Wed","ED_JT":"dr_c","ED_CB":"dr_b","GPO":"holly","GPA":"dr_a","OBS":"dr_e"}],"doctor_stats":{"holly":{"name":"Holly D","total_oncall_days":8,"ed_days":1,"maternity_days":7,"weekend_days":1,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":true},"simon":{"name":"Simon J","total_oncall_days":8,"ed_days":1,"maternity_days":7,"weekend_days":2,"double_hatted_days":0,"longest_stretch":4,"leave_days":3,"reduced_load":true},"rowena":{"name":"Rowena","total_oncall_days":16,"ed_days":16,"maternity_days":0,"weekend_days":6,"double_hatted_days":0,"longest_stretch":4,"leave_days":2,"reduced_load":false},"dr_a":{"name":"Dr A (senior)","total_oncall_days":19,"ed_days":0,"maternity_days":19,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_b":{"name":"Dr B","total_oncall_days":16,"ed_days":4,"maternity_days":12,"weekend_days":5,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_c":{"name":"Dr C","total_oncall_days":20,"ed_days":2,"maternity_days":18,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_d":{"name":"Dr D","total_oncall_days":21,"ed_days":8,"maternity_days":13,"weekend_days":7,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_e":{"name":"Dr E","total_oncall_days":16,"ed_days":2,"maternity_days":14,"weekend_days":3,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_f":{"name":"Dr F","total_oncall_days":16,"ed_days":16,"maternity_days":0,"weekend_days":7,"double_hatted_days":0,"longest_stretch":4,"leave_days":5,"reduced_load":false},"dr_g":{"name":"Dr G (part-time)","total_oncall_days":10,"ed_days":10,"maternity_days":0,"weekend_days":1,"double_hatted_days":0,"longest_stretch":2,"leave_days":0,"reduced_load":false}},"summary":{"ed_slots":60,"ed_gaps":0,"ed_fill_pct":100.0,"total_gaps":0,"clare_backup_days":0,"double_hatted_days":0}},{"scenario":"new_oct","label":"NEW model \u2014 Oct 2026, site switched to CB","model":"new","month":"2026-10","active_site":"CB","days":31,"roles":["ED_JT","ED_CB","GPO","GPA","OBS"],"roster":[{"date":"2026-10-01","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-02","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-03","weekday":"Sat","ED_JT":"dr_e","ED_CB":"dr_b","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-04","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-05","weekday":"Mon","ED_JT":"holly","ED_CB":"dr_f","GPO":"dr_b","GPA":"simon","OBS":"dr_e"},{"date":"2026-10-06","weekday":"Tue","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"simon","OBS":"dr_e"},{"date":"2026-10-07","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-10-08","weekday":"Thu","ED_JT":"dr_e","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_d"},{"date":"2026-10-09","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"holly","GPA":"dr_a","OBS":"dr_d"},{"date":"2026-10-10","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_b","GPO":"holly","GPA":"dr_a","OBS":"dr_d"},{"date":"2026-10-11","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"holly","GPA":"simon","OBS":"dr_e"},{"date":"2026-10-12","weekday":"Mon","ED_JT":"dr_c","ED_CB":"dr_f","GPO":"dr_a","GPA":"simon","OBS":"dr_e"},{"date":"2026-10-13","weekday":"Tue","ED_JT":"rowena","ED_CB":"dr_b","GPO":"dr_a","GPA":"simon","OBS":"dr_e"},{"date":"2026-10-14","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-10-15","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_a"},{"date":"2026-10-16","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-10-17","weekday":"Sat","ED_JT":"dr_a","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-10-18","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_b","GPO":"dr_a","GPA":"simon","OBS":"dr_e"},{"date":"2026-10-19","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-10-20","weekday":"Tue","ED_JT":"dr_a","ED_CB":"simon","GPO":"holly","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-21","weekday":"Wed","ED_JT":"dr_e","ED_CB":"dr_f","GPO":"holly","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-22","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_f","GPO":"holly","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-23","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_d"},{"date":"2026-10-24","weekday":"Sat","ED_JT":"dr_c","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-10-25","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-10-26","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-10-27","weekday":"Tue","ED_JT":"rowena","ED_CB":"simon","GPO":"holly","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-28","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-29","weekday":"Thu","ED_JT":"dr_e","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-30","weekday":"Fri","ED_JT":"dr_e","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-10-31","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"}],"doctor_stats":{"holly":{"name":"Holly D","total_oncall_days":8,"ed_days":1,"maternity_days":7,"weekend_days":2,"double_hatted_days":0,"longest_stretch":3,"leave_days":3,"reduced_load":true},"simon":{"name":"Simon J","total_oncall_days":8,"ed_days":2,"maternity_days":6,"weekend_days":2,"double_hatted_days":0,"longest_stretch":3,"leave_days":0,"reduced_load":true},"rowena":{"name":"Rowena","total_oncall_days":21,"ed_days":21,"maternity_days":0,"weekend_days":6,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_a":{"name":"Dr A (senior)","total_oncall_days":21,"ed_days":2,"maternity_days":19,"weekend_days":8,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_b":{"name":"Dr B","total_oncall_days":19,"ed_days":4,"maternity_days":15,"weekend_days":7,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_c":{"name":"Dr C","total_oncall_days":18,"ed_days":2,"maternity_days":16,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_d":{"name":"Dr D","total_oncall_days":17,"ed_days":2,"maternity_days":15,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_e":{"name":"Dr E","total_oncall_days":20,"ed_days":5,"maternity_days":15,"weekend_days":7,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_f":{"name":"Dr F","total_oncall_days":23,"ed_days":23,"maternity_days":0,"weekend_days":5,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_g":{"name":"Dr G (part-time)","total_oncall_days":0,"ed_days":0,"maternity_days":0,"weekend_days":0,"double_hatted_days":0,"longest_stretch":0,"leave_days":31,"reduced_load":false}},"summary":{"ed_slots":62,"ed_gaps":0,"ed_fill_pct":100.0,"total_gaps":0,"clare_backup_days":0,"double_hatted_days":0}},{"scenario":"new_stress","label":"NEW model \u2014 stress test: 2 of 3 GPOs + a GPA away at once (Nov 2026)","model":"new","month":"2026-11","active_site":"JT","days":30,"roles":["ED_JT","ED_CB","GPO","GPA","OBS"],"roster":[{"date":"2026-11-01","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-11-02","weekday":"Mon","ED_JT":"dr_g","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-11-03","weekday":"Tue","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-11-04","weekday":"Wed","ED_JT":"dr_g","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-11-05","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-11-06","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-11-07","weekday":"Sat","ED_JT":"dr_e","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-11-08","weekday":"Sun","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"dr_b","GPA":"simon","OBS":"dr_a"},{"date":"2026-11-09","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"simon","OBS":"dr_a"},{"date":"2026-11-10","weekday":"Tue","ED_JT":"dr_c","ED_CB":"dr_f","GPO":"dr_b","GPA":"simon","OBS":"dr_d"},{"date":"2026-11-11","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_f","GPO":"CLARE","GPA":"simon","OBS":"dr_d"},{"date":"2026-11-12","weekday":"Thu","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-11-13","weekday":"Fri","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-11-14","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-11-15","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2026-11-16","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_f","GPO":"holly","GPA":"CLARE","OBS":"dr_d"},{"date":"2026-11-17","weekday":"Tue","ED_JT":"dr_c","ED_CB":"dr_f","GPO":"holly","GPA":"dr_a","OBS":"dr_d"},{"date":"2026-11-18","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_b","GPO":"holly","GPA":"dr_a","OBS":"dr_d"},{"date":"2026-11-19","weekday":"Thu","ED_JT":"dr_e","ED_CB":"dr_f","GPO":"holly","GPA":"dr_c","OBS":"dr_d"},{"date":"2026-11-20","weekday":"Fri","ED_JT":"dr_e","ED_CB":"dr_g","GPO":"dr_b","GPA":"dr_c","OBS":"dr_a"},{"date":"2026-11-21","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_c","OBS":"dr_a"},{"date":"2026-11-22","weekday":"Sun","ED_JT":"dr_g","ED_CB":"rowena","GPO":"dr_b","GPA":"dr_c","OBS":"dr_a"},{"date":"2026-11-23","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_b","GPO":"holly","GPA":"simon","OBS":"dr_d"},{"date":"2026-11-24","weekday":"Tue","ED_JT":"rowena","ED_CB":"dr_g","GPO":"holly","GPA":"simon","OBS":"dr_d"},{"date":"2026-11-25","weekday":"Wed","ED_JT":"dr_e","ED_CB":"dr_b","GPO":"holly","GPA":"simon","OBS":"dr_d"},{"date":"2026-11-26","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_g","GPO":"holly","GPA":"simon","OBS":"dr_d"},{"date":"2026-11-27","weekday":"Fri","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-11-28","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-11-29","weekday":"Sun","ED_JT":"dr_c","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2026-11-30","weekday":"Mon","ED_JT":"dr_c","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"}],"doctor_stats":{"holly":{"name":"Holly D","total_oncall_days":8,"ed_days":0,"maternity_days":8,"weekend_days":0,"double_hatted_days":0,"longest_stretch":4,"leave_days":14,"reduced_load":true},"simon":{"name":"Simon J","total_oncall_days":8,"ed_days":0,"maternity_days":8,"weekend_days":1,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":true},"rowena":{"name":"Rowena","total_oncall_days":16,"ed_days":16,"maternity_days":0,"weekend_days":6,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_a":{"name":"Dr A (senior)","total_oncall_days":16,"ed_days":0,"maternity_days":16,"weekend_days":6,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_b":{"name":"Dr B","total_oncall_days":22,"ed_days":3,"maternity_days":19,"weekend_days":9,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_c":{"name":"Dr C","total_oncall_days":16,"ed_days":4,"maternity_days":12,"weekend_days":6,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_d":{"name":"Dr D","total_oncall_days":20,"ed_days":7,"maternity_days":13,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_e":{"name":"Dr E","total_oncall_days":16,"ed_days":4,"maternity_days":12,"weekend_days":6,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_f":{"name":"Dr F","total_oncall_days":16,"ed_days":16,"maternity_days":0,"weekend_days":5,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_g":{"name":"Dr G (part-time)","total_oncall_days":10,"ed_days":10,"maternity_days":0,"weekend_days":2,"double_hatted_days":0,"longest_stretch":3,"leave_days":0,"reduced_load":false}},"summary":{"ed_slots":60,"ed_gaps":0,"ed_fill_pct":100.0,"total_gaps":0,"clare_backup_days":2,"double_hatted_days":0}},{"scenario":"old_stress","label":"OLD model \u2014 same stress month for comparison (Nov 2026)","model":"old","month":"2026-11","active_site":"JT","days":30,"roles":["ED_JT","ED_CB","GPO_JT","GPO_CB","GPA_JT","GPA_CB","OBS_JT","OBS_CB"],"roster":[{"date":"2026-11-01","weekday":"Sun","ED_JT":"dr_g","ED_CB":"dr_f","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"CLARE","OBS_CB":"dr_e"},{"date":"2026-11-02","weekday":"Mon","ED_JT":"dr_a","ED_CB":"dr_b","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_d","OBS_CB":"dr_e"},{"date":"2026-11-03","weekday":"Tue","ED_JT":"dr_a","ED_CB":"dr_f","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_d","OBS_CB":"dr_e"},{"date":"2026-11-04","weekday":"Wed","ED_JT":"dr_a","ED_CB":"dr_f","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"CLARE","GPA_CB":"dr_c","OBS_JT":"dr_d","OBS_CB":"dr_e"},{"date":"2026-11-05","weekday":"Thu","ED_JT":"rowena","ED_CB":"simon","GPO_JT":"CLARE","GPO_CB":"CLARE","GPA_JT":"CLARE","GPA_CB":"simon","OBS_JT":"dr_d","OBS_CB":"CLARE"},{"date":"2026-11-06","weekday":"Fri","ED_JT":"dr_a","ED_CB":"dr_b","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"CLARE","OBS_CB":"CLARE"},{"date":"2026-11-07","weekday":"Sat","ED_JT":"dr_g","ED_CB":"simon","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-08","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_d","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-09","weekday":"Mon","ED_JT":"dr_g","ED_CB":"dr_b","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"CLARE","GPA_CB":"CLARE","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-10","weekday":"Tue","ED_JT":"dr_c","ED_CB":"dr_d","GPO_JT":"CLARE","GPO_CB":"CLARE","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-11","weekday":"Wed","ED_JT":"dr_g","ED_CB":"dr_f","GPO_JT":"CLARE","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"CLARE","OBS_CB":"CLARE"},{"date":"2026-11-12","weekday":"Thu","ED_JT":"dr_c","ED_CB":"dr_b","GPO_JT":"CLARE","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"CLARE","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-13","weekday":"Fri","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"CLARE","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"CLARE","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-14","weekday":"Sat","ED_JT":"dr_g","ED_CB":"dr_d","GPO_JT":"CLARE","GPO_CB":"dr_b","GPA_JT":"CLARE","GPA_CB":"CLARE","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-15","weekday":"Sun","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"holly","GPO_CB":"CLARE","GPA_JT":"CLARE","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-16","weekday":"Mon","ED_JT":"holly","ED_CB":"dr_b","GPO_JT":"holly","GPO_CB":"dr_b","GPA_JT":"CLARE","GPA_CB":"dr_c","OBS_JT":"CLARE","OBS_CB":"CLARE"},{"date":"2026-11-17","weekday":"Tue","ED_JT":"dr_a","ED_CB":"dr_f","GPO_JT":"holly","GPO_CB":"dr_b","GPA_JT":"dr_a","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-18","weekday":"Wed","ED_JT":"dr_a","ED_CB":"dr_b","GPO_JT":"holly","GPO_CB":"dr_b","GPA_JT":"dr_a","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-19","weekday":"Thu","ED_JT":"dr_a","ED_CB":"dr_d","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"CLARE","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-20","weekday":"Fri","ED_JT":"rowena","ED_CB":"simon","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-21","weekday":"Sat","ED_JT":"dr_c","ED_CB":"simon","GPO_JT":"dr_b","GPO_CB":"holly","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"CLARE","OBS_CB":"CLARE"},{"date":"2026-11-22","weekday":"Sun","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"dr_b","GPO_CB":"holly","GPA_JT":"dr_a","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-23","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_d","GPO_JT":"dr_b","GPO_CB":"holly","GPA_JT":"dr_a","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-24","weekday":"Tue","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"dr_b","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-25","weekday":"Wed","ED_JT":"dr_g","ED_CB":"dr_d","GPO_JT":"holly","GPO_CB":"dr_a","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-26","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_b","GPO_JT":"holly","GPO_CB":"dr_b","GPA_JT":"simon","GPA_CB":"dr_c","OBS_JT":"CLARE","OBS_CB":"CLARE"},{"date":"2026-11-27","weekday":"Fri","ED_JT":"dr_e","ED_CB":"dr_f","GPO_JT":"holly","GPO_CB":"dr_b","GPA_JT":"simon","GPA_CB":"dr_a","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-28","weekday":"Sat","ED_JT":"dr_c","ED_CB":"dr_b","GPO_JT":"holly","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"dr_a","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-29","weekday":"Sun","ED_JT":"dr_g","ED_CB":"dr_b","GPO_JT":"dr_a","GPO_CB":"dr_b","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"},{"date":"2026-11-30","weekday":"Mon","ED_JT":"dr_e","ED_CB":"dr_d","GPO_JT":"dr_a","GPO_CB":"holly","GPA_JT":"dr_c","GPA_CB":"simon","OBS_JT":"dr_e","OBS_CB":"dr_d"}],"doctor_stats":{"holly":{"name":"Holly D","total_oncall_days":13,"ed_days":1,"maternity_days":13,"weekend_days":4,"double_hatted_days":1,"longest_stretch":4,"leave_days":14,"reduced_load":false},"simon":{"name":"Simon J","total_oncall_days":19,"ed_days":4,"maternity_days":19,"weekend_days":6,"double_hatted_days":4,"longest_stretch":4,"leave_days":7,"reduced_load":false},"rowena":{"name":"Rowena","total_oncall_days":5,"ed_days":5,"maternity_days":0,"weekend_days":1,"double_hatted_days":0,"longest_stretch":1,"leave_days":0,"reduced_load":false},"dr_a":{"name":"Dr A (senior)","total_oncall_days":20,"ed_days":7,"maternity_days":20,"weekend_days":6,"double_hatted_days":7,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_b":{"name":"Dr B","total_oncall_days":24,"ed_days":9,"maternity_days":24,"weekend_days":8,"double_hatted_days":9,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_c":{"name":"Dr C","total_oncall_days":24,"ed_days":4,"maternity_days":24,"weekend_days":7,"double_hatted_days":4,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_d":{"name":"Dr D","total_oncall_days":24,"ed_days":11,"maternity_days":24,"weekend_days":7,"double_hatted_days":11,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_e":{"name":"Dr E","total_oncall_days":24,"ed_days":6,"maternity_days":24,"weekend_days":8,"double_hatted_days":6,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_f":{"name":"Dr F","total_oncall_days":6,"ed_days":6,"maternity_days":0,"weekend_days":1,"double_hatted_days":0,"longest_stretch":2,"leave_days":7,"reduced_load":false},"dr_g":{"name":"Dr G (part-time)","total_oncall_days":7,"ed_days":7,"maternity_days":0,"weekend_days":4,"double_hatted_days":0,"longest_stretch":1,"leave_days":0,"reduced_load":false}},"summary":{"ed_slots":60,"ed_gaps":0,"ed_fill_pct":100.0,"total_gaps":0,"clare_backup_days":32,"double_hatted_days":42}},{"scenario":"new_lauren","label":"NEW model \u2014 Feb 2027 with Lauren on board (4th GPO)","model":"new","month":"2027-02","active_site":"CB","days":28,"roles":["ED_JT","ED_CB","GPO","GPA","OBS"],"roster":[{"date":"2027-02-01","weekday":"Mon","ED_JT":"dr_e","ED_CB":"holly","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2027-02-02","weekday":"Tue","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2027-02-03","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_e","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2027-02-04","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_c","OBS":"dr_d"},{"date":"2027-02-05","weekday":"Fri","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"lauren","GPA":"simon","OBS":"dr_e"},{"date":"2027-02-06","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_f","GPO":"lauren","GPA":"simon","OBS":"dr_e"},{"date":"2027-02-07","weekday":"Sun","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"lauren","GPA":"simon","OBS":"dr_e"},{"date":"2027-02-08","weekday":"Mon","ED_JT":"dr_g","ED_CB":"dr_d","GPO":"lauren","GPA":"simon","OBS":"dr_e"},{"date":"2027-02-09","weekday":"Tue","ED_JT":"rowena","ED_CB":"dr_f","GPO":"holly","GPA":"dr_a","OBS":"dr_d"},{"date":"2027-02-10","weekday":"Wed","ED_JT":"lauren","ED_CB":"dr_b","GPO":"holly","GPA":"dr_a","OBS":"dr_d"},{"date":"2027-02-11","weekday":"Thu","ED_JT":"lauren","ED_CB":"dr_f","GPO":"holly","GPA":"dr_a","OBS":"dr_d"},{"date":"2027-02-12","weekday":"Fri","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"holly","GPA":"dr_a","OBS":"dr_e"},{"date":"2027-02-13","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_d","GPO":"dr_b","GPA":"dr_c","OBS":"dr_e"},{"date":"2027-02-14","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_b","GPA":"dr_a","OBS":"dr_e"},{"date":"2027-02-15","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_f","GPO":"lauren","GPA":"dr_a","OBS":"dr_e"},{"date":"2027-02-16","weekday":"Tue","ED_JT":"dr_g","ED_CB":"dr_d","GPO":"lauren","GPA":"dr_a","OBS":"dr_b"},{"date":"2027-02-17","weekday":"Wed","ED_JT":"rowena","ED_CB":"dr_d","GPO":"lauren","GPA":"dr_a","OBS":"dr_b"},{"date":"2027-02-18","weekday":"Thu","ED_JT":"rowena","ED_CB":"dr_f","GPO":"lauren","GPA":"dr_c","OBS":"dr_b"},{"date":"2027-02-19","weekday":"Fri","ED_JT":"dr_g","ED_CB":"dr_d","GPO":"dr_a","GPA":"dr_c","OBS":"dr_b"},{"date":"2027-02-20","weekday":"Sat","ED_JT":"dr_g","ED_CB":"dr_f","GPO":"dr_a","GPA":"simon","OBS":"dr_d"},{"date":"2027-02-21","weekday":"Sun","ED_JT":"holly","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_d"},{"date":"2027-02-22","weekday":"Mon","ED_JT":"rowena","ED_CB":"dr_b","GPO":"lauren","GPA":"dr_c","OBS":"dr_d"},{"date":"2027-02-23","weekday":"Tue","ED_JT":"rowena","ED_CB":"dr_b","GPO":"lauren","GPA":"dr_c","OBS":"dr_e"},{"date":"2027-02-24","weekday":"Wed","ED_JT":"rowena","ED_CB":"simon","GPO":"lauren","GPA":"dr_a","OBS":"dr_e"},{"date":"2027-02-25","weekday":"Thu","ED_JT":"holly","ED_CB":"dr_b","GPO":"lauren","GPA":"dr_c","OBS":"dr_e"},{"date":"2027-02-26","weekday":"Fri","ED_JT":"dr_e","ED_CB":"simon","GPO":"dr_a","GPA":"dr_c","OBS":"dr_b"},{"date":"2027-02-27","weekday":"Sat","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_b"},{"date":"2027-02-28","weekday":"Sun","ED_JT":"rowena","ED_CB":"dr_f","GPO":"dr_a","GPA":"dr_c","OBS":"dr_b"}],"doctor_stats":{"holly":{"name":"Holly D","total_oncall_days":7,"ed_days":3,"maternity_days":4,"weekend_days":1,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":true},"simon":{"name":"Simon J","total_oncall_days":7,"ed_days":2,"maternity_days":5,"weekend_days":3,"double_hatted_days":0,"longest_stretch":4,"leave_days":3,"reduced_load":true},"rowena":{"name":"Rowena","total_oncall_days":14,"ed_days":14,"maternity_days":0,"weekend_days":5,"double_hatted_days":0,"longest_stretch":3,"leave_days":0,"reduced_load":false},"dr_a":{"name":"Dr A (senior)","total_oncall_days":15,"ed_days":0,"maternity_days":15,"weekend_days":5,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_b":{"name":"Dr B","total_oncall_days":17,"ed_days":4,"maternity_days":13,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_c":{"name":"Dr C","total_oncall_days":14,"ed_days":0,"maternity_days":14,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_d":{"name":"Dr D","total_oncall_days":15,"ed_days":5,"maternity_days":10,"weekend_days":3,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_e":{"name":"Dr E","total_oncall_days":14,"ed_days":3,"maternity_days":11,"weekend_days":4,"double_hatted_days":0,"longest_stretch":4,"leave_days":7,"reduced_load":false},"dr_f":{"name":"Dr F","total_oncall_days":15,"ed_days":15,"maternity_days":0,"weekend_days":7,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false},"dr_g":{"name":"Dr G (part-time)","total_oncall_days":8,"ed_days":8,"maternity_days":0,"weekend_days":2,"double_hatted_days":0,"longest_stretch":2,"leave_days":0,"reduced_load":false},"lauren":{"name":"Lauren (GPO)","total_oncall_days":14,"ed_days":2,"maternity_days":12,"weekend_days":2,"double_hatted_days":0,"longest_stretch":4,"leave_days":0,"reduced_load":false}},"summary":{"ed_slots":56,"ed_gaps":0,"ed_fill_pct":100.0,"total_gaps":0,"clare_backup_days":0,"double_hatted_days":0}}]</script>
+<script>
+(function () {
+  const RESULTS = JSON.parse(document.getElementById('roster-data').textContent);
+  const byId = Object.fromEntries(RESULTS.map(r => [r.scenario, r]));
+
+  const INITIALS = {
+    holly: 'HD', simon: 'SJ', rowena: 'RW', dr_a: 'A', dr_b: 'B', dr_c: 'C',
+    dr_d: 'D', dr_e: 'E', dr_f: 'F', dr_g: 'G', lauren: 'LN', krishna: 'KR',
+    CLARE: 'CL', GAP: '—'
+  };
+  const ROLE_LABELS = {
+    ED_JT: 'ED — Jamestown (+ Orroroo)', ED_CB: 'ED — Crystal Brook (+ Laura)',
+    GPO: 'GP obstetrician', GPA: 'GP anaesthetist', OBS: 'Obs support',
+    GPO_JT: 'GPO — JT', GPO_CB: 'GPO — CB', GPA_JT: 'GPA — JT',
+    GPA_CB: 'GPA — CB', OBS_JT: 'Obs support — JT', OBS_CB: 'Obs support — CB'
+  };
+  const SCENARIO_NOTES = {
+    old_sep: 'Baseline: the historic two-team roster in a typical month (five leave requests). It covers everything — but look at the ×2 double-hatted cells and the amber backfill row-by-row. This is what “we filled the roster” actually meant.',
+    new_sep: 'The same September — same doctors, same leave — under the single alternating team (active site Jamestown). Every line fills locally, nobody double-hats, and Holly D and Simon J drop to 8 on-call days.',
+    new_oct: 'October, with the active birthing site switched to Crystal Brook and a part-timer away the whole month. Still no gaps and no backup needed.',
+    new_stress: 'The deliberate worst case: Holly away a fortnight, the senior GPO/GPA away a week overlapping, Simon away a week overlapping that. ED still fills every night; the maternity roster needs just 2 Clare backup days.',
+    old_stress: 'The same brutal November under the old model: 42 double-hatted days and 32 externally backfilled maternity days. The old roster survives bad months by piling risk onto whoever is left.',
+    new_lauren: 'February 2027 with Lauren aboard as a fourth GPO: everyone’s load flattens to ~14–17 days, the reduced-load pair drop to 7, and there is slack for Pirie skills rotations.'
+  };
+
+  function el(tag, cls, html) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  /* ---- load comparison chart (Sept old vs new) ---- */
+  (function () {
+    const oldS = byId.old_sep.doctor_stats, newS = byId.new_sep.doctor_stats;
+    const docs = Object.keys(oldS).sort((a, b) => oldS[b].total_oncall_days - oldS[a].total_oncall_days);
+    const max = Math.max(...docs.map(d => oldS[d].total_oncall_days));
+    const chart = document.getElementById('loadchart');
+    docs.forEach(d => {
+      const name = el('div', 'doc', oldS[d].name.replace(' (senior)', '').replace(' (part-time)', '') +
+        (newS[d].reduced_load ? '<span class="tag">reduced-load</span>' : ''));
+      const pair = el('div', 'pair');
+      [['old', oldS[d].total_oncall_days], ['new', newS[d].total_oncall_days]].forEach(([k, v]) => {
+        const row = el('div', 'bar-row');
+        const bar = el('div', 'bar ' + k);
+        bar.style.width = (v / max * 100) + '%';
+        bar.title = oldS[d].name + ' — ' + (k === 'old' ? 'old' : 'new') + ' model: ' + v + ' on-call days';
+        row.appendChild(bar);
+        row.appendChild(el('span', 'bar-val', String(v)));
+        pair.appendChild(row);
+      });
+      chart.appendChild(name); chart.appendChild(pair);
+    });
+  })();
+
+  /* ---- cost charts ---- */
+  function costChart(id, metric) {
+    const groups = [
+      ['Typical month', 'Sept 2026', byId.old_sep, byId.new_sep],
+      ['Stress month', 'Nov 2026 — heavy overlapping leave', byId.old_stress, byId.new_stress]
+    ];
+    const max = Math.max(...groups.flatMap(g => [g[2].summary[metric], g[3].summary[metric]]), 1);
+    const chart = document.getElementById(id);
+    groups.forEach(([label, sub, o, n]) => {
+      chart.appendChild(el('div', 'glabel', label + '<small>' + sub + '</small>'));
+      const pair = el('div', 'pair');
+      [['old', o.summary[metric]], ['new', n.summary[metric]]].forEach(([k, v]) => {
+        const row = el('div', 'bar-row');
+        const bar = el('div', 'bar ' + k);
+        bar.style.width = Math.max(v / max * 100, 0.8) + '%';
+        bar.title = label + ' — ' + (k === 'old' ? 'old' : 'new') + ' model: ' + v + ' days';
+        row.appendChild(bar);
+        row.appendChild(el('span', 'bar-val', String(v)));
+        pair.appendChild(row);
+      });
+      chart.appendChild(pair);
+    });
+  }
+  costChart('dblchart', 'double_hatted_days');
+  costChart('clarechart', 'clare_backup_days');
+
+  /* ---- scenario explorer ---- */
+  const ORDER = ['new_sep', 'old_sep', 'new_oct', 'new_stress', 'old_stress', 'new_lauren'];
+  const TAB_LABELS = {
+    new_sep: 'Sept — new model', old_sep: 'Sept — old model', new_oct: 'Oct — site → CB',
+    new_stress: 'Stress test — new', old_stress: 'Stress test — old', new_lauren: 'Feb ’27 + Lauren'
+  };
+  const tabs = document.getElementById('tabs');
+  ORDER.forEach((id, i) => {
+    const b = el('button', 'tab', TAB_LABELS[id]);
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    b.addEventListener('click', () => { select(id); });
+    b.dataset.id = id;
+    tabs.appendChild(b);
+  });
+
+  function select(id) {
+    [...tabs.children].forEach(b => b.setAttribute('aria-selected', String(b.dataset.id === id)));
+    render(byId[id]);
+  }
+
+  function render(r) {
+    /* chips */
+    const chips = document.getElementById('chips');
+    chips.innerHTML = '';
+    const s = r.summary;
+    chips.appendChild(el('span', 'chip', 'ED fill <span class="num">' + s.ed_fill_pct + '%</span>'));
+    chips.appendChild(el('span', 'chip' + (s.total_gaps ? ' crit' : ''), 'Unfilled days <span class="num">' + s.total_gaps + '</span>'));
+    chips.appendChild(el('span', 'chip' + (s.clare_backup_days ? ' warn' : ''), 'Clare backup <span class="num">' + s.clare_backup_days + '</span>'));
+    chips.appendChild(el('span', 'chip' + (s.double_hatted_days ? ' crit' : ''), 'Double-hatted <span class="num">' + s.double_hatted_days + '</span>'));
+    if (r.model === 'new') chips.appendChild(el('span', 'chip', 'Active birthing site: ' + (r.active_site === 'JT' ? 'Jamestown' : 'Crystal Brook')));
+    document.getElementById('scenario-note').textContent = SCENARIO_NOTES[r.scenario] || r.label;
+
+    /* roster grid */
+    const t = document.getElementById('rostertable');
+    t.innerHTML = '';
+    const days = r.roster;
+    const head1 = el('tr'); head1.appendChild(el('th', 'rolename', r.month));
+    const head2 = el('tr'); head2.appendChild(el('th', 'rolename', ''));
+    days.forEach(d => {
+      head1.appendChild(el('th', null, String(+d.date.slice(8))));
+      head2.appendChild(el('th', 'dow', d.weekday.slice(0, 2)));
+    });
+    t.appendChild(head1); t.appendChild(head2);
+
+    r.roles.forEach(role => {
+      const tr = el('tr');
+      tr.appendChild(el('td', 'rolename', ROLE_LABELS[role] || role));
+      days.forEach(d => {
+        const who = d[role];
+        const wkend = d.weekday === 'Sat' || d.weekday === 'Sun';
+        const td = el('td', wkend ? 'wkend' : '');
+        if (who === 'CLARE') { td.classList.add('clare'); td.textContent = 'CL'; td.title = 'Clare network backup'; }
+        else if (who === 'GAP' || who === null) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled'; }
+        else {
+          const dbl = r.roles.filter(x => d[x] === who).length > 1;
+          td.textContent = INITIALS[who] + (dbl ? '×2' : '');
+          td.dataset.doc = who;
+          td.title = (r.doctor_stats[who] ? r.doctor_stats[who].name : who) + ' — ' + (ROLE_LABELS[role] || role) + (dbl ? ' (double-hatted)' : '');
+        }
+        tr.appendChild(td);
+      });
+      t.appendChild(tr);
+    });
+
+    t.addEventListener('mouseover', e => {
+      const doc = e.target.dataset && e.target.dataset.doc;
+      t.querySelectorAll('td.hl').forEach(c => c.classList.remove('hl'));
+      if (doc) t.querySelectorAll('td[data-doc="' + doc + '"]').forEach(c => c.classList.add('hl'));
+    });
+    t.addEventListener('mouseleave', () => t.querySelectorAll('td.hl').forEach(c => c.classList.remove('hl')));
+
+    /* per-doctor table */
+    const lt = document.getElementById('loadtable');
+    lt.innerHTML = '';
+    const hr = el('tr');
+    ['Doctor', 'On-call days', 'ED', 'Maternity', 'Weekend', 'Double-hatted', 'Longest stretch', 'Leave'].forEach(h => hr.appendChild(el('th', null, h)));
+    lt.appendChild(hr);
+    Object.entries(r.doctor_stats)
+      .sort((a, b) => b[1].total_oncall_days - a[1].total_oncall_days)
+      .forEach(([id, st]) => {
+        const tr = el('tr');
+        tr.appendChild(el('td', null, INITIALS[id] + ' · ' + st.name + (st.reduced_load ? ' <span class="tag">reduced-load</span>' : '')));
+        [st.total_oncall_days, st.ed_days, st.maternity_days, st.weekend_days,
+         st.double_hatted_days, st.longest_stretch, st.leave_days].forEach(v => tr.appendChild(el('td', null, String(v))));
+        lt.appendChild(tr);
+      });
+  }
+
+  select('new_sep');
+})();
+</script>
