@@ -1,0 +1,672 @@
+<title>On-Call Availability Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #f6f8f6;
+    --card: #fcfdfc;
+    --ink: #16211f;
+    --ink-2: #4d5a57;
+    --ink-3: #7d8a86;
+    --hairline: #dde3e0;
+    --grid: #e7ebe9;
+    --accent: #0e6e64;
+    --accent-ink: #0a5750;
+    --accent-wash: #e2efec;
+    --day-ink: #8a5a00;
+    --day-wash: #fdf3d9;
+    --day-edge: #fab219;
+    --night-ink: #4a3aa7;
+    --night-wash: #e9e6f9;
+    --night-edge: #4a3aa7;
+    --off-ink: #a32e2e;
+    --off-wash: #fbe7e7;
+    --off-edge: #d03b3b;
+    --leave-ink: #4d5a57;
+    --leave-wash: #e7ebe9;
+    --good-text: #006300;
+    --wkend: #eef1ef;
+    --cell-hover: #d5ece5;
+    --shadow: 0 1px 2px rgba(22,33,31,.05), 0 4px 16px rgba(22,33,31,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #101413;
+      --card: #171c1b;
+      --ink: #edf2f0;
+      --ink-2: #a8b4b0;
+      --ink-3: #78847f;
+      --hairline: #2a312f;
+      --grid: #232927;
+      --accent: #3aaf9f;
+      --accent-ink: #52c2b2;
+      --accent-wash: #16302c;
+      --day-ink: #fab219;
+      --day-wash: #33290e;
+      --day-edge: #fab219;
+      --night-ink: #a99df0;
+      --night-wash: #221d3d;
+      --night-edge: #9085e9;
+      --off-ink: #e66767;
+      --off-wash: #391a1a;
+      --off-edge: #e66767;
+      --leave-ink: #a8b4b0;
+      --leave-wash: #232927;
+      --good-text: #0ca30c;
+      --wkend: #1b201f;
+      --cell-hover: #1f3b35;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #101413;
+    --card: #171c1b;
+    --ink: #edf2f0;
+    --ink-2: #a8b4b0;
+    --ink-3: #78847f;
+    --hairline: #2a312f;
+    --grid: #232927;
+    --accent: #3aaf9f;
+    --accent-ink: #52c2b2;
+    --accent-wash: #16302c;
+    --day-ink: #fab219;
+    --day-wash: #33290e;
+    --day-edge: #fab219;
+    --night-ink: #a99df0;
+    --night-wash: #221d3d;
+    --night-edge: #9085e9;
+    --off-ink: #e66767;
+    --off-wash: #391a1a;
+    --off-edge: #e66767;
+    --leave-ink: #a8b4b0;
+    --leave-wash: #232927;
+    --good-text: #0ca30c;
+    --wkend: #1b201f;
+    --cell-hover: #1f3b35;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px; line-height: 1.55;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 36px 24px 80px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 12px; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Public Sans", sans-serif; text-wrap: balance; }
+  h1 { font-size: clamp(28px, 4.5vw, 40px); font-weight: 800; line-height: 1.08; margin: 0 0 10px; }
+  h2 { font-size: 21px; font-weight: 700; margin: 0 0 4px; }
+  h3 { font-size: 16px; font-weight: 700; margin: 0 0 6px; }
+  .lede { font-size: 17px; color: var(--ink-2); max-width: 66ch; margin: 0; }
+  .lede strong { color: var(--ink); }
+
+  .modebar { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .mode { font-size: 12.5px; font-weight: 600; border-radius: 999px; padding: 4px 12px; border: 1px solid var(--hairline); color: var(--ink-2); background: var(--card); }
+  .mode.shared { background: var(--accent-wash); color: var(--accent-ink); border-color: var(--accent); }
+
+  section { margin-top: 40px; }
+  .kicker { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
+  .stepnum { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 999px; background: var(--accent); color: #fff; font: 700 14px "Bricolage Grotesque", sans-serif; margin-right: 8px; vertical-align: -4px; }
+  :root[data-theme="dark"] .stepnum { color: #08211d; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .stepnum { color: #08211d; } }
+  .section-note { color: var(--ink-2); max-width: 70ch; margin: 6px 0 0; font-size: 14.5px; }
+  .section-note strong { color: var(--ink); }
+
+  .card { background: var(--card); border: 1px solid var(--hairline); border-radius: 12px; padding: 20px 22px; margin-top: 16px; box-shadow: var(--shadow); }
+
+  select, button { font: 600 14px "Public Sans", sans-serif; border-radius: 8px; border: 1px solid var(--hairline); background: var(--card); color: var(--ink); padding: 9px 14px; }
+  select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button { cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] button.primary { color: #08211d; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button.primary { color: #08211d; } }
+  button.primary:hover { filter: brightness(1.08); }
+  button.ghost:hover { border-color: var(--accent); }
+  button:disabled { opacity: .5; cursor: default; }
+
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+  .monthtabs { display: flex; gap: 8px; margin: 14px 0 0; }
+  .mtab { border-radius: 999px; padding: 7px 16px; }
+  .mtab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .mtab[aria-selected="true"] { color: #08211d; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mtab[aria-selected="true"] { color: #08211d; } }
+
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin: 14px 0 12px; }
+  .legend .key { display: inline-flex; align-items: center; gap: 6px; }
+  .pill { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; border-radius: 6px; font: 600 11px "IBM Plex Mono", monospace; padding: 0 4px; }
+  .st-ok    { background: var(--accent-wash); color: var(--accent-ink); box-shadow: inset 0 0 0 1px var(--accent); }
+  .st-day   { background: var(--day-wash);   color: var(--day-ink);   box-shadow: inset 0 0 0 1px var(--day-edge); }
+  .st-night { background: var(--night-wash); color: var(--night-ink); box-shadow: inset 0 0 0 1px var(--night-edge); }
+  .st-off   { background: var(--off-wash);   color: var(--off-ink);   box-shadow: inset 0 0 0 1px var(--off-edge); }
+  .st-leave { background: var(--leave-wash); color: var(--leave-ink); box-shadow: inset 0 0 0 1px var(--ink-3); }
+
+  .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 6px; }
+  .cal .dow { text-align: center; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding-bottom: 2px; }
+  .cal .day {
+    border: 1px solid var(--hairline); border-radius: 9px; min-height: 62px; padding: 6px 8px;
+    background: var(--card); cursor: pointer; text-align: left; font-family: "Public Sans", sans-serif;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 4px; transition: border-color .12s;
+  }
+  .cal .day:hover { border-color: var(--accent); }
+  .cal .day.wk { background: var(--wkend); }
+  .cal .day .num { font: 600 12.5px "IBM Plex Mono", monospace; color: var(--ink-3); }
+  .cal .day .state { font-size: 11.5px; font-weight: 600; border-radius: 6px; padding: 2px 6px; align-self: flex-start; }
+  .cal .day.blank { visibility: hidden; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 12px; }
+  .chip { font-size: 13px; font-weight: 600; border-radius: 999px; padding: 5px 12px; background: var(--accent-wash); color: var(--accent-ink); border: 1px solid transparent; }
+  .chip.warn { background: var(--day-wash); color: var(--ink); border-color: var(--day-edge); }
+  .chip.crit { background: var(--off-wash); color: var(--ink); border-color: var(--off-edge); }
+  .chip .num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+  .roster-scroll { overflow-x: auto; border: 1px solid var(--hairline); border-radius: 10px; }
+  table.roster { border-collapse: collapse; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; }
+  table.roster th, table.roster td { border: 1px solid var(--grid); text-align: center; min-width: 32px; padding: 5px 2px; }
+  table.roster th { font-weight: 600; color: var(--ink-3); background: var(--card); }
+  table.roster th.dow2 { font-size: 9.5px; }
+  table.roster td.rolename, table.roster th.rolename {
+    position: sticky; left: 0; background: var(--card); text-align: right; padding: 5px 10px;
+    font-family: "Public Sans", sans-serif; font-size: 12.5px; font-weight: 600; color: var(--ink-2);
+    white-space: nowrap; z-index: 2; border-right: 2px solid var(--hairline);
+  }
+  table.roster td { background: var(--card); color: var(--ink); }
+  table.roster td.wk { background: var(--wkend); }
+  table.roster td.half { color: var(--ink-2); }
+  table.roster td.clare { background: var(--day-wash); box-shadow: inset 0 0 0 1.5px var(--day-edge); font-weight: 600; }
+  table.roster td.gapcell { background: var(--off-wash); box-shadow: inset 0 0 0 1.5px var(--off-edge); font-weight: 600; }
+  table.roster td.hl { background: var(--cell-hover); font-weight: 600; }
+
+  table.loads { border-collapse: collapse; width: 100%; font-size: 13.5px; margin-top: 14px; }
+  table.loads th { text-align: right; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); padding: 6px 10px; border-bottom: 1px solid var(--hairline); }
+  table.loads th:first-child, table.loads td:first-child { text-align: left; }
+  table.loads td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  table.loads td:first-child { font-family: "Public Sans", sans-serif; font-weight: 600; font-size: 13.5px; }
+  table.loads td .tag { font-size: 11px; color: var(--accent-ink); font-weight: 600; }
+
+  .subs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .sub-pill { font-size: 12.5px; font-weight: 600; border-radius: 999px; padding: 4px 11px; background: var(--accent-wash); color: var(--accent-ink); }
+  .sub-pill.none { background: var(--leave-wash); color: var(--ink-3); }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper); font-size: 14px; font-weight: 600; border-radius: 10px; padding: 10px 18px; opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 10; max-width: 90vw; }
+  .toast.show { opacity: 1; }
+
+  .caveat { border-left: 3px solid var(--day-edge); padding: 2px 0 2px 16px; margin-top: 14px; color: var(--ink-2); max-width: 72ch; font-size: 14.5px; }
+  .caveat strong { color: var(--ink); }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--hairline); font-size: 13px; color: var(--ink-3); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Mid North GP rostering · availability-first demo</div>
+    <h1>Tell us when you can work. The roster does the rest.</h1>
+    <p class="lede">Mark each day a month ahead: <strong>available</strong>, <strong>day shifts only</strong>, <strong>night only</strong>, <strong>not available to the LHN</strong>, or <strong>on leave</strong>. ED cover splits into day and night halves — take one half and the $2,500 sessional splits $1,250 / $1,250, so part-days cost the LHN nothing extra. The generator then builds the month's roster around everyone's choices.</p>
+    <div class="modebar">
+      <span class="mode" id="modebadge">Checking storage…</span>
+      <span class="mode" id="deadlinebadge"></span>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="stepnum">1</span>Who are you?</h2>
+    <div class="card">
+      <div class="row">
+        <select id="docselect" aria-label="Select your name"></select>
+        <span class="section-note" id="docmeta"></span>
+      </div>
+      <div class="subs" id="subs"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="stepnum">2</span>Mark your month</h2>
+    <p class="section-note">Click a day to cycle through the five states. Weekends are shaded. Nothing is stored until you press <strong>Save my availability</strong>.</p>
+    <div class="monthtabs" id="monthtabs" role="tablist"></div>
+    <div class="card">
+      <div class="legend">
+        <span class="key"><span class="pill st-ok">✓</span> Available — any shift</span>
+        <span class="key"><span class="pill st-day">D</span> Day shifts only</span>
+        <span class="key"><span class="pill st-night">N</span> Nights only</span>
+        <span class="key"><span class="pill st-off">✕</span> Not available to LHN</span>
+        <span class="key"><span class="pill st-leave">L</span> Leave</span>
+      </div>
+      <div class="cal" id="cal"></div>
+      <div class="row" style="margin-top:16px">
+        <button class="primary" id="savebtn">Save my availability</button>
+        <button class="ghost" id="clearbtn">Clear my month</button>
+        <span class="section-note" id="savenote"></span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="stepnum">3</span>Build the roster</h2>
+    <p class="section-note">Runs on everyone's saved availability for the selected month. Hard rules: skills match the line, one role per doctor per shift, leave and unavailability are absolute, no more than 4 consecutive on-call days. Maternity roles (GPO / GPA / obs support) are 24-hour and fall back to the Clare network; an uncoverable ED half shows red rather than being hidden.</p>
+    <div class="card">
+      <div class="row"><button class="primary" id="genbtn">Generate roster</button><span class="section-note" id="gennote"></span></div>
+      <div id="results" hidden>
+        <div class="chips" id="genchips" style="margin-top:16px"></div>
+        <div class="roster-scroll"><table class="roster" id="rostertable"></table></div>
+        <div class="legend" style="margin-top:10px">
+          <span class="key"><span class="pill st-day">CL</span> Clare backup</span>
+          <span class="key"><span class="pill st-off">—</span> unfilled</span>
+          <span class="key">Hover a cell to trace one doctor · lower-case initials = half-shift ($1,250)</span>
+        </div>
+        <table class="loads" id="loadtable"></table>
+      </div>
+    </div>
+    <div class="caveat"><strong>Demo scope.</strong> The in-page generator is a fast, rule-faithful sibling of the production solver (Google OR-Tools CP-SAT, in the repo) — good enough to show the flow live; final rosters would come from the full solver with the same inputs. Sessional assumption: any on-call day pays $2,500 per doctor; a doctor covering only a day or night half splits it. Sample entries are pre-loaded so the demo isn't empty — clear them from the button above once real entries exist.</div>
+  </section>
+
+  <footer>Companion to the “One Team, Two Towns” briefing · workforce and rules mirror <span style="font-family:'IBM Plex Mono',monospace">rostering/workforce_config.json</span> on branch claude/gp-rostering-ed-obstetrics-wlsndd</footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script type="application/json" id="app-state">{"months":{"2026-10":{"availability":{"josh_smith":{"1":"day","2":"day","5":"day","6":"day","7":"day","8":"day","9":"day","12":"day","13":"day","14":"day","19":"off","20":"off","21":"off","26":"day","27":"day","28":"day"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"nitya_sukheja":{"5":"night","6":"night","7":"night","12":"night","13":"night","14":"night","19":"night","20":"night","21":"night","26":"night","27":"night","28":"night"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","holly_deer":"sample","rick_chalwin":"sample","nitya_sukheja":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}}}</script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- workforce (mirrors workforce_config.json) ---------- */
+  const DOCS = [
+    { id:'holly_deer',         name:'Holly Deer',         home:'CB', skills:['ED','GPO'],       reduced:true,  fte:1.0 },
+    { id:'simon_jackson',      name:'Simon Jackson',      home:'JT', skills:['ED','GPO'],       reduced:true,  fte:1.0 },
+    { id:'rowena_conway',      name:'Rowena Conway',      home:'JT', skills:['ED','GPO','GPA'], reduced:false, fte:1.0 },
+    { id:'kc_chen',            name:'KC Chen',            home:'CB', skills:['ED','GPA'],       reduced:false, fte:1.0 },
+    { id:'niall_fostyk',       name:'Niall Fostyk',       home:'JT', skills:['ED','OBS'],       reduced:false, fte:1.0 },
+    { id:'michael_macpherson', name:'Michael MacPherson', home:'JT', skills:['ED','OBS'],       reduced:false, fte:1.0 },
+    { id:'krishna_bayley',     name:'Krishna Bayley',     home:'JT', skills:['ED','OBS'],       reduced:false, fte:0.7 },
+    { id:'fiona_forrester',    name:'Fiona Forrester',    home:'CB', skills:['ED','OBS'],       reduced:false, fte:1.0 },
+    { id:'lauren_mclean',      name:'Lauren McLean',      home:'CB', skills:['ED','OBS'],       reduced:false, fte:0.7 },
+    { id:'li_chei_lee',        name:'Li Chei Lee',        home:'CB', skills:['OBS'],            reduced:false, fte:0.4 },
+    { id:'josh_smith',         name:'Josh Smith',         home:'CB', skills:['ED'],             reduced:false, fte:0.5 },
+    { id:'nitya_sukheja',      name:'Nitya Sukheja',      home:'CB', skills:['ED'],             reduced:false, fte:0.5 },
+    { id:'rick_chalwin',       name:'Rick Chalwin',       home:'CB', skills:['ED'],             reduced:false, fte:0.4 },
+    { id:'gareth_oreilly',     name:"Gareth O'Reilly",    home:'CB', skills:['ED'],             reduced:false, fte:0.4 },
+    { id:'cynthia_paredes',    name:'Cynthia Paredes',    home:'CB', skills:['ED','OBS'],       reduced:false, fte:0.4 },
+    { id:'nikki_pennifold',    name:'Nikki Pennifold',    home:'CB', skills:['ED'],             reduced:false, fte:0.4 }
+  ];
+  const BY_ID = Object.fromEntries(DOCS.map(d => [d.id, d]));
+  const INITIALS = {
+    holly_deer:'HD', simon_jackson:'SJ', rowena_conway:'RW', kc_chen:'KC', niall_fostyk:'NF',
+    michael_macpherson:'MM', krishna_bayley:'KB', fiona_forrester:'FF', lauren_mclean:'LM',
+    li_chei_lee:'LL', josh_smith:'JS', nitya_sukheja:'NS', rick_chalwin:'RC',
+    gareth_oreilly:'GO', cynthia_paredes:'CP', nikki_pennifold:'NP'
+  };
+  const RATE = 2500, HALF = 1250;
+  const MONTHS = ['2026-10', '2026-11'];
+  const MONTH_NAMES = { '2026-10':'October 2026 · active site: Crystal Brook', '2026-11':'November 2026 · active site: Jamestown' };
+  const STATES = ['ok', 'day', 'night', 'off', 'leave'];
+  const STATE_META = {
+    ok:    { cls:'st-ok',    label:'✓ Available' },
+    day:   { cls:'st-day',   label:'D · Day only' },
+    night: { cls:'st-night', label:'N · Nights only' },
+    off:   { cls:'st-off',   label:'✕ Not available' },
+    leave: { cls:'st-leave', label:'L · Leave' }
+  };
+
+  /* ---------- state & storage ---------- */
+  const stateEl = document.getElementById('app-state');
+  let STATE = JSON.parse(stateEl.textContent);
+  let artifactNS = null;   // resolved claude.use('artifact') namespace, or null
+  let mode = 'local';      // 'shared' | 'local'
+  const LS_KEY = 'oncall-availability-v1';
+
+  function lsLoad() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || null; } catch (e) { return null; } }
+  function lsSave(s) { try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch (e) {} }
+
+  function mergeLocal() {
+    const local = lsLoad();
+    if (!local) return;
+    MONTHS.forEach(m => {
+      const lm = local.months && local.months[m];
+      if (!lm) return;
+      Object.assign(STATE.months[m].availability, lm.availability || {});
+      Object.assign(STATE.months[m].submitted, lm.submitted || {});
+    });
+  }
+
+  const toastEl = document.getElementById('toast');
+  let toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3200);
+  }
+
+  function setMode(m) {
+    mode = m;
+    const b = document.getElementById('modebadge');
+    if (m === 'shared') { b.textContent = 'Shared board — entries save for everyone'; b.classList.add('shared'); }
+    else { b.textContent = 'Demo mode — entries stay in this browser'; b.classList.remove('shared'); }
+  }
+
+  async function persist() {
+    if (artifactNS) {
+      try {
+        const res = await fetch(location.href, { cache: 'no-store' });
+        const src = await res.text();
+        const json = JSON.stringify(STATE).replace(/<\//g, '<\\/');
+        const marked = src.replace(
+          /(<script type="application\/json" id="app-state">)[\s\S]*?(<\/script>)/,
+          (m0, a, b) => a + json + b
+        );
+        if (marked !== src || src.includes('id="app-state"')) {
+          await artifactNS.publish(marked);
+          return true; // page reloads to the new version
+        }
+      } catch (e) {
+        const code = e && (e.code || e.name || '');
+        if (String(code).includes('conflict')) { toast('Someone else just saved — reloading their version.'); return true; }
+        artifactNS = null; setMode('local');
+        toast('Could not save to the shared board — keeping your entries in this browser.');
+      }
+    }
+    lsSave(STATE);
+    return false;
+  }
+
+  /* ---------- calendar helpers ---------- */
+  function monthDays(key) {
+    const [y, m] = key.split('-').map(Number);
+    return new Date(y, m, 0).getDate();
+  }
+  function weekday(key, day) {  // 0=Mon..6=Sun
+    const [y, m] = key.split('-').map(Number);
+    return (new Date(y, m - 1, day).getDay() + 6) % 7;
+  }
+  const DOW = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  /* ---------- UI state ---------- */
+  let curDoc = DOCS[0].id;
+  let curMonth = MONTHS[0];
+
+  function el(tag, cls, html) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  function getAvail(monthKey, docId) {
+    return (STATE.months[monthKey].availability[docId]) || {};
+  }
+  function stateFor(monthKey, docId, day) {
+    return getAvail(monthKey, docId)[String(day)] || 'ok';
+  }
+
+  /* ---------- render: doctor picker ---------- */
+  const docSel = document.getElementById('docselect');
+  DOCS.forEach(d => {
+    const o = document.createElement('option');
+    o.value = d.id; o.textContent = d.name;
+    docSel.appendChild(o);
+  });
+  docSel.addEventListener('change', () => { curDoc = docSel.value; renderAll(); });
+
+  function renderDocMeta() {
+    const d = BY_ID[curDoc];
+    document.getElementById('docmeta').textContent =
+      d.skills.join(' · ') + ' · based ' + (d.home === 'JT' ? 'Jamestown' : 'Crystal Brook') +
+      (d.reduced ? ' · reduced-load' : '');
+  }
+
+  function renderSubs() {
+    const wrap = document.getElementById('subs');
+    wrap.innerHTML = '';
+    const sub = STATE.months[curMonth].submitted;
+    DOCS.forEach(d => {
+      const has = sub[d.id];
+      const p = el('span', 'sub-pill' + (has ? '' : ' none'),
+        INITIALS[d.id] + (has ? (sub[d.id] === 'sample' ? ' · sample' : ' ✓') : ' · —'));
+      p.title = d.name + (has ? ' has marked availability' : ' has not marked availability yet');
+      wrap.appendChild(p);
+    });
+  }
+
+  /* ---------- render: month tabs & calendar ---------- */
+  const tabsEl = document.getElementById('monthtabs');
+  MONTHS.forEach(m => {
+    const b = el('button', 'mtab', MONTH_NAMES[m].split(' · ')[0]);
+    b.setAttribute('role', 'tab');
+    b.dataset.m = m;
+    b.addEventListener('click', () => { curMonth = m; renderAll(); });
+    tabsEl.appendChild(b);
+  });
+
+  function renderCal() {
+    [...tabsEl.children].forEach(b => b.setAttribute('aria-selected', String(b.dataset.m === curMonth)));
+    const cal = document.getElementById('cal');
+    cal.innerHTML = '';
+    DOW.forEach(d => cal.appendChild(el('div', 'dow', d)));
+    const n = monthDays(curMonth);
+    const lead = weekday(curMonth, 1);
+    for (let i = 0; i < lead; i++) cal.appendChild(el('div', 'day blank'));
+    for (let day = 1; day <= n; day++) {
+      const wd = weekday(curMonth, day);
+      const st = stateFor(curMonth, curDoc, day);
+      const b = el('button', 'day' + (wd >= 5 ? ' wk' : ''));
+      b.setAttribute('aria-label', 'Day ' + day + ': ' + STATE_META[st].label);
+      b.appendChild(el('span', 'num', String(day)));
+      b.appendChild(el('span', 'state ' + STATE_META[st].cls, STATE_META[st].label));
+      b.addEventListener('click', () => {
+        const next = STATES[(STATES.indexOf(st) + 1) % STATES.length];
+        const av = STATE.months[curMonth].availability;
+        if (!av[curDoc]) av[curDoc] = {};
+        if (next === 'ok') delete av[curDoc][String(day)];
+        else av[curDoc][String(day)] = next;
+        renderCal();
+      });
+      cal.appendChild(b);
+    }
+    document.getElementById('savenote').textContent =
+      MONTH_NAMES[curMonth] + ' — marking as ' + BY_ID[curDoc].name;
+  }
+
+  document.getElementById('savebtn').addEventListener('click', async () => {
+    STATE.months[curMonth].submitted[curDoc] = new Date().toISOString().slice(0, 10);
+    const reloading = await persist();
+    if (!reloading) { renderSubs(); toast('Saved for ' + BY_ID[curDoc].name + ' — ' + MONTH_NAMES[curMonth].split(' · ')[0]); }
+  });
+  document.getElementById('clearbtn').addEventListener('click', async () => {
+    delete STATE.months[curMonth].availability[curDoc];
+    delete STATE.months[curMonth].submitted[curDoc];
+    const reloading = await persist();
+    if (!reloading) { renderCal(); renderSubs(); toast('Cleared ' + BY_ID[curDoc].name + "'s month"); }
+  });
+
+  /* ---------- the generator ---------- */
+  const SLOTS = [
+    { id:'GPO',   label:'GP obstetrician',    skill:'GPO', kind:'full' },
+    { id:'GPA',   label:'GP anaesthetist',    skill:'GPA', kind:'full' },
+    { id:'OBS',   label:'Obs support',        skill:'OBS', kind:'full' },
+    { id:'ED_JT_D', label:'ED Jamestown — day',      skill:'ED', kind:'day',   site:'JT' },
+    { id:'ED_CB_D', label:'ED Crystal Brook — day',  skill:'ED', kind:'day',   site:'CB' },
+    { id:'ED_JT_N', label:'ED Jamestown — night',    skill:'ED', kind:'night', site:'JT' },
+    { id:'ED_CB_N', label:'ED Crystal Brook — night','skill':'ED', kind:'night', site:'CB' }
+  ];
+  const MAX_CONSEC = 4;
+
+  function generate(monthKey) {
+    const n = monthDays(monthKey);
+    const halvesTotal = n * 10; // 3 full roles (2 halves each) + 4 ED halves
+    const weightSum = DOCS.reduce((s, d) => s + d.fte * (d.reduced ? 0.55 : 1), 0);
+    const target = {};
+    DOCS.forEach(d => { target[d.id] = halvesTotal * d.fte * (d.reduced ? 0.55 : 1) / weightSum; });
+
+    const halves = Object.fromEntries(DOCS.map(d => [d.id, 0]));
+    const consec = Object.fromEntries(DOCS.map(d => [d.id, 0]));
+    const grid = [];   // per day: {slotId: docId|'CLARE'|null}
+    let prevFull = {}; // continuity: yesterday's holder per full role
+
+    for (let day = 1; day <= n; day++) {
+      const today = {};
+      const busyFull = new Set(), busyDay = new Set(), busyNight = new Set();
+
+      SLOTS.forEach(slot => {
+        const cand = DOCS.filter(d => {
+          if (!d.skills.includes(slot.skill)) return false;
+          const st = stateFor(monthKey, d.id, day);
+          if (st === 'off' || st === 'leave') return false;
+          if (slot.kind === 'full' && st !== 'ok') return false;
+          if (slot.kind === 'day' && st === 'night') return false;
+          if (slot.kind === 'night' && st === 'day') return false;
+          if (busyFull.has(d.id)) return false;
+          if (slot.kind === 'full' && (busyDay.has(d.id) || busyNight.has(d.id))) return false;
+          if (slot.kind === 'day' && busyDay.has(d.id)) return false;
+          if (slot.kind === 'night' && busyNight.has(d.id)) return false;
+          if (consec[d.id] >= MAX_CONSEC && !busyDay.has(d.id) && !busyNight.has(d.id)) return false;
+          return true;
+        });
+        if (!cand.length) { today[slot.id] = slot.kind === 'full' ? 'CLARE' : null; return; }
+        cand.sort((a, b) => score(a) - score(b));
+        function score(d) {
+          let s = halves[d.id] / Math.max(target[d.id], 0.5);
+          if (slot.kind === 'full' && prevFull[slot.id] === d.id && consec[d.id] < MAX_CONSEC) s -= 0.8; // continuity
+          if (slot.site && d.home !== slot.site) s += 0.12;
+          if (d.reduced) s += 0.35;
+          if ((slot.kind === 'day' && busyNight.has(d.id)) || (slot.kind === 'night' && busyDay.has(d.id))) s -= 0.15; // finish the day you started
+          s += consec[d.id] * 0.05;
+          return s;
+        }
+        const pick = cand[0];
+        today[slot.id] = pick.id;
+        if (slot.kind === 'full') { busyFull.add(pick.id); halves[pick.id] += 2; }
+        else if (slot.kind === 'day') { busyDay.add(pick.id); halves[pick.id] += 1; }
+        else { busyNight.add(pick.id); halves[pick.id] += 1; }
+      });
+
+      DOCS.forEach(d => {
+        const on = busyFull.has(d.id) || busyDay.has(d.id) || busyNight.has(d.id);
+        consec[d.id] = on ? consec[d.id] + 1 : 0;
+      });
+      prevFull = { GPO: today.GPO, GPA: today.GPA, OBS: today.OBS };
+      grid.push(today);
+    }
+    return grid;
+  }
+
+  /* ---------- render results ---------- */
+  document.getElementById('genbtn').addEventListener('click', () => {
+    const grid = generate(curMonth);
+    const n = grid.length;
+    const results = document.getElementById('results');
+    results.hidden = false;
+
+    // stats
+    const stat = {};
+    DOCS.forEach(d => { stat[d.id] = { days:0, fullDays:0, halfDays:0, earnings:0, edHalves:0, matDays:0 }; });
+    let clare = 0, gaps = 0, cost = 0;
+    grid.forEach(today => {
+      const dayHalves = {};
+      SLOTS.forEach(slot => {
+        const w = today[slot.id];
+        if (w === 'CLARE') { clare++; cost += RATE; return; }
+        if (!w) { gaps++; return; }
+        dayHalves[w] = (dayHalves[w] || 0) + (slot.kind === 'full' ? 2 : 1);
+        if (slot.kind === 'full') stat[w].matDays++;
+        else stat[w].edHalves++;
+      });
+      Object.entries(dayHalves).forEach(([w, h]) => {
+        stat[w].days++;
+        const pay = h >= 2 ? RATE : HALF;
+        if (h >= 2) stat[w].fullDays++; else stat[w].halfDays++;
+        stat[w].earnings += pay; cost += pay;
+      });
+    });
+    const edSlots = 4 * n, edFilled = edSlots - gaps;
+
+    const chips = document.getElementById('genchips');
+    chips.innerHTML = '';
+    chips.appendChild(el('span', 'chip', 'ED halves filled <span class="num">' + edFilled + '/' + edSlots + '</span>'));
+    chips.appendChild(el('span', 'chip' + (gaps ? ' crit' : ''), 'Unfilled ED halves <span class="num">' + gaps + '</span>'));
+    chips.appendChild(el('span', 'chip' + (clare ? ' warn' : ''), 'Clare backup days <span class="num">' + clare + '</span>'));
+    chips.appendChild(el('span', 'chip', 'Sessional cost <span class="num">$' + (cost / 1000).toLocaleString('en-AU', { maximumFractionDigits: 1 }) + 'k</span>'));
+    chips.appendChild(el('span', 'chip', 'Flat-rate baseline <span class="num">$' + (n * 12.5).toLocaleString('en-AU') + 'k</span>'));
+
+    // grid table
+    const t = document.getElementById('rostertable');
+    t.innerHTML = '';
+    const h1 = el('tr'); h1.appendChild(el('th', 'rolename', curMonth));
+    const h2 = el('tr'); h2.appendChild(el('th', 'rolename', ''));
+    for (let day = 1; day <= n; day++) {
+      h1.appendChild(el('th', null, String(day)));
+      h2.appendChild(el('th', 'dow2', DOW[weekday(curMonth, day)].slice(0, 2)));
+    }
+    t.appendChild(h1); t.appendChild(h2);
+    SLOTS.forEach(slot => {
+      const tr = el('tr');
+      tr.appendChild(el('td', 'rolename', slot.label));
+      grid.forEach((today, i) => {
+        const wd = weekday(curMonth, i + 1);
+        const w = today[slot.id];
+        const td = el('td', wd >= 5 ? 'wk' : '');
+        if (w === 'CLARE') { td.classList.add('clare'); td.textContent = 'CL'; td.title = 'Clare network backup'; }
+        else if (!w) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled — needs a manual tweak or extra availability'; }
+        else {
+          const halfOnly = slot.kind !== 'full' &&
+            !SLOTS.some(s2 => s2.kind !== slot.kind && today[s2.id] === w);
+          td.textContent = halfOnly ? INITIALS[w].toLowerCase() : INITIALS[w];
+          if (halfOnly) td.classList.add('half');
+          td.dataset.doc = w;
+          td.title = BY_ID[w].name + ' — ' + slot.label + (halfOnly ? ' (half-shift, $1,250)' : '');
+        }
+        tr.appendChild(td);
+      });
+      t.appendChild(tr);
+    });
+    t.onmouseover = e => {
+      const doc = e.target.dataset && e.target.dataset.doc;
+      t.querySelectorAll('td.hl').forEach(c => c.classList.remove('hl'));
+      if (doc) t.querySelectorAll('td[data-doc="' + doc + '"]').forEach(c => c.classList.add('hl'));
+    };
+    t.onmouseleave = () => t.querySelectorAll('td.hl').forEach(c => c.classList.remove('hl'));
+
+    // per-doctor table
+    const lt = document.getElementById('loadtable');
+    lt.innerHTML = '';
+    const hr = el('tr');
+    ['Doctor', 'On-call days', 'Full days', 'Half-shifts', 'ED halves', 'Maternity days', 'Sessional earnings'].forEach(h => hr.appendChild(el('th', null, h)));
+    lt.appendChild(hr);
+    DOCS.slice().sort((a, b) => stat[b.id].earnings - stat[a.id].earnings).forEach(d => {
+      const s = stat[d.id];
+      if (!s.days) return;
+      const tr = el('tr');
+      tr.appendChild(el('td', null, INITIALS[d.id] + ' · ' + d.name + (d.reduced ? ' <span class="tag">reduced-load</span>' : '')));
+      [s.days, s.fullDays, s.halfDays, s.edHalves, s.matDays,
+       '$' + s.earnings.toLocaleString('en-AU')].forEach(v => tr.appendChild(el('td', null, String(v))));
+      lt.appendChild(tr);
+    });
+
+    document.getElementById('gennote').textContent =
+      'Built from ' + Object.keys(STATE.months[curMonth].submitted).length + ' saved availability sheets for ' + MONTH_NAMES[curMonth].split(' · ')[0] + '. Unmarked doctors count as fully available.';
+  });
+
+  /* ---------- boot ---------- */
+  function renderAll() {
+    docSel.value = curDoc;
+    renderDocMeta(); renderSubs(); renderCal();
+    document.getElementById('results').hidden = true;
+    document.getElementById('gennote').textContent = '';
+  }
+
+  document.getElementById('deadlinebadge').textContent = 'October entries close 1 September · November entries close 1 October';
+  renderAll();
+
+  (async () => {
+    try {
+      if (window.claude && typeof window.claude.use === 'function') {
+        artifactNS = await window.claude.use('artifact');
+      }
+    } catch (e) { artifactNS = null; }
+    if (artifactNS) setMode('shared');
+    else { setMode('local'); mergeLocal(); renderAll(); }
+  })();
+})();
+</script>
