@@ -1,507 +1,7 @@
 [
  {
-  "scenario": "old_sep",
-  "label": "OLD model \u2014 Sept 2026, typical leave",
-  "model": "old",
-  "month": "2026-09",
-  "active_site": "JT",
-  "days": 30,
-  "roles": [
-   "ED_JT",
-   "ED_CB",
-   "GPO_JT",
-   "GPO_CB",
-   "GPA_JT",
-   "GPA_CB",
-   "OBS_JT",
-   "OBS_CB"
-  ],
-  "roster": [
-   {
-    "date": "2026-09-01",
-    "weekday": "Tue",
-    "ED_JT": "dr_c",
-    "ED_CB": "simon",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-02",
-    "weekday": "Wed",
-    "ED_JT": "dr_a",
-    "ED_CB": "simon",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-03",
-    "weekday": "Thu",
-    "ED_JT": "dr_g",
-    "ED_CB": "simon",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_b"
-   },
-   {
-    "date": "2026-09-04",
-    "weekday": "Fri",
-    "ED_JT": "dr_g",
-    "ED_CB": "simon",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_d",
-    "OBS_CB": "dr_b"
-   },
-   {
-    "date": "2026-09-05",
-    "weekday": "Sat",
-    "ED_JT": "dr_a",
-    "ED_CB": "rowena",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_d",
-    "OBS_CB": "dr_e"
-   },
-   {
-    "date": "2026-09-06",
-    "weekday": "Sun",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "holly",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_d",
-    "OBS_CB": "dr_e"
-   },
-   {
-    "date": "2026-09-07",
-    "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_d",
-    "OBS_CB": "dr_e"
-   },
-   {
-    "date": "2026-09-08",
-    "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "dr_e"
-   },
-   {
-    "date": "2026-09-09",
-    "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-10",
-    "weekday": "Thu",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-11",
-    "weekday": "Fri",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-12",
-    "weekday": "Sat",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "simon",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-09-13",
-    "weekday": "Sun",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-14",
-    "weekday": "Mon",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-15",
-    "weekday": "Tue",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-16",
-    "weekday": "Wed",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "holly",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-17",
-    "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "simon",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-09-18",
-    "weekday": "Fri",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "CLARE",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-19",
-    "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-20",
-    "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-21",
-    "weekday": "Mon",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "holly",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-22",
-    "weekday": "Tue",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "holly",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_a",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-09-23",
-    "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-24",
-    "weekday": "Thu",
-    "ED_JT": "holly",
-    "ED_CB": "dr_d",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_b",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-25",
-    "weekday": "Fri",
-    "ED_JT": "holly",
-    "ED_CB": "dr_d",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-26",
-    "weekday": "Sat",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-27",
-    "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_b"
-   },
-   {
-    "date": "2026-09-28",
-    "weekday": "Mon",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-29",
-    "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_b",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-09-30",
-    "weekday": "Wed",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   }
-  ],
-  "doctor_stats": {
-   "holly": {
-    "name": "Holly D",
-    "total_oncall_days": 19,
-    "ed_days": 2,
-    "maternity_days": 19,
-    "weekend_days": 6,
-    "double_hatted_days": 2,
-    "longest_stretch": 4,
-    "leave_days": 7,
-    "reduced_load": false
-   },
-   "simon": {
-    "name": "Simon J",
-    "total_oncall_days": 23,
-    "ed_days": 4,
-    "maternity_days": 23,
-    "weekend_days": 4,
-    "double_hatted_days": 4,
-    "longest_stretch": 4,
-    "leave_days": 3,
-    "reduced_load": false
-   },
-   "rowena": {
-    "name": "Rowena",
-    "total_oncall_days": 10,
-    "ed_days": 10,
-    "maternity_days": 0,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 3,
-    "leave_days": 2,
-    "reduced_load": false
-   },
-   "dr_a": {
-    "name": "Dr A (senior)",
-    "total_oncall_days": 24,
-    "ed_days": 4,
-    "maternity_days": 24,
-    "weekend_days": 6,
-    "double_hatted_days": 4,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_b": {
-    "name": "Dr B",
-    "total_oncall_days": 19,
-    "ed_days": 0,
-    "maternity_days": 19,
-    "weekend_days": 5,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 7,
-    "reduced_load": false
-   },
-   "dr_c": {
-    "name": "Dr C",
-    "total_oncall_days": 24,
-    "ed_days": 1,
-    "maternity_days": 24,
-    "weekend_days": 5,
-    "double_hatted_days": 1,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_d": {
-    "name": "Dr D",
-    "total_oncall_days": 24,
-    "ed_days": 14,
-    "maternity_days": 24,
-    "weekend_days": 6,
-    "double_hatted_days": 14,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_e": {
-    "name": "Dr E",
-    "total_oncall_days": 24,
-    "ed_days": 4,
-    "maternity_days": 24,
-    "weekend_days": 7,
-    "double_hatted_days": 4,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_f": {
-    "name": "Dr F",
-    "total_oncall_days": 11,
-    "ed_days": 11,
-    "maternity_days": 0,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 5,
-    "reduced_load": false
-   },
-   "dr_g": {
-    "name": "Dr G (part-time)",
-    "total_oncall_days": 10,
-    "ed_days": 10,
-    "maternity_days": 0,
-    "weekend_days": 2,
-    "double_hatted_days": 0,
-    "longest_stretch": 2,
-    "leave_days": 0,
-    "reduced_load": false
-   }
-  },
-  "summary": {
-   "ed_slots": 60,
-   "ed_gaps": 0,
-   "ed_fill_pct": 100.0,
-   "total_gaps": 0,
-   "clare_backup_days": 23,
-   "double_hatted_days": 29
-  }
- },
- {
   "scenario": "new_sep",
-  "label": "NEW model \u2014 Sept 2026, same leave (active site: JT)",
+  "label": "NEW model \u2014 Sept 2026, typical leave (active site: JT)",
   "model": "new",
   "month": "2026-09",
   "active_site": "JT",
@@ -517,382 +17,448 @@
    {
     "date": "2026-09-01",
     "weekday": "Tue",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_b"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-09-02",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-09-03",
     "weekday": "Thu",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_b",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-09-04",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-09-05",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "fiona_forrester",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-09-06",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "rick_chalwin",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-09-07",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-09-08",
     "weekday": "Tue",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_b",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-09-09",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-09-10",
     "weekday": "Thu",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-09-11",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "josh_smith",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-09-12",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-09-13",
     "weekday": "Sun",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-09-14",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "josh_smith",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-09-15",
     "weekday": "Tue",
-    "ED_JT": "dr_e",
-    "ED_CB": "simon",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-09-16",
     "weekday": "Wed",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "simon",
-    "OBS": "dr_a"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "josh_smith",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-09-17",
     "weekday": "Thu",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO": "holly",
-    "GPA": "simon",
-    "OBS": "dr_a"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "josh_smith",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-09-18",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "josh_smith",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-09-19",
     "weekday": "Sat",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-09-20",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-09-21",
     "weekday": "Mon",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_b",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "lauren_mclean",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-09-22",
     "weekday": "Tue",
-    "ED_JT": "holly",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "fiona_forrester",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-09-23",
     "weekday": "Wed",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-09-24",
     "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_g",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "cynthia_paredes",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-09-25",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-09-26",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-09-27",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "cynthia_paredes",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-09-28",
     "weekday": "Mon",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-09-29",
     "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-09-30",
     "weekday": "Wed",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_b",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    }
   ],
   "doctor_stats": {
-   "holly": {
-    "name": "Holly D",
-    "total_oncall_days": 8,
-    "ed_days": 1,
-    "maternity_days": 7,
-    "weekend_days": 1,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 7,
-    "reduced_load": true
-   },
-   "simon": {
-    "name": "Simon J",
-    "total_oncall_days": 8,
-    "ed_days": 1,
+   "holly_deer": {
+    "name": "Holly Deer",
+    "total_oncall_days": 7,
+    "ed_days": 0,
     "maternity_days": 7,
     "weekend_days": 2,
     "double_hatted_days": 0,
     "longest_stretch": 4,
-    "leave_days": 3,
+    "leave_days": 7,
     "reduced_load": true
    },
-   "rowena": {
-    "name": "Rowena",
-    "total_oncall_days": 16,
-    "ed_days": 16,
-    "maternity_days": 0,
-    "weekend_days": 6,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 2,
-    "reduced_load": false
-   },
-   "dr_a": {
-    "name": "Dr A (senior)",
-    "total_oncall_days": 19,
+   "simon_jackson": {
+    "name": "Simon Jackson",
+    "total_oncall_days": 7,
     "ed_days": 0,
-    "maternity_days": 19,
-    "weekend_days": 4,
+    "maternity_days": 7,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 2,
+    "leave_days": 0,
+    "reduced_load": true
+   },
+   "rowena_conway": {
+    "name": "Rowena Conway",
+    "total_oncall_days": 23,
+    "ed_days": 0,
+    "maternity_days": 23,
+    "weekend_days": 7,
     "double_hatted_days": 0,
     "longest_stretch": 4,
     "leave_days": 0,
     "reduced_load": false
    },
-   "dr_b": {
-    "name": "Dr B",
-    "total_oncall_days": 16,
-    "ed_days": 4,
-    "maternity_days": 12,
+   "kc_chen": {
+    "name": "KC Chen",
+    "total_oncall_days": 23,
+    "ed_days": 0,
+    "maternity_days": 23,
     "weekend_days": 5,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 3,
+    "reduced_load": false
+   },
+   "niall_fostyk": {
+    "name": "Niall Fostyk",
+    "total_oncall_days": 13,
+    "ed_days": 7,
+    "maternity_days": 6,
+    "weekend_days": 2,
     "double_hatted_days": 0,
     "longest_stretch": 4,
     "leave_days": 7,
     "reduced_load": false
    },
-   "dr_c": {
-    "name": "Dr C",
-    "total_oncall_days": 20,
-    "ed_days": 2,
-    "maternity_days": 18,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_d": {
-    "name": "Dr D",
-    "total_oncall_days": 21,
-    "ed_days": 8,
-    "maternity_days": 13,
-    "weekend_days": 7,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_e": {
-    "name": "Dr E",
-    "total_oncall_days": 16,
-    "ed_days": 2,
-    "maternity_days": 14,
-    "weekend_days": 3,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_f": {
-    "name": "Dr F",
-    "total_oncall_days": 16,
-    "ed_days": 16,
+   "michael_macpherson": {
+    "name": "Michael MacPherson",
+    "total_oncall_days": 13,
+    "ed_days": 13,
     "maternity_days": 0,
-    "weekend_days": 7,
+    "weekend_days": 6,
     "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 5,
+    "longest_stretch": 3,
+    "leave_days": 0,
     "reduced_load": false
    },
-   "dr_g": {
-    "name": "Dr G (part-time)",
+   "krishna_bayley": {
+    "name": "Krishna Bayley",
     "total_oncall_days": 10,
     "ed_days": 10,
     "maternity_days": 0,
-    "weekend_days": 1,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 3,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "fiona_forrester": {
+    "name": "Fiona Forrester",
+    "total_oncall_days": 10,
+    "ed_days": 3,
+    "maternity_days": 7,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "lauren_mclean": {
+    "name": "Lauren McLean",
+    "total_oncall_days": 9,
+    "ed_days": 1,
+    "maternity_days": 8,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "li_chei_lee": {
+    "name": "Li Chei Lee",
+    "total_oncall_days": 6,
+    "ed_days": 0,
+    "maternity_days": 6,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 3,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "josh_smith": {
+    "name": "Josh Smith",
+    "total_oncall_days": 5,
+    "ed_days": 5,
+    "maternity_days": 0,
+    "weekend_days": 0,
+    "double_hatted_days": 0,
+    "longest_stretch": 3,
+    "leave_days": 7,
+    "reduced_load": false
+   },
+   "nitya_sukheja": {
+    "name": "Nitya Sukheja",
+    "total_oncall_days": 7,
+    "ed_days": 7,
+    "maternity_days": 0,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "rick_chalwin": {
+    "name": "Rick Chalwin",
+    "total_oncall_days": 4,
+    "ed_days": 4,
+    "maternity_days": 0,
+    "weekend_days": 2,
     "double_hatted_days": 0,
     "longest_stretch": 2,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "gareth_oreilly": {
+    "name": "Gareth O'Reilly",
+    "total_oncall_days": 5,
+    "ed_days": 5,
+    "maternity_days": 0,
+    "weekend_days": 0,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "cynthia_paredes": {
+    "name": "Cynthia Paredes",
+    "total_oncall_days": 5,
+    "ed_days": 2,
+    "maternity_days": 3,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "nikki_pennifold": {
+    "name": "Nikki Pennifold",
+    "total_oncall_days": 3,
+    "ed_days": 3,
+    "maternity_days": 0,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
     "leave_days": 0,
     "reduced_load": false
    }
@@ -924,385 +490,407 @@
    {
     "date": "2026-10-01",
     "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "josh_smith",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-10-02",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-10-03",
     "weekday": "Sat",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_b",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-10-04",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-10-05",
     "weekday": "Mon",
-    "ED_JT": "holly",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-10-06",
     "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "josh_smith",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-10-07",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-10-08",
     "weekday": "Thu",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "niall_fostyk"
    },
    {
     "date": "2026-10-09",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-10-10",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_b",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-10-11",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "josh_smith",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-10-12",
     "weekday": "Mon",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-10-13",
     "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_b",
-    "GPO": "dr_a",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "lauren_mclean",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-10-14",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "josh_smith",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-10-15",
     "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_a"
+    "ED_JT": "gareth_oreilly",
+    "ED_CB": "cynthia_paredes",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-10-16",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "josh_smith",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-10-17",
     "weekday": "Sat",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "fiona_forrester",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-10-18",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_b",
-    "GPO": "dr_a",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-10-19",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-10-20",
     "weekday": "Tue",
-    "ED_JT": "dr_a",
-    "ED_CB": "simon",
-    "GPO": "holly",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-10-21",
     "weekday": "Wed",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-10-22",
     "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "lauren_mclean",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-10-23",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-10-24",
     "weekday": "Sat",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "josh_smith",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-10-25",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-10-26",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "lauren_mclean",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-10-27",
     "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "simon",
-    "GPO": "holly",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-10-28",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "josh_smith",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-10-29",
     "weekday": "Thu",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-10-30",
     "weekday": "Fri",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-10-31",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    }
   ],
   "doctor_stats": {
-   "holly": {
-    "name": "Holly D",
-    "total_oncall_days": 8,
-    "ed_days": 1,
+   "holly_deer": {
+    "name": "Holly Deer",
+    "total_oncall_days": 7,
+    "ed_days": 0,
+    "maternity_days": 7,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": true
+   },
+   "simon_jackson": {
+    "name": "Simon Jackson",
+    "total_oncall_days": 7,
+    "ed_days": 0,
     "maternity_days": 7,
     "weekend_days": 2,
     "double_hatted_days": 0,
     "longest_stretch": 3,
-    "leave_days": 3,
+    "leave_days": 7,
     "reduced_load": true
    },
-   "simon": {
-    "name": "Simon J",
-    "total_oncall_days": 8,
-    "ed_days": 2,
-    "maternity_days": 6,
-    "weekend_days": 2,
-    "double_hatted_days": 0,
-    "longest_stretch": 3,
-    "leave_days": 0,
-    "reduced_load": true
-   },
-   "rowena": {
-    "name": "Rowena",
-    "total_oncall_days": 21,
-    "ed_days": 21,
-    "maternity_days": 0,
+   "rowena_conway": {
+    "name": "Rowena Conway",
+    "total_oncall_days": 24,
+    "ed_days": 0,
+    "maternity_days": 24,
     "weekend_days": 6,
     "double_hatted_days": 0,
     "longest_stretch": 4,
     "leave_days": 0,
     "reduced_load": false
    },
-   "dr_a": {
-    "name": "Dr A (senior)",
-    "total_oncall_days": 21,
-    "ed_days": 2,
-    "maternity_days": 19,
-    "weekend_days": 8,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_b": {
-    "name": "Dr B",
-    "total_oncall_days": 19,
-    "ed_days": 4,
-    "maternity_days": 15,
+   "kc_chen": {
+    "name": "KC Chen",
+    "total_oncall_days": 24,
+    "ed_days": 0,
+    "maternity_days": 24,
     "weekend_days": 7,
     "double_hatted_days": 0,
     "longest_stretch": 4,
     "leave_days": 0,
     "reduced_load": false
    },
-   "dr_c": {
-    "name": "Dr C",
-    "total_oncall_days": 18,
-    "ed_days": 2,
-    "maternity_days": 16,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 7,
-    "reduced_load": false
-   },
-   "dr_d": {
-    "name": "Dr D",
-    "total_oncall_days": 17,
-    "ed_days": 2,
-    "maternity_days": 15,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 7,
-    "reduced_load": false
-   },
-   "dr_e": {
-    "name": "Dr E",
-    "total_oncall_days": 20,
-    "ed_days": 5,
-    "maternity_days": 15,
-    "weekend_days": 7,
+   "niall_fostyk": {
+    "name": "Niall Fostyk",
+    "total_oncall_days": 14,
+    "ed_days": 10,
+    "maternity_days": 4,
+    "weekend_days": 3,
     "double_hatted_days": 0,
     "longest_stretch": 4,
     "leave_days": 0,
     "reduced_load": false
    },
-   "dr_f": {
-    "name": "Dr F",
-    "total_oncall_days": 23,
-    "ed_days": 23,
+   "michael_macpherson": {
+    "name": "Michael MacPherson",
+    "total_oncall_days": 14,
+    "ed_days": 10,
+    "maternity_days": 4,
+    "weekend_days": 7,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 7,
+    "reduced_load": false
+   },
+   "krishna_bayley": {
+    "name": "Krishna Bayley",
+    "total_oncall_days": 10,
+    "ed_days": 10,
     "maternity_days": 0,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "fiona_forrester": {
+    "name": "Fiona Forrester",
+    "total_oncall_days": 12,
+    "ed_days": 4,
+    "maternity_days": 8,
     "weekend_days": 5,
     "double_hatted_days": 0,
     "longest_stretch": 4,
+    "leave_days": 7,
+    "reduced_load": false
+   },
+   "lauren_mclean": {
+    "name": "Lauren McLean",
+    "total_oncall_days": 7,
+    "ed_days": 3,
+    "maternity_days": 4,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
     "leave_days": 0,
     "reduced_load": false
    },
-   "dr_g": {
-    "name": "Dr G (part-time)",
+   "li_chei_lee": {
+    "name": "Li Chei Lee",
+    "total_oncall_days": 6,
+    "ed_days": 0,
+    "maternity_days": 6,
+    "weekend_days": 0,
+    "double_hatted_days": 0,
+    "longest_stretch": 3,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "josh_smith": {
+    "name": "Josh Smith",
+    "total_oncall_days": 7,
+    "ed_days": 7,
+    "maternity_days": 0,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "nitya_sukheja": {
+    "name": "Nitya Sukheja",
     "total_oncall_days": 0,
     "ed_days": 0,
     "maternity_days": 0,
@@ -1310,6 +898,50 @@
     "double_hatted_days": 0,
     "longest_stretch": 0,
     "leave_days": 31,
+    "reduced_load": false
+   },
+   "rick_chalwin": {
+    "name": "Rick Chalwin",
+    "total_oncall_days": 5,
+    "ed_days": 5,
+    "maternity_days": 0,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 2,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "gareth_oreilly": {
+    "name": "Gareth O'Reilly",
+    "total_oncall_days": 6,
+    "ed_days": 6,
+    "maternity_days": 0,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "cynthia_paredes": {
+    "name": "Cynthia Paredes",
+    "total_oncall_days": 6,
+    "ed_days": 1,
+    "maternity_days": 5,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "nikki_pennifold": {
+    "name": "Nikki Pennifold",
+    "total_oncall_days": 6,
+    "ed_days": 6,
+    "maternity_days": 0,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
+    "leave_days": 0,
     "reduced_load": false
    }
   },
@@ -1324,7 +956,7 @@
  },
  {
   "scenario": "new_stress",
-  "label": "NEW model \u2014 stress test: 2 of 3 GPOs + a GPA away at once (Nov 2026)",
+  "label": "NEW model \u2014 stress test: a GPO, the second GPA and an obs-support doc away at once (Nov 2026)",
   "model": "new",
   "month": "2026-11",
   "active_site": "JT",
@@ -1340,382 +972,448 @@
    {
     "date": "2026-11-01",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-02",
     "weekday": "Mon",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-03",
     "weekday": "Tue",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-11-04",
     "weekday": "Wed",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "nikki_pennifold",
+    "ED_CB": "fiona_forrester",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-11-05",
     "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-11-06",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "josh_smith",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-11-07",
     "weekday": "Sat",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-11-08",
     "weekday": "Sun",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_a"
+    "ED_JT": "nikki_pennifold",
+    "ED_CB": "fiona_forrester",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-11-09",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_a"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-11-10",
     "weekday": "Tue",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "josh_smith",
+    "GPO": "CLARE",
+    "GPA": "rowena_conway",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-11-11",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "CLARE",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2026-11-12",
     "weekday": "Thu",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-13",
     "weekday": "Fri",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "fiona_forrester",
+    "GPO": "simon_jackson",
+    "GPA": "CLARE",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-14",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "rick_chalwin",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-15",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "rick_chalwin",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-16",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "CLARE",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "rick_chalwin",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2026-11-17",
     "weekday": "Tue",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "nitya_sukheja",
+    "ED_CB": "josh_smith",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "krishna_bayley"
    },
    {
     "date": "2026-11-18",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_b",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "krishna_bayley"
    },
    {
     "date": "2026-11-19",
     "weekday": "Thu",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "josh_smith",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "krishna_bayley"
    },
    {
     "date": "2026-11-20",
     "weekday": "Fri",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_g",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_a"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "krishna_bayley"
    },
    {
     "date": "2026-11-21",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_a"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "fiona_forrester",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-22",
     "weekday": "Sun",
-    "ED_JT": "dr_g",
-    "ED_CB": "rowena",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_a"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "fiona_forrester",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-23",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_b",
-    "GPO": "holly",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "rick_chalwin",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-24",
     "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_g",
-    "GPO": "holly",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "lauren_mclean"
    },
    {
     "date": "2026-11-25",
     "weekday": "Wed",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_b",
-    "GPO": "holly",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-11-26",
     "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_g",
-    "GPO": "holly",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-11-27",
     "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-11-28",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "fiona_forrester",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2026-11-29",
     "weekday": "Sun",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2026-11-30",
     "weekday": "Mon",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "cynthia_paredes",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    }
   ],
   "doctor_stats": {
-   "holly": {
-    "name": "Holly D",
-    "total_oncall_days": 8,
+   "holly_deer": {
+    "name": "Holly Deer",
+    "total_oncall_days": 7,
     "ed_days": 0,
-    "maternity_days": 8,
-    "weekend_days": 0,
+    "maternity_days": 7,
+    "weekend_days": 3,
     "double_hatted_days": 0,
-    "longest_stretch": 4,
+    "longest_stretch": 3,
     "leave_days": 14,
     "reduced_load": true
    },
-   "simon": {
-    "name": "Simon J",
+   "simon_jackson": {
+    "name": "Simon Jackson",
     "total_oncall_days": 8,
     "ed_days": 0,
     "maternity_days": 8,
-    "weekend_days": 1,
+    "weekend_days": 2,
     "double_hatted_days": 0,
     "longest_stretch": 4,
-    "leave_days": 7,
+    "leave_days": 0,
     "reduced_load": true
    },
-   "rowena": {
-    "name": "Rowena",
-    "total_oncall_days": 16,
-    "ed_days": 16,
-    "maternity_days": 0,
-    "weekend_days": 6,
+   "rowena_conway": {
+    "name": "Rowena Conway",
+    "total_oncall_days": 24,
+    "ed_days": 0,
+    "maternity_days": 24,
+    "weekend_days": 7,
     "double_hatted_days": 0,
     "longest_stretch": 4,
     "leave_days": 0,
     "reduced_load": false
    },
-   "dr_a": {
-    "name": "Dr A (senior)",
-    "total_oncall_days": 16,
+   "kc_chen": {
+    "name": "KC Chen",
+    "total_oncall_days": 19,
     "ed_days": 0,
-    "maternity_days": 16,
+    "maternity_days": 19,
     "weekend_days": 6,
     "double_hatted_days": 0,
     "longest_stretch": 4,
     "leave_days": 7,
     "reduced_load": false
    },
-   "dr_b": {
-    "name": "Dr B",
-    "total_oncall_days": 22,
-    "ed_days": 3,
-    "maternity_days": 19,
-    "weekend_days": 9,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_c": {
-    "name": "Dr C",
-    "total_oncall_days": 16,
-    "ed_days": 4,
-    "maternity_days": 12,
-    "weekend_days": 6,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_d": {
-    "name": "Dr D",
-    "total_oncall_days": 20,
-    "ed_days": 7,
-    "maternity_days": 13,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_e": {
-    "name": "Dr E",
-    "total_oncall_days": 16,
-    "ed_days": 4,
-    "maternity_days": 12,
-    "weekend_days": 6,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_f": {
-    "name": "Dr F",
-    "total_oncall_days": 16,
-    "ed_days": 16,
+   "niall_fostyk": {
+    "name": "Niall Fostyk",
+    "total_oncall_days": 14,
+    "ed_days": 14,
     "maternity_days": 0,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 3,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "michael_macpherson": {
+    "name": "Michael MacPherson",
+    "total_oncall_days": 14,
+    "ed_days": 7,
+    "maternity_days": 7,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 7,
+    "reduced_load": false
+   },
+   "krishna_bayley": {
+    "name": "Krishna Bayley",
+    "total_oncall_days": 10,
+    "ed_days": 6,
+    "maternity_days": 4,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "fiona_forrester": {
+    "name": "Fiona Forrester",
+    "total_oncall_days": 12,
+    "ed_days": 10,
+    "maternity_days": 2,
+    "weekend_days": 5,
+    "double_hatted_days": 0,
+    "longest_stretch": 3,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "lauren_mclean": {
+    "name": "Lauren McLean",
+    "total_oncall_days": 10,
+    "ed_days": 0,
+    "maternity_days": 10,
     "weekend_days": 5,
     "double_hatted_days": 0,
     "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "li_chei_lee": {
+    "name": "Li Chei Lee",
+    "total_oncall_days": 3,
+    "ed_days": 0,
+    "maternity_days": 3,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 2,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "josh_smith": {
+    "name": "Josh Smith",
+    "total_oncall_days": 4,
+    "ed_days": 4,
+    "maternity_days": 0,
+    "weekend_days": 0,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
     "leave_days": 7,
     "reduced_load": false
    },
-   "dr_g": {
-    "name": "Dr G (part-time)",
-    "total_oncall_days": 10,
-    "ed_days": 10,
+   "nitya_sukheja": {
+    "name": "Nitya Sukheja",
+    "total_oncall_days": 5,
+    "ed_days": 5,
+    "maternity_days": 0,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "rick_chalwin": {
+    "name": "Rick Chalwin",
+    "total_oncall_days": 4,
+    "ed_days": 4,
     "maternity_days": 0,
     "weekend_days": 2,
     "double_hatted_days": 0,
     "longest_stretch": 3,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "gareth_oreilly": {
+    "name": "Gareth O'Reilly",
+    "total_oncall_days": 4,
+    "ed_days": 4,
+    "maternity_days": 0,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "cynthia_paredes": {
+    "name": "Cynthia Paredes",
+    "total_oncall_days": 5,
+    "ed_days": 1,
+    "maternity_days": 4,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "nikki_pennifold": {
+    "name": "Nikki Pennifold",
+    "total_oncall_days": 5,
+    "ed_days": 5,
+    "maternity_days": 0,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
     "leave_days": 0,
     "reduced_load": false
    }
@@ -1730,508 +1428,8 @@
   }
  },
  {
-  "scenario": "old_stress",
-  "label": "OLD model \u2014 same stress month for comparison (Nov 2026)",
-  "model": "old",
-  "month": "2026-11",
-  "active_site": "JT",
-  "days": 30,
-  "roles": [
-   "ED_JT",
-   "ED_CB",
-   "GPO_JT",
-   "GPO_CB",
-   "GPA_JT",
-   "GPA_CB",
-   "OBS_JT",
-   "OBS_CB"
-  ],
-  "roster": [
-   {
-    "date": "2026-11-01",
-    "weekday": "Sun",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "dr_e"
-   },
-   {
-    "date": "2026-11-02",
-    "weekday": "Mon",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_b",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_d",
-    "OBS_CB": "dr_e"
-   },
-   {
-    "date": "2026-11-03",
-    "weekday": "Tue",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_d",
-    "OBS_CB": "dr_e"
-   },
-   {
-    "date": "2026-11-04",
-    "weekday": "Wed",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_f",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_d",
-    "OBS_CB": "dr_e"
-   },
-   {
-    "date": "2026-11-05",
-    "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "simon",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "CLARE",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_d",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-11-06",
-    "weekday": "Fri",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_b",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-11-07",
-    "weekday": "Sat",
-    "ED_JT": "dr_g",
-    "ED_CB": "simon",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-08",
-    "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-09",
-    "weekday": "Mon",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_b",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-10",
-    "weekday": "Tue",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_d",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "CLARE",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-11",
-    "weekday": "Wed",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-11-12",
-    "weekday": "Thu",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_b",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-13",
-    "weekday": "Fri",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-14",
-    "weekday": "Sat",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO_JT": "CLARE",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "CLARE",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-15",
-    "weekday": "Sun",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "holly",
-    "GPO_CB": "CLARE",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-16",
-    "weekday": "Mon",
-    "ED_JT": "holly",
-    "ED_CB": "dr_b",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-11-17",
-    "weekday": "Tue",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_f",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_a",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-18",
-    "weekday": "Wed",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_b",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_a",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-19",
-    "weekday": "Thu",
-    "ED_JT": "dr_a",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "CLARE",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-20",
-    "weekday": "Fri",
-    "ED_JT": "rowena",
-    "ED_CB": "simon",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-21",
-    "weekday": "Sat",
-    "ED_JT": "dr_c",
-    "ED_CB": "simon",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "holly",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-11-22",
-    "weekday": "Sun",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "holly",
-    "GPA_JT": "dr_a",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-23",
-    "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "holly",
-    "GPA_JT": "dr_a",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-24",
-    "weekday": "Tue",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_b",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-25",
-    "weekday": "Wed",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_a",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-26",
-    "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_b",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_c",
-    "OBS_JT": "CLARE",
-    "OBS_CB": "CLARE"
-   },
-   {
-    "date": "2026-11-27",
-    "weekday": "Fri",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_f",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "simon",
-    "GPA_CB": "dr_a",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-28",
-    "weekday": "Sat",
-    "ED_JT": "dr_c",
-    "ED_CB": "dr_b",
-    "GPO_JT": "holly",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "dr_a",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-29",
-    "weekday": "Sun",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_b",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "dr_b",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   },
-   {
-    "date": "2026-11-30",
-    "weekday": "Mon",
-    "ED_JT": "dr_e",
-    "ED_CB": "dr_d",
-    "GPO_JT": "dr_a",
-    "GPO_CB": "holly",
-    "GPA_JT": "dr_c",
-    "GPA_CB": "simon",
-    "OBS_JT": "dr_e",
-    "OBS_CB": "dr_d"
-   }
-  ],
-  "doctor_stats": {
-   "holly": {
-    "name": "Holly D",
-    "total_oncall_days": 13,
-    "ed_days": 1,
-    "maternity_days": 13,
-    "weekend_days": 4,
-    "double_hatted_days": 1,
-    "longest_stretch": 4,
-    "leave_days": 14,
-    "reduced_load": false
-   },
-   "simon": {
-    "name": "Simon J",
-    "total_oncall_days": 19,
-    "ed_days": 4,
-    "maternity_days": 19,
-    "weekend_days": 6,
-    "double_hatted_days": 4,
-    "longest_stretch": 4,
-    "leave_days": 7,
-    "reduced_load": false
-   },
-   "rowena": {
-    "name": "Rowena",
-    "total_oncall_days": 5,
-    "ed_days": 5,
-    "maternity_days": 0,
-    "weekend_days": 1,
-    "double_hatted_days": 0,
-    "longest_stretch": 1,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_a": {
-    "name": "Dr A (senior)",
-    "total_oncall_days": 20,
-    "ed_days": 7,
-    "maternity_days": 20,
-    "weekend_days": 6,
-    "double_hatted_days": 7,
-    "longest_stretch": 4,
-    "leave_days": 7,
-    "reduced_load": false
-   },
-   "dr_b": {
-    "name": "Dr B",
-    "total_oncall_days": 24,
-    "ed_days": 9,
-    "maternity_days": 24,
-    "weekend_days": 8,
-    "double_hatted_days": 9,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_c": {
-    "name": "Dr C",
-    "total_oncall_days": 24,
-    "ed_days": 4,
-    "maternity_days": 24,
-    "weekend_days": 7,
-    "double_hatted_days": 4,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_d": {
-    "name": "Dr D",
-    "total_oncall_days": 24,
-    "ed_days": 11,
-    "maternity_days": 24,
-    "weekend_days": 7,
-    "double_hatted_days": 11,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_e": {
-    "name": "Dr E",
-    "total_oncall_days": 24,
-    "ed_days": 6,
-    "maternity_days": 24,
-    "weekend_days": 8,
-    "double_hatted_days": 6,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_f": {
-    "name": "Dr F",
-    "total_oncall_days": 6,
-    "ed_days": 6,
-    "maternity_days": 0,
-    "weekend_days": 1,
-    "double_hatted_days": 0,
-    "longest_stretch": 2,
-    "leave_days": 7,
-    "reduced_load": false
-   },
-   "dr_g": {
-    "name": "Dr G (part-time)",
-    "total_oncall_days": 7,
-    "ed_days": 7,
-    "maternity_days": 0,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 1,
-    "leave_days": 0,
-    "reduced_load": false
-   }
-  },
-  "summary": {
-   "ed_slots": 60,
-   "ed_gaps": 0,
-   "ed_fill_pct": 100.0,
-   "total_gaps": 0,
-   "clare_backup_days": 32,
-   "double_hatted_days": 42
-  }
- },
- {
   "scenario": "new_lauren",
-  "label": "NEW model \u2014 Feb 2027 with Lauren on board (4th GPO)",
+  "label": "NEW model \u2014 Feb 2027, Lauren McLean credentialed as GPO",
   "model": "new",
   "month": "2027-02",
   "active_site": "CB",
@@ -2247,360 +1445,382 @@
    {
     "date": "2027-02-01",
     "weekday": "Mon",
-    "ED_JT": "dr_e",
-    "ED_CB": "holly",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2027-02-02",
     "weekday": "Tue",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "josh_smith",
+    "GPO": "lauren_mclean",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2027-02-03",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_e",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "rick_chalwin",
+    "GPO": "lauren_mclean",
+    "GPA": "kc_chen",
+    "OBS": "michael_macpherson"
    },
    {
     "date": "2027-02-04",
     "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "rick_chalwin",
+    "GPO": "lauren_mclean",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2027-02-05",
     "weekday": "Fri",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "lauren",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "lauren_mclean",
+    "GPA": "CLARE",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2027-02-06",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "lauren",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2027-02-07",
     "weekday": "Sun",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "lauren",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "josh_smith",
+    "GPO": "lauren_mclean",
+    "GPA": "kc_chen",
+    "OBS": "li_chei_lee"
    },
    {
     "date": "2027-02-08",
     "weekday": "Mon",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO": "lauren",
-    "GPA": "simon",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "lauren_mclean",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-09",
     "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "lauren_mclean",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-10",
     "weekday": "Wed",
-    "ED_JT": "lauren",
-    "ED_CB": "dr_b",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "josh_smith",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2027-02-11",
     "weekday": "Thu",
-    "ED_JT": "lauren",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2027-02-12",
     "weekday": "Fri",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "holly",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "josh_smith",
+    "GPO": "lauren_mclean",
+    "GPA": "rowena_conway",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-13",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "dr_b",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "lauren_mclean",
+    "GPA": "rowena_conway",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-14",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_b",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "lauren_mclean",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-15",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "lauren",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "rick_chalwin",
+    "GPO": "lauren_mclean",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-16",
     "weekday": "Tue",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO": "lauren",
-    "GPA": "dr_a",
-    "OBS": "dr_b"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2027-02-17",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_d",
-    "GPO": "lauren",
-    "GPA": "dr_a",
-    "OBS": "dr_b"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "cynthia_paredes"
    },
    {
     "date": "2027-02-18",
     "weekday": "Thu",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "lauren",
-    "GPA": "dr_c",
-    "OBS": "dr_b"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-19",
     "weekday": "Fri",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_d",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_b"
+    "ED_JT": "krishna_bayley",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-20",
     "weekday": "Sat",
-    "ED_JT": "dr_g",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "simon",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nitya_sukheja",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-21",
     "weekday": "Sun",
-    "ED_JT": "holly",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "josh_smith",
+    "GPO": "holly_deer",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-22",
     "weekday": "Mon",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_b",
-    "GPO": "lauren",
-    "GPA": "dr_c",
-    "OBS": "dr_d"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "krishna_bayley"
    },
    {
     "date": "2027-02-23",
     "weekday": "Tue",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_b",
-    "GPO": "lauren",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "rick_chalwin",
+    "GPO": "holly_deer",
+    "GPA": "rowena_conway",
+    "OBS": "krishna_bayley"
    },
    {
     "date": "2027-02-24",
     "weekday": "Wed",
-    "ED_JT": "rowena",
-    "ED_CB": "simon",
-    "GPO": "lauren",
-    "GPA": "dr_a",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "krishna_bayley"
    },
    {
     "date": "2027-02-25",
     "weekday": "Thu",
-    "ED_JT": "holly",
-    "ED_CB": "dr_b",
-    "GPO": "lauren",
-    "GPA": "dr_c",
-    "OBS": "dr_e"
+    "ED_JT": "michael_macpherson",
+    "ED_CB": "josh_smith",
+    "GPO": "simon_jackson",
+    "GPA": "rowena_conway",
+    "OBS": "krishna_bayley"
    },
    {
     "date": "2027-02-26",
     "weekday": "Fri",
-    "ED_JT": "dr_e",
-    "ED_CB": "simon",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_b"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "nikki_pennifold",
+    "GPO": "simon_jackson",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-27",
     "weekday": "Sat",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_b"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "cynthia_paredes",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    },
    {
     "date": "2027-02-28",
     "weekday": "Sun",
-    "ED_JT": "rowena",
-    "ED_CB": "dr_f",
-    "GPO": "dr_a",
-    "GPA": "dr_c",
-    "OBS": "dr_b"
+    "ED_JT": "niall_fostyk",
+    "ED_CB": "gareth_oreilly",
+    "GPO": "rowena_conway",
+    "GPA": "kc_chen",
+    "OBS": "fiona_forrester"
    }
   ],
   "doctor_stats": {
-   "holly": {
-    "name": "Holly D",
-    "total_oncall_days": 7,
-    "ed_days": 3,
-    "maternity_days": 4,
+   "holly_deer": {
+    "name": "Holly Deer",
+    "total_oncall_days": 6,
+    "ed_days": 0,
+    "maternity_days": 6,
     "weekend_days": 1,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": true
-   },
-   "simon": {
-    "name": "Simon J",
-    "total_oncall_days": 7,
-    "ed_days": 2,
-    "maternity_days": 5,
-    "weekend_days": 3,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 3,
-    "reduced_load": true
-   },
-   "rowena": {
-    "name": "Rowena",
-    "total_oncall_days": 14,
-    "ed_days": 14,
-    "maternity_days": 0,
-    "weekend_days": 5,
     "double_hatted_days": 0,
     "longest_stretch": 3,
     "leave_days": 0,
-    "reduced_load": false
+    "reduced_load": true
    },
-   "dr_a": {
-    "name": "Dr A (senior)",
-    "total_oncall_days": 15,
+   "simon_jackson": {
+    "name": "Simon Jackson",
+    "total_oncall_days": 6,
     "ed_days": 0,
-    "maternity_days": 15,
-    "weekend_days": 5,
+    "maternity_days": 6,
+    "weekend_days": 1,
     "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 7,
-    "reduced_load": false
+    "longest_stretch": 3,
+    "leave_days": 3,
+    "reduced_load": true
    },
-   "dr_b": {
-    "name": "Dr B",
-    "total_oncall_days": 17,
-    "ed_days": 4,
-    "maternity_days": 13,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_c": {
-    "name": "Dr C",
+   "rowena_conway": {
+    "name": "Rowena Conway",
     "total_oncall_days": 14,
     "ed_days": 0,
     "maternity_days": 14,
     "weekend_days": 4,
     "double_hatted_days": 0,
     "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_d": {
-    "name": "Dr D",
-    "total_oncall_days": 15,
-    "ed_days": 5,
-    "maternity_days": 10,
-    "weekend_days": 3,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
-    "leave_days": 0,
-    "reduced_load": false
-   },
-   "dr_e": {
-    "name": "Dr E",
-    "total_oncall_days": 14,
-    "ed_days": 3,
-    "maternity_days": 11,
-    "weekend_days": 4,
-    "double_hatted_days": 0,
-    "longest_stretch": 4,
     "leave_days": 7,
     "reduced_load": false
    },
-   "dr_f": {
-    "name": "Dr F",
-    "total_oncall_days": 15,
-    "ed_days": 15,
-    "maternity_days": 0,
+   "kc_chen": {
+    "name": "KC Chen",
+    "total_oncall_days": 18,
+    "ed_days": 0,
+    "maternity_days": 18,
     "weekend_days": 7,
     "double_hatted_days": 0,
     "longest_stretch": 4,
     "leave_days": 0,
     "reduced_load": false
    },
-   "dr_g": {
-    "name": "Dr G (part-time)",
-    "total_oncall_days": 8,
-    "ed_days": 8,
+   "niall_fostyk": {
+    "name": "Niall Fostyk",
+    "total_oncall_days": 13,
+    "ed_days": 13,
+    "maternity_days": 0,
+    "weekend_days": 5,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 7,
+    "reduced_load": false
+   },
+   "michael_macpherson": {
+    "name": "Michael MacPherson",
+    "total_oncall_days": 13,
+    "ed_days": 10,
+    "maternity_days": 3,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 3,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "krishna_bayley": {
+    "name": "Krishna Bayley",
+    "total_oncall_days": 9,
+    "ed_days": 5,
+    "maternity_days": 4,
+    "weekend_days": 0,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "fiona_forrester": {
+    "name": "Fiona Forrester",
+    "total_oncall_days": 13,
+    "ed_days": 0,
+    "maternity_days": 13,
+    "weekend_days": 6,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "lauren_mclean": {
+    "name": "Lauren McLean",
+    "total_oncall_days": 11,
+    "ed_days": 0,
+    "maternity_days": 11,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "li_chei_lee": {
+    "name": "Li Chei Lee",
+    "total_oncall_days": 4,
+    "ed_days": 0,
+    "maternity_days": 4,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 4,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "josh_smith": {
+    "name": "Josh Smith",
+    "total_oncall_days": 6,
+    "ed_days": 6,
+    "maternity_days": 0,
+    "weekend_days": 2,
+    "double_hatted_days": 0,
+    "longest_stretch": 1,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "nitya_sukheja": {
+    "name": "Nitya Sukheja",
+    "total_oncall_days": 7,
+    "ed_days": 7,
     "maternity_days": 0,
     "weekend_days": 2,
     "double_hatted_days": 0,
@@ -2608,14 +1828,47 @@
     "leave_days": 0,
     "reduced_load": false
    },
-   "lauren": {
-    "name": "Lauren (GPO)",
-    "total_oncall_days": 14,
-    "ed_days": 2,
-    "maternity_days": 12,
-    "weekend_days": 2,
+   "rick_chalwin": {
+    "name": "Rick Chalwin",
+    "total_oncall_days": 4,
+    "ed_days": 4,
+    "maternity_days": 0,
+    "weekend_days": 0,
     "double_hatted_days": 0,
-    "longest_stretch": 4,
+    "longest_stretch": 2,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "gareth_oreilly": {
+    "name": "Gareth O'Reilly",
+    "total_oncall_days": 5,
+    "ed_days": 5,
+    "maternity_days": 0,
+    "weekend_days": 3,
+    "double_hatted_days": 0,
+    "longest_stretch": 2,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "cynthia_paredes": {
+    "name": "Cynthia Paredes",
+    "total_oncall_days": 5,
+    "ed_days": 1,
+    "maternity_days": 4,
+    "weekend_days": 1,
+    "double_hatted_days": 0,
+    "longest_stretch": 2,
+    "leave_days": 0,
+    "reduced_load": false
+   },
+   "nikki_pennifold": {
+    "name": "Nikki Pennifold",
+    "total_oncall_days": 5,
+    "ed_days": 5,
+    "maternity_days": 0,
+    "weekend_days": 0,
+    "double_hatted_days": 0,
+    "longest_stretch": 2,
     "leave_days": 0,
     "reduced_load": false
    }
@@ -2625,7 +1878,7 @@
    "ed_gaps": 0,
    "ed_fill_pct": 100.0,
    "total_gaps": 0,
-   "clare_backup_days": 0,
+   "clare_backup_days": 1,
    "double_hatted_days": 0
   }
  }

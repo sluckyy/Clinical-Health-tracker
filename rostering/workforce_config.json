@@ -1,23 +1,28 @@
 {
-  "_comment": "EDIT THIS FILE to match the real workforce. Names, skills, leave and load targets here drive everything. Skills: ED (emergency on-call), GPO (GP obstetrician), GPA (GP anaesthetist), OBS (obstetric support doctor). 'home' is the doctor's usual site (JT = Jamestown, CB = Crystal Brook) - used as a soft preference for which ED line they cover. 'reduced_load' marks doctors whose on-call burden the solver actively minimises. 'fte' scales their fair-share target (1.0 = full share).",
+  "_comment": "Real JT/CB workforce, inferred from the actual July/August 2026 roster. Skills come from the lines each person actually worked: GPO = the 'OBS ONCALL' lines, GPA = 'GPA ONCALL', OBS = 'OBS SUPPORT', ED = any ED line (CB, JT, Laura, Orroroo). FTE values are estimates from how often each person appeared - EDIT to match reality. 'reduced_load' marks doctors whose on-call burden the solver actively minimises. Locums (Michelle, Ben) are excluded from the forward workforce.",
 
   "doctors": [
-    { "id": "holly",  "name": "Holly D",          "home": "JT", "skills": ["ED", "GPO"],               "reduced_load": true,  "fte": 1.0 },
-    { "id": "simon",  "name": "Simon J",          "home": "CB", "skills": ["ED", "GPA"],               "reduced_load": true,  "fte": 1.0 },
-    { "id": "rowena", "name": "Rowena",           "home": "JT", "skills": ["ED"],                      "reduced_load": false, "fte": 1.0 },
-    { "id": "dr_a",   "name": "Dr A (senior)",    "home": "JT", "skills": ["ED", "GPO", "GPA", "OBS"], "reduced_load": false, "fte": 1.0 },
-    { "id": "dr_b",   "name": "Dr B",             "home": "CB", "skills": ["ED", "GPO", "OBS"],        "reduced_load": false, "fte": 1.0 },
-    { "id": "dr_c",   "name": "Dr C",             "home": "JT", "skills": ["ED", "GPA"],               "reduced_load": false, "fte": 1.0 },
-    { "id": "dr_d",   "name": "Dr D",             "home": "CB", "skills": ["ED", "OBS"],               "reduced_load": false, "fte": 1.0 },
-    { "id": "dr_e",   "name": "Dr E",             "home": "JT", "skills": ["ED", "OBS"],               "reduced_load": false, "fte": 1.0 },
-    { "id": "dr_f",   "name": "Dr F",             "home": "CB", "skills": ["ED"],                      "reduced_load": false, "fte": 1.0 },
-    { "id": "dr_g",   "name": "Dr G (part-time)", "home": "JT", "skills": ["ED"],                      "reduced_load": false, "fte": 0.6 }
+    { "id": "holly_deer",         "name": "Holly Deer",         "home": "CB", "skills": ["ED", "GPO"],        "reduced_load": true,  "fte": 1.0 },
+    { "id": "simon_jackson",      "name": "Simon Jackson",      "home": "JT", "skills": ["ED", "GPO"],        "reduced_load": true,  "fte": 1.0 },
+    { "id": "rowena_conway",      "name": "Rowena Conway",      "home": "JT", "skills": ["ED", "GPO", "GPA"], "reduced_load": false, "fte": 1.0 },
+    { "id": "kc_chen",            "name": "KC Chen",            "home": "CB", "skills": ["ED", "GPA"],        "reduced_load": false, "fte": 1.0 },
+    { "id": "niall_fostyk",       "name": "Niall Fostyk",       "home": "JT", "skills": ["ED", "OBS"],        "reduced_load": false, "fte": 1.0 },
+    { "id": "michael_macpherson", "name": "Michael MacPherson", "home": "JT", "skills": ["ED", "OBS"],        "reduced_load": false, "fte": 1.0 },
+    { "id": "krishna_bayley",     "name": "Krishna Bayley",     "home": "JT", "skills": ["ED", "OBS"],        "reduced_load": false, "fte": 0.7 },
+    { "id": "fiona_forrester",    "name": "Fiona Forrester",    "home": "CB", "skills": ["ED", "OBS"],        "reduced_load": false, "fte": 1.0 },
+    { "id": "lauren_mclean",      "name": "Lauren McLean",      "home": "CB", "skills": ["ED", "OBS"],        "reduced_load": false, "fte": 0.7 },
+    { "id": "li_chei_lee",        "name": "Li Chei Lee",        "home": "CB", "skills": ["OBS"],              "reduced_load": false, "fte": 0.4 },
+    { "id": "josh_smith",         "name": "Josh Smith",         "home": "CB", "skills": ["ED"],               "reduced_load": false, "fte": 0.5 },
+    { "id": "nitya_sukheja",      "name": "Nitya Sukheja",      "home": "CB", "skills": ["ED"],               "reduced_load": false, "fte": 0.5 },
+    { "id": "rick_chalwin",       "name": "Rick Chalwin",       "home": "CB", "skills": ["ED"],               "reduced_load": false, "fte": 0.4 },
+    { "id": "gareth_oreilly",     "name": "Gareth O'Reilly",    "home": "CB", "skills": ["ED"],               "reduced_load": false, "fte": 0.4 },
+    { "id": "cynthia_paredes",    "name": "Cynthia Paredes",    "home": "CB", "skills": ["ED", "OBS"],        "reduced_load": false, "fte": 0.4 },
+    { "id": "nikki_pennifold",    "name": "Nikki Pennifold",    "home": "CB", "skills": ["ED"],               "reduced_load": false, "fte": 0.4 }
   ],
 
-  "future_doctors": [
-    { "id": "lauren",  "name": "Lauren (GPO)",  "home": "JT", "skills": ["ED", "GPO"], "reduced_load": false, "fte": 1.0, "available_from_month": 6 },
-    { "id": "krishna", "name": "Krishna (GPO)", "home": "CB", "skills": ["ED", "GPO"], "reduced_load": false, "fte": 1.0, "available_from_month": 12 }
-  ],
+  "future_doctors": [],
+
+  "_future_note": "Lauren McLean is expected to credential as a GPO in ~5-6 months and Krishna Bayley possibly in ~12 months - scenarios model this via 'upgrade_skills' rather than new people, since both are already in the workforce.",
 
   "clare_backup": {
     "_comment": "Clare network backup, usable 'at a pinch' for maternity roles only (not ED). GPOs rotate weekly, GPAs do 2-3 day stints.",

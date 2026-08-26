@@ -2,22 +2,25 @@
 
 Constraint-based roster generator and briefing demo for the proposed 6-month
 trial of a single alternating maternity team across Jamestown and Crystal
-Brook, with the ED roster run separately.
+Brook, with the ED roster run separately. The baseline is the **actual
+July–August 2026 roster**, parsed from the spreadsheet in `data/`.
 
 ## What's here
 
 | File | Purpose |
 |---|---|
-| `workforce_config.json` | **Edit this first.** Doctors, skills (ED/GPO/GPA/OBS), home site, FTE, reduced-load flags, incoming GPOs (Lauren/Krishna), Clare backup pool, fatigue rules. |
-| `scenarios.json` | The months to solve: model (old two-team vs new single-team), active birthing site, leave requests. |
+| `data/GP_roster_jul_aug_2026.xlsx` | The real roster (old model) as provided. |
+| `extract_actuals.py` | Parses the spreadsheet → `actuals.json`: per-day assignments, multi-hatting, gaps, DIVERT days, per-doctor stats. Normalises name typos and the "(SJ)/(HD)" backup annotations. |
+| `workforce_config.json` | **Edit this to update the workforce.** Real doctors with skills inferred from the lines they actually work, FTE estimates, reduced-load flags, Clare backup pool, fatigue rules. |
+| `scenarios.json` | The months to generate: active birthing site, leave requests, skill upgrades (e.g. Lauren McLean → GPO). |
 | `roster_solver.py` | The generator (Google OR-Tools CP-SAT). Solves every scenario, prints a summary, writes `results.json`. |
-| `results.json` | Generated rosters + per-doctor statistics + coverage summaries. |
-| `build_dashboard.py` | Injects `results.json` into `dashboard_template.html` → `dashboard.html` (the briefing page). |
+| `build_dashboard.py` | Injects `actuals.json` + `results.json` into `dashboard_template.html` → `dashboard.html` (the briefing page). |
 
 ## Run it
 
 ```bash
-pip install ortools
+pip install ortools openpyxl
+python3 extract_actuals.py data/GP_roster_jul_aug_2026.xlsx
 python3 roster_solver.py      # solves all scenarios (~1 min)
 python3 build_dashboard.py    # rebuilds the briefing dashboard
 ```
@@ -35,10 +38,12 @@ reduced-load doctors steered to ~55% of a fair share, FTE-scaled fairness,
 week-style maternity blocks, home-site ED preference, Clare-network backup
 (GPO/GPA/OBS only) used last and always counted.
 
-## Swapping in the real workforce
+## Known assumptions to review
 
-The doctors in `workforce_config.json` are a realistic stand-in (the real
-July/August rosters weren't available when this was built). To make the
-numbers quotable: replace the `doctors` array with the real roster's names,
-skills and FTEs, copy real leave into `scenarios.json`, and re-run the two
-commands above. The dashboard regenerates itself from the results.
+- FTE values are inferred from appearance frequency on the actual roster,
+  not payroll — adjust in `workforce_config.json`.
+- Future-month leave in `scenarios.json` is assumed for the demo; swap in
+  real requests before circulating per-doctor numbers.
+- Laura and Orroroo are folded into the CB and JT ED lines respectively
+  (Laura's separate line was already unrostered in August). To keep them as
+  separate lines, add the roles in `roster_solver.py`'s `NEW_MODEL_ROLES`.

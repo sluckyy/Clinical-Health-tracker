@@ -1,29 +1,15 @@
 [
   {
-    "id": "old_sep",
-    "label": "OLD model — Sept 2026, typical leave",
-    "model": "old",
-    "year": 2026, "month": 9,
-    "leave": [
-      { "doc": "holly",  "from_day": 7,  "to_day": 13 },
-      { "doc": "dr_b",   "from_day": 14, "to_day": 20 },
-      { "doc": "simon",  "from_day": 25, "to_day": 27 },
-      { "doc": "dr_f",   "from_day": 1,  "to_day": 5 },
-      { "doc": "rowena", "from_day": 21, "to_day": 22 }
-    ]
-  },
-  {
     "id": "new_sep",
-    "label": "NEW model — Sept 2026, same leave (active site: JT)",
+    "label": "NEW model — Sept 2026, typical leave (active site: JT)",
     "model": "new",
     "active_site": "JT",
     "year": 2026, "month": 9,
     "leave": [
-      { "doc": "holly",  "from_day": 7,  "to_day": 13 },
-      { "doc": "dr_b",   "from_day": 14, "to_day": 20 },
-      { "doc": "simon",  "from_day": 25, "to_day": 27 },
-      { "doc": "dr_f",   "from_day": 1,  "to_day": 5 },
-      { "doc": "rowena", "from_day": 21, "to_day": 22 }
+      { "doc": "holly_deer",     "from_day": 7,  "to_day": 13 },
+      { "doc": "niall_fostyk",   "from_day": 14, "to_day": 20 },
+      { "doc": "josh_smith",     "from_day": 21, "to_day": 27 },
+      { "doc": "kc_chen",        "from_day": 4,  "to_day": 6 }
     ]
   },
   {
@@ -33,48 +19,36 @@
     "active_site": "CB",
     "year": 2026, "month": 10,
     "leave": [
-      { "doc": "dr_c",   "from_day": 5,  "to_day": 11 },
-      { "doc": "dr_d",   "from_day": 12, "to_day": 18 },
-      { "doc": "holly",  "from_day": 23, "to_day": 25 },
-      { "doc": "dr_g",   "from_day": 1,  "to_day": 31 }
+      { "doc": "fiona_forrester",    "from_day": 5,  "to_day": 11 },
+      { "doc": "simon_jackson",      "from_day": 12, "to_day": 18 },
+      { "doc": "michael_macpherson", "from_day": 19, "to_day": 25 },
+      { "doc": "nitya_sukheja",      "from_day": 1,  "to_day": 31 }
     ]
   },
   {
     "id": "new_stress",
-    "label": "NEW model — stress test: 2 of 3 GPOs + a GPA away at once (Nov 2026)",
+    "label": "NEW model — stress test: a GPO, the second GPA and an obs-support doc away at once (Nov 2026)",
     "model": "new",
     "active_site": "JT",
     "year": 2026, "month": 11,
     "leave": [
-      { "doc": "holly",  "from_day": 1,  "to_day": 14 },
-      { "doc": "dr_a",   "from_day": 10, "to_day": 16 },
-      { "doc": "simon",  "from_day": 12, "to_day": 18 },
-      { "doc": "dr_f",   "from_day": 20, "to_day": 26 }
-    ]
-  },
-  {
-    "id": "old_stress",
-    "label": "OLD model — same stress month for comparison (Nov 2026)",
-    "model": "old",
-    "year": 2026, "month": 11,
-    "leave": [
-      { "doc": "holly",  "from_day": 1,  "to_day": 14 },
-      { "doc": "dr_a",   "from_day": 10, "to_day": 16 },
-      { "doc": "simon",  "from_day": 12, "to_day": 18 },
-      { "doc": "dr_f",   "from_day": 20, "to_day": 26 }
+      { "doc": "holly_deer",         "from_day": 1,  "to_day": 14 },
+      { "doc": "kc_chen",            "from_day": 9,  "to_day": 15 },
+      { "doc": "michael_macpherson", "from_day": 12, "to_day": 18 },
+      { "doc": "josh_smith",         "from_day": 20, "to_day": 26 }
     ]
   },
   {
     "id": "new_lauren",
-    "label": "NEW model — Feb 2027 with Lauren on board (4th GPO)",
+    "label": "NEW model — Feb 2027, Lauren McLean credentialed as GPO",
     "model": "new",
     "active_site": "CB",
     "year": 2027, "month": 2,
-    "extra_doctors": ["lauren"],
+    "upgrade_skills": { "lauren_mclean": ["ED", "GPO", "OBS"] },
     "leave": [
-      { "doc": "dr_a",   "from_day": 2,  "to_day": 8 },
-      { "doc": "dr_e",   "from_day": 16, "to_day": 22 },
-      { "doc": "simon",  "from_day": 12, "to_day": 14 }
+      { "doc": "rowena_conway",  "from_day": 2,  "to_day": 8 },
+      { "doc": "niall_fostyk",   "from_day": 16, "to_day": 22 },
+      { "doc": "simon_jackson",  "from_day": 12, "to_day": 14 }
     ]
   }
 ]

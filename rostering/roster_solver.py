@@ -70,6 +70,11 @@ def build_and_solve(scenario, config):
         fd = next(f for f in config["future_doctors"] if f["id"] == extra_id)
         doctors.append(dict(fd))
 
+    for did, skills in scenario.get("upgrade_skills", {}).items():
+        for doc in doctors:
+            if doc["id"] == did:
+                doc["skills"] = skills
+
     if model_kind == "old":
         # the old roster could not accommodate anyone stepping back - with 8
         # roles/day everyone shares the crush, so reduced-load preferences
