@@ -246,7 +246,7 @@
 
   <section>
     <h2><span class="stepnum">3</span>Build the roster</h2>
-    <p class="section-note">Runs on everyone's saved availability for the selected month. Hard rules: skills match the line, one role per doctor per shift, leave and unavailability are absolute, no more than 4 consecutive on-call days. Maternity roles (GPO / GPA / obs support) are 24-hour and fall back to the Clare network; an uncoverable ED half shows red rather than being hidden.</p>
+    <p class="section-note">Runs on everyone's saved availability for the selected month. Hard rules: skills match the line, one role per doctor per shift, leave and unavailability are absolute, no more than 4 consecutive on-call days. Maternity roles (GPO / GPA / obs support) are 24-hour and fall back to the Clare network; an uncoverable ED half shows red rather than being hidden. <strong>One doctor covering a site’s full 24 hours is preferred</strong> — day/night splits are a secondary option, used where nobody can take the whole day or a split clearly spreads the load better.</p>
     <div class="card">
       <div class="row"><button class="primary" id="genbtn">Generate roster</button><span class="section-note" id="gennote"></span></div>
       <div id="results" hidden>
@@ -267,7 +267,7 @@
 </div>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="application/json" id="app-state">{"months":{"2026-10":{"availability":{"josh_smith":{"1":"day","2":"day","5":"day","6":"day","7":"day","8":"day","9":"day","12":"day","13":"day","14":"day","19":"off","20":"off","21":"off","26":"day","27":"day","28":"day"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"nitya_sukheja":{"5":"night","6":"night","7":"night","12":"night","13":"night","14":"night","19":"night","20":"night","21":"night","26":"night","27":"night","28":"night"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","holly_deer":"sample","rick_chalwin":"sample","nitya_sukheja":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}}}</script>
+<script type="application/json" id="app-state">{"months":{"2026-10":{"availability":{"josh_smith":{"1":"day","2":"day","3":"day","4":"day","5":"day","6":"day","7":"day","8":"day","9":"day","10":"day","11":"day","12":"day","13":"day","14":"day","15":"day","16":"day","17":"day","18":"day","19":"off","20":"off","21":"off","22":"day","23":"day","24":"day","25":"day","26":"day","27":"day","28":"day","29":"day","30":"day","31":"day"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"nitya_sukheja":{"1":"night","2":"night","3":"night","4":"night","5":"night","6":"night","7":"night","8":"night","9":"night","10":"night","11":"night","12":"night","13":"night","14":"night","15":"night","16":"night","17":"night","18":"night","19":"night","20":"night","21":"night","22":"night","23":"night","24":"night","25":"night","26":"night","27":"night","28":"night","29":"night","30":"night","31":"night"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","holly_deer":"sample","rick_chalwin":"sample","nitya_sukheja":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}}}</script>
 <script>
 (function () {
   'use strict';
@@ -505,41 +505,83 @@
     const grid = [];   // per day: {slotId: docId|'CLARE'|null}
     let prevFull = {}; // continuity: yesterday's holder per full role
 
+    const SPLIT_PENALTY = 0.25; // secondary preference: one doctor covers a site's full 24h
+
     for (let day = 1; day <= n; day++) {
       const today = {};
       const busyFull = new Set(), busyDay = new Set(), busyNight = new Set();
 
-      SLOTS.forEach(slot => {
+      function baseScore(d, site, forFullRole, slotId) {
+        let s = halves[d.id] / Math.max(target[d.id], 0.5);
+        if (forFullRole && prevFull[slotId] === d.id && consec[d.id] < MAX_CONSEC) s -= 0.8; // continuity
+        if (site && d.home !== site) s += 0.12;
+        if (d.reduced) s += 0.35;
+        s += consec[d.id] * 0.05;
+        return s;
+      }
+      function free(d) {
+        return !busyFull.has(d.id) &&
+          !(consec[d.id] >= MAX_CONSEC && !busyDay.has(d.id) && !busyNight.has(d.id));
+      }
+      function edEligible(d, half) { // half: 'day' | 'night' | 'both'
+        if (!d.skills.includes('ED') || !free(d)) return false;
+        const st = stateFor(monthKey, d.id, day);
+        if (st === 'off' || st === 'leave') return false;
+        if (half === 'both') return st === 'ok' && !busyDay.has(d.id) && !busyNight.has(d.id);
+        if (half === 'day') return st !== 'night' && !busyDay.has(d.id);
+        return st !== 'day' && !busyNight.has(d.id);
+      }
+
+      // maternity roles first (24h, Clare fallback)
+      SLOTS.filter(s => s.kind === 'full').forEach(slot => {
         const cand = DOCS.filter(d => {
-          if (!d.skills.includes(slot.skill)) return false;
-          const st = stateFor(monthKey, d.id, day);
-          if (st === 'off' || st === 'leave') return false;
-          if (slot.kind === 'full' && st !== 'ok') return false;
-          if (slot.kind === 'day' && st === 'night') return false;
-          if (slot.kind === 'night' && st === 'day') return false;
-          if (busyFull.has(d.id)) return false;
-          if (slot.kind === 'full' && (busyDay.has(d.id) || busyNight.has(d.id))) return false;
-          if (slot.kind === 'day' && busyDay.has(d.id)) return false;
-          if (slot.kind === 'night' && busyNight.has(d.id)) return false;
-          if (consec[d.id] >= MAX_CONSEC && !busyDay.has(d.id) && !busyNight.has(d.id)) return false;
-          return true;
-        });
-        if (!cand.length) { today[slot.id] = slot.kind === 'full' ? 'CLARE' : null; return; }
-        cand.sort((a, b) => score(a) - score(b));
-        function score(d) {
-          let s = halves[d.id] / Math.max(target[d.id], 0.5);
-          if (slot.kind === 'full' && prevFull[slot.id] === d.id && consec[d.id] < MAX_CONSEC) s -= 0.8; // continuity
-          if (slot.site && d.home !== slot.site) s += 0.12;
-          if (d.reduced) s += 0.35;
-          if ((slot.kind === 'day' && busyNight.has(d.id)) || (slot.kind === 'night' && busyDay.has(d.id))) s -= 0.15; // finish the day you started
-          s += consec[d.id] * 0.05;
-          return s;
-        }
+          if (!d.skills.includes(slot.skill) || !free(d)) return false;
+          if (busyDay.has(d.id) || busyNight.has(d.id)) return false;
+          return stateFor(monthKey, d.id, day) === 'ok';
+        }).sort((a, b) => baseScore(a, null, true, slot.id) - baseScore(b, null, true, slot.id));
+        if (!cand.length) { today[slot.id] = 'CLARE'; return; }
         const pick = cand[0];
         today[slot.id] = pick.id;
-        if (slot.kind === 'full') { busyFull.add(pick.id); halves[pick.id] += 2; }
-        else if (slot.kind === 'day') { busyDay.add(pick.id); halves[pick.id] += 1; }
-        else { busyNight.add(pick.id); halves[pick.id] += 1; }
+        busyFull.add(pick.id); halves[pick.id] += 2;
+      });
+
+      // ED per site: prefer one doctor for the whole 24h; split day/night
+      // only when nobody can take the full day, or a split is clearly better
+      ['JT', 'CB'].forEach(site => {
+        const dSlot = 'ED_' + site + '_D', nSlot = 'ED_' + site + '_N';
+        const fullCand = DOCS.filter(d => edEligible(d, 'both'))
+          .sort((a, b) => baseScore(a, site) - baseScore(b, site));
+
+        // doctors who can ONLY offer part of this day - the reason splits exist
+        const partOnly = DOCS.filter(d => {
+          const st = stateFor(monthKey, d.id, day);
+          return (st === 'day' && edEligible(d, 'day')) ||
+                 (st === 'night' && edEligible(d, 'night'));
+        }).sort((a, b) => baseScore(a, site) - baseScore(b, site));
+        const anchor = partOnly[0];
+
+        const preferSplit = !fullCand.length ||
+          (anchor && baseScore(anchor, site) + SPLIT_PENALTY < baseScore(fullCand[0], site));
+
+        if (!preferSplit && fullCand.length) {
+          const pick = fullCand[0];
+          today[dSlot] = pick.id; today[nSlot] = pick.id;
+          busyDay.add(pick.id); busyNight.add(pick.id); halves[pick.id] += 2;
+        } else {
+          ['day', 'night'].forEach(half => {
+            const slotId = half === 'day' ? dSlot : nSlot;
+            const cand = DOCS.filter(d => edEligible(d, half))
+              .sort((a, b) => baseScore(a, site) - baseScore(b, site));
+            // the anchoring part-day doctor takes their half when it's this one
+            const pick = (anchor && stateFor(monthKey, anchor.id, day) === half && edEligible(anchor, half))
+              ? anchor : cand[0];
+            if (pick) {
+              today[slotId] = pick.id;
+              (half === 'day' ? busyDay : busyNight).add(pick.id);
+              halves[pick.id] += 1;
+            } else today[slotId] = null;
+          });
+        }
       });
 
       DOCS.forEach(d => {
