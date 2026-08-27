@@ -28,6 +28,7 @@
     --good-text: #006300;
     --wkend: #eef1ef;
     --cell-hover: #d5ece5;
+    --mine: #cfe9e2;
     --shadow: 0 1px 2px rgba(22,33,31,.05), 0 4px 16px rgba(22,33,31,.05);
   }
   @media (prefers-color-scheme: dark) {
@@ -57,6 +58,7 @@
       --good-text: #0ca30c;
       --wkend: #1b201f;
       --cell-hover: #1f3b35;
+      --mine: #1e4038;
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
     }
   }
@@ -86,6 +88,7 @@
     --good-text: #0ca30c;
     --wkend: #1b201f;
     --cell-hover: #1f3b35;
+    --mine: #1e4038;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
   }
 
@@ -95,48 +98,56 @@
     font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size: 16px; line-height: 1.55;
   }
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 36px 24px 80px; }
-  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 12px; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 30px 24px 80px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 10px; }
   h1, h2, h3 { font-family: "Bricolage Grotesque", "Public Sans", sans-serif; text-wrap: balance; }
-  h1 { font-size: clamp(28px, 4.5vw, 40px); font-weight: 800; line-height: 1.08; margin: 0 0 10px; }
-  h2 { font-size: 21px; font-weight: 700; margin: 0 0 4px; }
+  h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; line-height: 1.1; margin: 0 0 8px; }
+  h2 { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
   h3 { font-size: 16px; font-weight: 700; margin: 0 0 6px; }
-  .lede { font-size: 17px; color: var(--ink-2); max-width: 66ch; margin: 0; }
+  .lede { font-size: 16.5px; color: var(--ink-2); max-width: 66ch; margin: 0; }
   .lede strong { color: var(--ink); }
 
-  .modebar { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
-  .mode { font-size: 12.5px; font-weight: 600; border-radius: 999px; padding: 4px 12px; border: 1px solid var(--hairline); color: var(--ink-2); background: var(--card); }
-  .mode.shared { background: var(--accent-wash); color: var(--accent-ink); border-color: var(--accent); }
-
-  section { margin-top: 40px; }
-  .kicker { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
-  .stepnum { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 999px; background: var(--accent); color: #fff; font: 700 14px "Bricolage Grotesque", sans-serif; margin-right: 8px; vertical-align: -4px; }
-  :root[data-theme="dark"] .stepnum { color: #08211d; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .stepnum { color: #08211d; } }
-  .section-note { color: var(--ink-2); max-width: 70ch; margin: 6px 0 0; font-size: 14.5px; }
+  section { margin-top: 34px; }
+  .section-note { color: var(--ink-2); max-width: 70ch; margin: 6px 0 0; font-size: 14px; }
   .section-note strong { color: var(--ink); }
+  .card { background: var(--card); border: 1px solid var(--hairline); border-radius: 12px; padding: 20px 22px; margin-top: 14px; box-shadow: var(--shadow); }
 
-  .card { background: var(--card); border: 1px solid var(--hairline); border-radius: 12px; padding: 20px 22px; margin-top: 16px; box-shadow: var(--shadow); }
-
-  select, button { font: 600 14px "Public Sans", sans-serif; border-radius: 8px; border: 1px solid var(--hairline); background: var(--card); color: var(--ink); padding: 9px 14px; }
-  select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  select, button, input { font: 600 14px "Public Sans", sans-serif; border-radius: 8px; border: 1px solid var(--hairline); background: var(--card); color: var(--ink); padding: 9px 12px; }
+  input[type="text"], input[type="password"], input[type="number"] { font-weight: 500; }
+  select:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   button { cursor: pointer; }
   button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
   :root[data-theme="dark"] button.primary { color: #08211d; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button.primary { color: #08211d; } }
   button.primary:hover { filter: brightness(1.08); }
   button.ghost:hover { border-color: var(--accent); }
-  button:disabled { opacity: .5; cursor: default; }
+  button.danger { border-color: var(--off-edge); color: var(--off-ink); background: var(--card); }
+  button.small { padding: 5px 10px; font-size: 12.5px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
-  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  /* header bar */
+  .topbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 18px; padding: 12px 16px; background: var(--card); border: 1px solid var(--hairline); border-radius: 12px; box-shadow: var(--shadow); }
+  .topbar .who { font-weight: 700; }
+  .topbar .roletag { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent-wash); border-radius: 999px; padding: 3px 10px; }
+  .bell { position: relative; }
+  .bell .badge { position: absolute; top: -6px; right: -6px; background: var(--off-edge); color: #fff; font: 700 10.5px "IBM Plex Mono", monospace; min-width: 17px; height: 17px; border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0 3px; }
+  .spacer { flex: 1; }
+  .mode { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 3px 10px; border: 1px solid var(--hairline); color: var(--ink-2); }
+  .mode.shared { background: var(--accent-wash); color: var(--accent-ink); border-color: var(--accent); }
 
-  .monthtabs { display: flex; gap: 8px; margin: 14px 0 0; }
-  .mtab { border-radius: 999px; padding: 7px 16px; }
-  .mtab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
-  :root[data-theme="dark"] .mtab[aria-selected="true"] { color: #08211d; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mtab[aria-selected="true"] { color: #08211d; } }
+  /* login */
+  .login-card { max-width: 460px; }
+  .hint { font-size: 12.5px; color: var(--ink-3); }
 
-  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin: 14px 0 12px; }
+  /* notifications */
+  .notif { border: 1px solid var(--hairline); border-left: 4px solid var(--accent); border-radius: 10px; padding: 12px 14px; margin-top: 10px; background: var(--card); }
+  .notif.action { border-left-color: var(--day-edge); }
+  .notif.unread { background: var(--accent-wash); }
+  .notif .when { font: 500 11.5px "IBM Plex Mono", monospace; color: var(--ink-3); }
+  .notif p { margin: 4px 0 8px; font-size: 14px; }
+
+  /* calendar */
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin: 12px 0 12px; }
   .legend .key { display: inline-flex; align-items: center; gap: 6px; }
   .pill { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; border-radius: 6px; font: 600 11px "IBM Plex Mono", monospace; padding: 0 4px; }
   .st-ok    { background: var(--accent-wash); color: var(--accent-ink); box-shadow: inset 0 0 0 1px var(--accent); }
@@ -144,442 +155,371 @@
   .st-night { background: var(--night-wash); color: var(--night-ink); box-shadow: inset 0 0 0 1px var(--night-edge); }
   .st-off   { background: var(--off-wash);   color: var(--off-ink);   box-shadow: inset 0 0 0 1px var(--off-edge); }
   .st-leave { background: var(--leave-wash); color: var(--leave-ink); box-shadow: inset 0 0 0 1px var(--ink-3); }
-
+  .monthtabs { display: flex; gap: 8px; margin: 12px 0 0; }
+  .mtab { border-radius: 999px; padding: 7px 16px; }
+  .mtab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .mtab[aria-selected="true"] { color: #08211d; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mtab[aria-selected="true"] { color: #08211d; } }
   .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 6px; }
   .cal .dow { text-align: center; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding-bottom: 2px; }
-  .cal .day {
-    border: 1px solid var(--hairline); border-radius: 9px; min-height: 62px; padding: 6px 8px;
-    background: var(--card); cursor: pointer; text-align: left; font-family: "Public Sans", sans-serif;
-    display: flex; flex-direction: column; justify-content: space-between; gap: 4px; transition: border-color .12s;
-  }
+  .cal .day { border: 1px solid var(--hairline); border-radius: 9px; min-height: 58px; padding: 6px 8px; background: var(--card); cursor: pointer; text-align: left; font-family: "Public Sans", sans-serif; display: flex; flex-direction: column; justify-content: space-between; gap: 4px; }
   .cal .day:hover { border-color: var(--accent); }
   .cal .day.wk { background: var(--wkend); }
   .cal .day .num { font: 600 12.5px "IBM Plex Mono", monospace; color: var(--ink-3); }
-  .cal .day .state { font-size: 11.5px; font-weight: 600; border-radius: 6px; padding: 2px 6px; align-self: flex-start; }
+  .cal .day .state { font-size: 11px; font-weight: 600; border-radius: 6px; padding: 2px 6px; align-self: flex-start; }
   .cal .day.blank { visibility: hidden; }
 
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 12px; }
-  .chip { font-size: 13px; font-weight: 600; border-radius: 999px; padding: 5px 12px; background: var(--accent-wash); color: var(--accent-ink); border: 1px solid transparent; }
-  .chip.warn { background: var(--day-wash); color: var(--ink); border-color: var(--day-edge); }
-  .chip.crit { background: var(--off-wash); color: var(--ink); border-color: var(--off-edge); }
-  .chip .num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
-
+  /* roster grid */
   .roster-scroll { overflow-x: auto; border: 1px solid var(--hairline); border-radius: 10px; }
   table.roster { border-collapse: collapse; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; }
   table.roster th, table.roster td { border: 1px solid var(--grid); text-align: center; min-width: 32px; padding: 5px 2px; }
   table.roster th { font-weight: 600; color: var(--ink-3); background: var(--card); }
   table.roster th.dow2 { font-size: 9.5px; }
-  table.roster td.rolename, table.roster th.rolename {
-    position: sticky; left: 0; background: var(--card); text-align: right; padding: 5px 10px;
-    font-family: "Public Sans", sans-serif; font-size: 12.5px; font-weight: 600; color: var(--ink-2);
-    white-space: nowrap; z-index: 2; border-right: 2px solid var(--hairline);
-  }
+  table.roster td.rolename, table.roster th.rolename { position: sticky; left: 0; background: var(--card); text-align: right; padding: 5px 10px; font-family: "Public Sans", sans-serif; font-size: 12.5px; font-weight: 600; color: var(--ink-2); white-space: nowrap; z-index: 2; border-right: 2px solid var(--hairline); }
   table.roster td { background: var(--card); color: var(--ink); }
   table.roster td.wk { background: var(--wkend); }
   table.roster td.half { color: var(--ink-2); }
+  table.roster td.mine { background: var(--mine); font-weight: 700; }
+  table.roster td.clickable { cursor: pointer; }
+  table.roster td.clickable:hover { outline: 2px solid var(--accent); outline-offset: -2px; }
   table.roster td.clare { background: var(--day-wash); box-shadow: inset 0 0 0 1.5px var(--day-edge); font-weight: 600; }
   table.roster td.gapcell { background: var(--off-wash); box-shadow: inset 0 0 0 1.5px var(--off-edge); font-weight: 600; }
-  table.roster td.hl { background: var(--cell-hover); font-weight: 600; }
+  table.roster td.pending { box-shadow: inset 0 0 0 2px var(--day-edge); }
+  table.roster td.needcover { box-shadow: inset 0 0 0 2px var(--off-edge); }
 
-  table.loads { border-collapse: collapse; width: 100%; font-size: 13.5px; margin-top: 14px; }
-  table.loads th { text-align: right; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); padding: 6px 10px; border-bottom: 1px solid var(--hairline); }
-  table.loads th:first-child, table.loads td:first-child { text-align: left; }
-  table.loads td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
-  table.loads td:first-child { font-family: "Public Sans", sans-serif; font-weight: 600; font-size: 13.5px; }
-  table.loads td .tag { font-size: 11px; color: var(--accent-ink); font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 4px; }
+  .chip { font-size: 13px; font-weight: 600; border-radius: 999px; padding: 5px 12px; background: var(--accent-wash); color: var(--accent-ink); border: 1px solid transparent; }
+  .chip.warn { background: var(--day-wash); color: var(--ink); border-color: var(--day-edge); }
+  .chip.crit { background: var(--off-wash); color: var(--ink); border-color: var(--off-edge); }
+  .chip .num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
 
-  .subs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .sub-pill { font-size: 12.5px; font-weight: 600; border-radius: 999px; padding: 4px 11px; background: var(--accent-wash); color: var(--accent-ink); }
-  .sub-pill.none { background: var(--leave-wash); color: var(--ink-3); }
+  /* workforce table */
+  table.wf { border-collapse: collapse; width: 100%; font-size: 13.5px; margin-top: 10px; }
+  table.wf th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); padding: 6px 8px; border-bottom: 1px solid var(--hairline); }
+  table.wf td { padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+  table.wf input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
+  table.wf .name { font-weight: 600; white-space: nowrap; }
 
-  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper); font-size: 14px; font-weight: 600; border-radius: 10px; padding: 10px 18px; opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 10; max-width: 90vw; }
+  /* boards */
+  .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; margin-top: 12px; }
+  .req { border: 1px solid var(--hairline); border-left: 4px solid var(--off-edge); border-radius: 10px; padding: 12px 14px; background: var(--card); }
+  .req.swap { border-left-color: var(--night-edge); }
+  .req.done { border-left-color: var(--accent); opacity: .75; }
+  .req .meta { font: 500 11.5px "IBM Plex Mono", monospace; color: var(--ink-3); }
+  .req p { margin: 4px 0 8px; font-size: 14px; }
+
+  dialog { border: 1px solid var(--hairline); border-radius: 14px; background: var(--card); color: var(--ink); padding: 22px; max-width: 440px; width: 92vw; box-shadow: var(--shadow); }
+  dialog::backdrop { background: rgba(10, 20, 18, .45); }
+  dialog h3 { margin-top: 0; }
+  dialog .row { margin-top: 12px; }
+  dialog label { display: block; font-size: 13px; font-weight: 600; color: var(--ink-2); margin: 10px 0 4px; }
+  dialog select, dialog input { width: 100%; }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper); font-size: 14px; font-weight: 600; border-radius: 10px; padding: 10px 18px; opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 30; max-width: 90vw; }
   .toast.show { opacity: 1; }
-
-  .caveat { border-left: 3px solid var(--day-edge); padding: 2px 0 2px 16px; margin-top: 14px; color: var(--ink-2); max-width: 72ch; font-size: 14.5px; }
+  .caveat { border-left: 3px solid var(--day-edge); padding: 2px 0 2px 16px; margin-top: 14px; color: var(--ink-2); max-width: 72ch; font-size: 14px; }
   .caveat strong { color: var(--ink); }
-  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--hairline); font-size: 13px; color: var(--ink-3); }
+  footer { margin-top: 50px; padding-top: 16px; border-top: 1px solid var(--hairline); font-size: 13px; color: var(--ink-3); }
+  [hidden] { display: none !important; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Mid North GP rostering · availability-first demo</div>
-    <h1>Tell us when you can work. The roster does the rest.</h1>
-    <p class="lede">Mark each day a month ahead: <strong>available</strong>, <strong>day shifts only</strong>, <strong>night only</strong>, <strong>not available to the LHN</strong>, or <strong>on leave</strong>. ED cover splits into day and night halves — take one half and the $2,500 sessional splits $1,250 / $1,250, so part-days cost the LHN nothing extra. The generator then builds the month's roster around everyone's choices.</p>
-    <div class="modebar">
-      <span class="mode" id="modebadge">Checking storage…</span>
-      <span class="mode" id="deadlinebadge"></span>
-    </div>
+    <div class="eyebrow">Mid North GP rostering · availability, roster &amp; cover — demo</div>
+    <h1>The on-call board: sign in, mark your month, manage your shifts.</h1>
+    <p class="lede">GPs mark availability a month ahead and manage cover and swaps on their own shifts. The roster admin sets each GP’s scope, adds GPs, and edits the published roster — <strong>every roster change needs the affected GP’s agreement before it lands</strong>.</p>
   </header>
 
-  <section>
-    <h2><span class="stepnum">1</span>Who are you?</h2>
-    <div class="card">
-      <div class="row">
-        <select id="docselect" aria-label="Select your name"></select>
-        <span class="section-note" id="docmeta"></span>
+  <!-- LOGIN -->
+  <section id="login">
+    <div class="card login-card">
+      <h2>Sign in</h2>
+      <label for="loginuser" class="hint" style="display:block;margin:10px 0 4px">Who are you?</label>
+      <select id="loginuser" style="width:100%"></select>
+      <label for="loginpin" class="hint" style="display:block;margin:10px 0 4px">PIN</label>
+      <input type="password" id="loginpin" inputmode="numeric" maxlength="4" placeholder="••••" style="width:100%">
+      <div class="row" style="margin-top:14px">
+        <button class="primary" id="loginbtn">Sign in</button>
+        <span class="hint">Demo PINs — GPs: <span style="font-family:'IBM Plex Mono',monospace">1234</span> · Admin: <span style="font-family:'IBM Plex Mono',monospace">4321</span></span>
       </div>
-      <div class="subs" id="subs"></div>
+      <p class="hint" style="margin-top:12px">Demo-grade sign-in: PINs live in the page, not a real identity service. A production build would use the LHN’s single sign-on and send SMS/email notifications.</p>
     </div>
   </section>
 
-  <section>
-    <h2><span class="stepnum">2</span>Mark your month</h2>
-    <p class="section-note">Click a day to cycle through the five states. Weekends are shaded. Nothing is stored until you press <strong>Save my availability</strong>.</p>
-    <div class="monthtabs" id="monthtabs" role="tablist"></div>
-    <div class="card">
-      <div class="legend">
-        <span class="key"><span class="pill st-ok">✓</span> Available — any shift</span>
-        <span class="key"><span class="pill st-day">D</span> Day shifts only</span>
-        <span class="key"><span class="pill st-night">N</span> Nights only</span>
-        <span class="key"><span class="pill st-off">✕</span> Not available to LHN</span>
-        <span class="key"><span class="pill st-leave">L</span> Leave</span>
-      </div>
-      <div class="cal" id="cal"></div>
-      <div class="row" style="margin-top:16px">
-        <button class="primary" id="savebtn">Save my availability</button>
-        <button class="ghost" id="clearbtn">Clear my month</button>
-        <span class="section-note" id="savenote"></span>
-      </div>
+  <!-- APP -->
+  <div id="app" hidden>
+    <div class="topbar">
+      <span class="who" id="whoami"></span>
+      <span class="roletag" id="roletag"></span>
+      <span class="spacer"></span>
+      <span class="mode" id="modebadge">…</span>
+      <button class="bell ghost" id="bellbtn" aria-label="Notifications">🔔<span class="badge" id="bellbadge" hidden>0</span></button>
+      <button class="ghost" id="logoutbtn">Sign out</button>
     </div>
-  </section>
 
-  <section>
-    <h2><span class="stepnum">3</span>Build the roster</h2>
-    <p class="section-note">Runs on everyone's saved availability for the selected month. Hard rules: skills match the line, one role per doctor per shift, leave and unavailability are absolute, no more than 4 consecutive on-call days. Maternity roles (GPO / GPA / obs support) are 24-hour and fall back to the Clare network; an uncoverable ED half shows red rather than being hidden. <strong>One doctor covering a site’s full 24 hours is preferred</strong> — day/night splits are a secondary option, used where nobody can take the whole day or a split clearly spreads the load better.</p>
-    <div class="card">
-      <div class="row"><button class="primary" id="genbtn">Generate roster</button><span class="section-note" id="gennote"></span></div>
-      <div id="results" hidden>
-        <div class="chips" id="genchips" style="margin-top:16px"></div>
+    <!-- notifications -->
+    <section id="notifsec" hidden>
+      <h2>Your notifications</h2>
+      <p class="section-note">Items needing your agreement are amber. Agreeing to a roster change applies it immediately; declining sends it back to the admin.</p>
+      <div id="nlist"></div>
+    </section>
+
+    <!-- availability -->
+    <section id="availsec">
+      <h2>Mark availability<span id="availwho"></span></h2>
+      <p class="section-note">Click a day to cycle: available → day only → nights only → not available → leave. Save when done.</p>
+      <div class="monthtabs" id="monthtabs" role="tablist"></div>
+      <div class="card">
+        <div class="row" id="availadminrow" hidden>
+          <label for="availdoc" class="hint">Marking for:</label>
+          <select id="availdoc"></select>
+        </div>
+        <div class="legend">
+          <span class="key"><span class="pill st-ok">✓</span> Available</span>
+          <span class="key"><span class="pill st-day">D</span> Day only</span>
+          <span class="key"><span class="pill st-night">N</span> Nights only</span>
+          <span class="key"><span class="pill st-off">✕</span> Not available</span>
+          <span class="key"><span class="pill st-leave">L</span> Leave</span>
+        </div>
+        <div class="cal" id="cal"></div>
+        <div class="row" style="margin-top:14px">
+          <button class="primary" id="savebtn">Save availability</button>
+          <span class="section-note" id="savenote"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- roster -->
+    <section id="rostersec">
+      <h2>Roster — <span id="rostermonthname"></span></h2>
+      <p class="section-note" id="rosternote"></p>
+      <div class="card">
+        <div class="row" id="adminrosterrow" hidden>
+          <button class="primary" id="genbtn">Generate from availability</button>
+          <button class="ghost" id="pubbtn" hidden>Publish this roster</button>
+          <span class="section-note" id="gennote"></span>
+        </div>
+        <div class="chips" id="rchips"></div>
         <div class="roster-scroll"><table class="roster" id="rostertable"></table></div>
         <div class="legend" style="margin-top:10px">
+          <span class="key"><span class="pill st-ok" style="background:var(--mine);color:var(--ink)">HD</span> your shifts — click to request cover or a swap</span>
           <span class="key"><span class="pill st-day">CL</span> Clare backup</span>
           <span class="key"><span class="pill st-off">—</span> unfilled</span>
-          <span class="key">Hover a cell to trace one doctor · lower-case initials = half-shift ($1,250)</span>
+          <span class="key"><span class="pill" style="box-shadow:inset 0 0 0 2px var(--day-edge)">·</span> change awaiting agreement</span>
+          <span class="key"><span class="pill" style="box-shadow:inset 0 0 0 2px var(--off-edge)">·</span> cover requested</span>
         </div>
-        <table class="loads" id="loadtable"></table>
       </div>
-    </div>
-    <div class="caveat"><strong>Demo scope.</strong> The in-page generator is a fast, rule-faithful sibling of the production solver (Google OR-Tools CP-SAT, in the repo) — good enough to show the flow live; final rosters would come from the full solver with the same inputs. Sessional assumption: any on-call day pays $2,500 per doctor; a doctor covering only a day or night half splits it. Sample entries are pre-loaded so the demo isn't empty — clear them from the button above once real entries exist.</div>
-  </section>
+    </section>
 
-  <footer>Companion to the “One Team, Two Towns” briefing · workforce and rules mirror <span style="font-family:'IBM Plex Mono',monospace">rostering/workforce_config.json</span> on branch claude/gp-rostering-ed-obstetrics-wlsndd</footer>
+    <!-- cover board -->
+    <section id="boardsec">
+      <h2>Shifts needing cover &amp; swaps</h2>
+      <p class="section-note">Open requests across the team. If you’re eligible, you can take a shift straight from here.</p>
+      <div class="board" id="board"></div>
+    </section>
+
+    <!-- admin: workforce -->
+    <section id="wfsec" hidden>
+      <h2>Workforce &amp; scope <span class="roletag">admin</span></h2>
+      <p class="section-note">Tick the roles each GP is in scope for — ED scope controls who the generator and cover board will offer ED shifts to. Changes apply to future generation and eligibility immediately.</p>
+      <div class="card">
+        <table class="wf" id="wftable"></table>
+        <div class="row" style="margin-top:14px">
+          <button class="ghost" id="addgpbtn">+ Add a GP</button>
+          <span class="section-note">New GPs sign in with PIN 1234.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- admin: requests overview -->
+    <section id="reqsec" hidden>
+      <h2>Change log &amp; acknowledgements <span class="roletag">admin</span></h2>
+      <div class="card" id="reqlog"></div>
+    </section>
+
+    <div class="caveat"><strong>Demo scope.</strong> Sign-in is PIN-based inside the page (production: LHN single sign-on). Notifications are the in-app inbox with the bell badge (production: SMS/email push as well). Entries and changes persist to this shared board when your account can save it; otherwise they stay in your browser and the badge at the top says so. The generator is the in-page sibling of the production CP-SAT solver; sessional fees: $2,500/day, split $1,250 per half when a day is shared.</div>
+  </div>
+
+  <footer>Companion to the “One Team, Two Towns” briefing · branch claude/gp-rostering-ed-obstetrics-wlsndd</footer>
 </div>
+
+<dialog id="dlg"></dialog>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="application/json" id="app-state">{"months":{"2026-10":{"availability":{"josh_smith":{"1":"day","2":"day","3":"day","4":"day","5":"day","6":"day","7":"day","8":"day","9":"day","10":"day","11":"day","12":"day","13":"day","14":"day","15":"day","16":"day","17":"day","18":"day","19":"off","20":"off","21":"off","22":"day","23":"day","24":"day","25":"day","26":"day","27":"day","28":"day","29":"day","30":"day","31":"day"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"nitya_sukheja":{"1":"night","2":"night","3":"night","4":"night","5":"night","6":"night","7":"night","8":"night","9":"night","10":"night","11":"night","12":"night","13":"night","14":"night","15":"night","16":"night","17":"night","18":"night","19":"night","20":"night","21":"night","22":"night","23":"night","24":"night","25":"night","26":"night","27":"night","28":"night","29":"night","30":"night","31":"night"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","holly_deer":"sample","rick_chalwin":"sample","nitya_sukheja":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}}}</script>
+<script type="application/json" id="app-state">{"gps":[{"id":"holly_deer","name":"Holly Deer","home":"CB","skills":["ED","GPO"],"reduced":true,"fte":1.0},{"id":"simon_jackson","name":"Simon Jackson","home":"JT","skills":["ED","GPO"],"reduced":true,"fte":1.0},{"id":"rowena_conway","name":"Rowena Conway","home":"JT","skills":["ED","GPO","GPA"],"reduced":false,"fte":1.0},{"id":"kc_chen","name":"KC Chen","home":"CB","skills":["ED","GPA"],"reduced":false,"fte":1.0},{"id":"niall_fostyk","name":"Niall Fostyk","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"michael_macpherson","name":"Michael MacPherson","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"krishna_bayley","name":"Krishna Bayley","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":0.7},{"id":"fiona_forrester","name":"Fiona Forrester","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"lauren_mclean","name":"Lauren McLean","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":0.7},{"id":"li_chei_lee","name":"Li Chei Lee","home":"CB","skills":["OBS"],"reduced":false,"fte":0.4},{"id":"josh_smith","name":"Josh Smith","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"nitya_sukheja","name":"Nitya Sukheja","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"rick_chalwin","name":"Rick Chalwin","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"gareth_oreilly","name":"Gareth O'Reilly","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"cynthia_paredes","name":"Cynthia Paredes","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":0.4},{"id":"nikki_pennifold","name":"Nikki Pennifold","home":"CB","skills":["ED"],"reduced":false,"fte":0.4}],"users":{},"months":{"2026-10":{"availability":{"josh_smith":{"1":"day","2":"day","3":"day","4":"day","5":"day","6":"day","7":"day","8":"day","9":"day","10":"day","11":"day","12":"day","13":"day","14":"day","15":"day","16":"day","17":"day","18":"day","19":"off","20":"off","21":"off","22":"day","23":"day","24":"day","25":"day","26":"day","27":"day","28":"day","29":"day","30":"day","31":"day"},"nitya_sukheja":{"1":"night","2":"night","3":"night","4":"night","5":"night","6":"night","7":"night","8":"night","9":"night","10":"night","11":"night","12":"night","13":"night","14":"night","15":"night","16":"night","17":"night","18":"night","19":"night","20":"night","21":"night","22":"night","23":"night","24":"night","25":"night","26":"night","27":"night","28":"night","29":"night","30":"night","31":"night"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","nitya_sukheja":"sample","holly_deer":"sample","rick_chalwin":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}},"published":{},"notifications":{},"requests":[]}</script>
 <script>
 (function () {
   'use strict';
 
-  /* ---------- workforce (mirrors workforce_config.json) ---------- */
-  const DOCS = [
-    { id:'holly_deer',         name:'Holly Deer',         home:'CB', skills:['ED','GPO'],       reduced:true,  fte:1.0 },
-    { id:'simon_jackson',      name:'Simon Jackson',      home:'JT', skills:['ED','GPO'],       reduced:true,  fte:1.0 },
-    { id:'rowena_conway',      name:'Rowena Conway',      home:'JT', skills:['ED','GPO','GPA'], reduced:false, fte:1.0 },
-    { id:'kc_chen',            name:'KC Chen',            home:'CB', skills:['ED','GPA'],       reduced:false, fte:1.0 },
-    { id:'niall_fostyk',       name:'Niall Fostyk',       home:'JT', skills:['ED','OBS'],       reduced:false, fte:1.0 },
-    { id:'michael_macpherson', name:'Michael MacPherson', home:'JT', skills:['ED','OBS'],       reduced:false, fte:1.0 },
-    { id:'krishna_bayley',     name:'Krishna Bayley',     home:'JT', skills:['ED','OBS'],       reduced:false, fte:0.7 },
-    { id:'fiona_forrester',    name:'Fiona Forrester',    home:'CB', skills:['ED','OBS'],       reduced:false, fte:1.0 },
-    { id:'lauren_mclean',      name:'Lauren McLean',      home:'CB', skills:['ED','OBS'],       reduced:false, fte:0.7 },
-    { id:'li_chei_lee',        name:'Li Chei Lee',        home:'CB', skills:['OBS'],            reduced:false, fte:0.4 },
-    { id:'josh_smith',         name:'Josh Smith',         home:'CB', skills:['ED'],             reduced:false, fte:0.5 },
-    { id:'nitya_sukheja',      name:'Nitya Sukheja',      home:'CB', skills:['ED'],             reduced:false, fte:0.5 },
-    { id:'rick_chalwin',       name:'Rick Chalwin',       home:'CB', skills:['ED'],             reduced:false, fte:0.4 },
-    { id:'gareth_oreilly',     name:"Gareth O'Reilly",    home:'CB', skills:['ED'],             reduced:false, fte:0.4 },
-    { id:'cynthia_paredes',    name:'Cynthia Paredes',    home:'CB', skills:['ED','OBS'],       reduced:false, fte:0.4 },
-    { id:'nikki_pennifold',    name:'Nikki Pennifold',    home:'CB', skills:['ED'],             reduced:false, fte:0.4 }
-  ];
-  const BY_ID = Object.fromEntries(DOCS.map(d => [d.id, d]));
-  const INITIALS = {
-    holly_deer:'HD', simon_jackson:'SJ', rowena_conway:'RW', kc_chen:'KC', niall_fostyk:'NF',
-    michael_macpherson:'MM', krishna_bayley:'KB', fiona_forrester:'FF', lauren_mclean:'LM',
-    li_chei_lee:'LL', josh_smith:'JS', nitya_sukheja:'NS', rick_chalwin:'RC',
-    gareth_oreilly:'GO', cynthia_paredes:'CP', nikki_pennifold:'NP'
-  };
+  /* ---------- constants ---------- */
   const RATE = 2500, HALF = 1250;
   const MONTHS = ['2026-10', '2026-11'];
-  const MONTH_NAMES = { '2026-10':'October 2026 · active site: Crystal Brook', '2026-11':'November 2026 · active site: Jamestown' };
+  const MONTH_NAMES = { '2026-10': 'October 2026', '2026-11': 'November 2026' };
   const STATES = ['ok', 'day', 'night', 'off', 'leave'];
   const STATE_META = {
-    ok:    { cls:'st-ok',    label:'✓ Available' },
-    day:   { cls:'st-day',   label:'D · Day only' },
-    night: { cls:'st-night', label:'N · Nights only' },
-    off:   { cls:'st-off',   label:'✕ Not available' },
-    leave: { cls:'st-leave', label:'L · Leave' }
+    ok: { cls: 'st-ok', label: '✓ Available' },
+    day: { cls: 'st-day', label: 'D · Day only' },
+    night: { cls: 'st-night', label: 'N · Nights only' },
+    off: { cls: 'st-off', label: '✕ Not available' },
+    leave: { cls: 'st-leave', label: 'L · Leave' }
   };
-
-  /* ---------- state & storage ---------- */
-  const stateEl = document.getElementById('app-state');
-  let STATE = JSON.parse(stateEl.textContent);
-  let artifactNS = null;   // resolved claude.use('artifact') namespace, or null
-  let mode = 'local';      // 'shared' | 'local'
-  const LS_KEY = 'oncall-availability-v1';
-
-  function lsLoad() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || null; } catch (e) { return null; } }
-  function lsSave(s) { try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch (e) {} }
-
-  function mergeLocal() {
-    const local = lsLoad();
-    if (!local) return;
-    MONTHS.forEach(m => {
-      const lm = local.months && local.months[m];
-      if (!lm) return;
-      Object.assign(STATE.months[m].availability, lm.availability || {});
-      Object.assign(STATE.months[m].submitted, lm.submitted || {});
-    });
-  }
-
-  const toastEl = document.getElementById('toast');
-  let toastTimer;
-  function toast(msg) {
-    toastEl.textContent = msg;
-    toastEl.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3200);
-  }
-
-  function setMode(m) {
-    mode = m;
-    const b = document.getElementById('modebadge');
-    if (m === 'shared') { b.textContent = 'Shared board — entries save for everyone'; b.classList.add('shared'); }
-    else { b.textContent = 'Demo mode — entries stay in this browser'; b.classList.remove('shared'); }
-  }
-
-  async function persist() {
-    if (artifactNS) {
-      try {
-        const res = await fetch(location.href, { cache: 'no-store' });
-        const src = await res.text();
-        const json = JSON.stringify(STATE).replace(/<\//g, '<\\/');
-        const marked = src.replace(
-          /(<script type="application\/json" id="app-state">)[\s\S]*?(<\/script>)/,
-          (m0, a, b) => a + json + b
-        );
-        if (marked !== src || src.includes('id="app-state"')) {
-          await artifactNS.publish(marked);
-          return true; // page reloads to the new version
-        }
-      } catch (e) {
-        const code = e && (e.code || e.name || '');
-        if (String(code).includes('conflict')) { toast('Someone else just saved — reloading their version.'); return true; }
-        artifactNS = null; setMode('local');
-        toast('Could not save to the shared board — keeping your entries in this browser.');
-      }
-    }
-    lsSave(STATE);
-    return false;
-  }
-
-  /* ---------- calendar helpers ---------- */
-  function monthDays(key) {
-    const [y, m] = key.split('-').map(Number);
-    return new Date(y, m, 0).getDate();
-  }
-  function weekday(key, day) {  // 0=Mon..6=Sun
-    const [y, m] = key.split('-').map(Number);
-    return (new Date(y, m - 1, day).getDay() + 6) % 7;
-  }
+  const SLOTS = [
+    { id: 'GPO', label: 'GP obstetrician', skill: 'GPO', kind: 'full' },
+    { id: 'GPA', label: 'GP anaesthetist', skill: 'GPA', kind: 'full' },
+    { id: 'OBS', label: 'Obs support', skill: 'OBS', kind: 'full' },
+    { id: 'ED_JT_D', label: 'ED Jamestown — day', skill: 'ED', kind: 'day', site: 'JT' },
+    { id: 'ED_CB_D', label: 'ED Crystal Brook — day', skill: 'ED', kind: 'day', site: 'CB' },
+    { id: 'ED_JT_N', label: 'ED Jamestown — night', skill: 'ED', kind: 'night', site: 'JT' },
+    { id: 'ED_CB_N', label: 'ED Crystal Brook — night', skill: 'ED', kind: 'night', site: 'CB' }
+  ];
+  const SLOT = Object.fromEntries(SLOTS.map(s => [s.id, s]));
+  const MAX_CONSEC = 4;
   const DOW = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-  /* ---------- UI state ---------- */
-  let curDoc = DOCS[0].id;
+  /* ---------- state ---------- */
+  let STATE = JSON.parse(document.getElementById('app-state').textContent);
+  let artifactNS = null, mode = 'local';
+  const LS_KEY = 'oncall-board-v2';
+  let me = null;          // signed-in user id ('admin' or gp id)
   let curMonth = MONTHS[0];
+  let availTarget = null; // whose availability the calendar edits
+  let draftGrid = null;   // admin-generated, unpublished roster
 
+  const gps = () => STATE.gps;
+  const gp = id => STATE.gps.find(d => d.id === id);
+  const isAdmin = () => me === 'admin';
+
+  function initials(d) {
+    if (d.initials) return d.initials;
+    const parts = d.name.replace(/[^A-Za-z ]/g, '').split(/\s+/).filter(Boolean);
+    return ((parts[0] || 'X')[0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+  }
   function el(tag, cls, html) {
     const e = document.createElement(tag);
     if (cls) e.className = cls;
     if (html !== undefined) e.innerHTML = html;
     return e;
   }
-
-  function getAvail(monthKey, docId) {
-    return (STATE.months[monthKey].availability[docId]) || {};
+  const toastEl = document.getElementById('toast');
+  let toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg; toastEl.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3400);
   }
-  function stateFor(monthKey, docId, day) {
-    return getAvail(monthKey, docId)[String(day)] || 'ok';
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function uid() { return 'r' + Math.random().toString(36).slice(2, 9); }
+
+  /* ---------- persistence ---------- */
+  function lsLoad() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || null; } catch (e) { return null; } }
+  function lsSave(s) { try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch (e) {} }
+  function setMode(m) {
+    mode = m;
+    const b = document.getElementById('modebadge');
+    if (m === 'shared') { b.textContent = 'Shared board'; b.classList.add('shared'); }
+    else { b.textContent = 'This browser only'; b.classList.remove('shared'); }
   }
-
-  /* ---------- render: doctor picker ---------- */
-  const docSel = document.getElementById('docselect');
-  DOCS.forEach(d => {
-    const o = document.createElement('option');
-    o.value = d.id; o.textContent = d.name;
-    docSel.appendChild(o);
-  });
-  docSel.addEventListener('change', () => { curDoc = docSel.value; renderAll(); });
-
-  function renderDocMeta() {
-    const d = BY_ID[curDoc];
-    document.getElementById('docmeta').textContent =
-      d.skills.join(' · ') + ' · based ' + (d.home === 'JT' ? 'Jamestown' : 'Crystal Brook') +
-      (d.reduced ? ' · reduced-load' : '');
-  }
-
-  function renderSubs() {
-    const wrap = document.getElementById('subs');
-    wrap.innerHTML = '';
-    const sub = STATE.months[curMonth].submitted;
-    DOCS.forEach(d => {
-      const has = sub[d.id];
-      const p = el('span', 'sub-pill' + (has ? '' : ' none'),
-        INITIALS[d.id] + (has ? (sub[d.id] === 'sample' ? ' · sample' : ' ✓') : ' · —'));
-      p.title = d.name + (has ? ' has marked availability' : ' has not marked availability yet');
-      wrap.appendChild(p);
-    });
-  }
-
-  /* ---------- render: month tabs & calendar ---------- */
-  const tabsEl = document.getElementById('monthtabs');
-  MONTHS.forEach(m => {
-    const b = el('button', 'mtab', MONTH_NAMES[m].split(' · ')[0]);
-    b.setAttribute('role', 'tab');
-    b.dataset.m = m;
-    b.addEventListener('click', () => { curMonth = m; renderAll(); });
-    tabsEl.appendChild(b);
-  });
-
-  function renderCal() {
-    [...tabsEl.children].forEach(b => b.setAttribute('aria-selected', String(b.dataset.m === curMonth)));
-    const cal = document.getElementById('cal');
-    cal.innerHTML = '';
-    DOW.forEach(d => cal.appendChild(el('div', 'dow', d)));
-    const n = monthDays(curMonth);
-    const lead = weekday(curMonth, 1);
-    for (let i = 0; i < lead; i++) cal.appendChild(el('div', 'day blank'));
-    for (let day = 1; day <= n; day++) {
-      const wd = weekday(curMonth, day);
-      const st = stateFor(curMonth, curDoc, day);
-      const b = el('button', 'day' + (wd >= 5 ? ' wk' : ''));
-      b.setAttribute('aria-label', 'Day ' + day + ': ' + STATE_META[st].label);
-      b.appendChild(el('span', 'num', String(day)));
-      b.appendChild(el('span', 'state ' + STATE_META[st].cls, STATE_META[st].label));
-      b.addEventListener('click', () => {
-        const next = STATES[(STATES.indexOf(st) + 1) % STATES.length];
-        const av = STATE.months[curMonth].availability;
-        if (!av[curDoc]) av[curDoc] = {};
-        if (next === 'ok') delete av[curDoc][String(day)];
-        else av[curDoc][String(day)] = next;
-        renderCal();
-      });
-      cal.appendChild(b);
+  async function persist() {
+    if (artifactNS) {
+      try {
+        const res = await fetch(location.href, { cache: 'no-store' });
+        const src = await res.text();
+        const json = JSON.stringify(STATE).replace(/<\//g, '<\\/');
+        const next = src.replace(/(<script type="application\/json" id="app-state">)[\s\S]*?(<\/script>)/, (m0, a, b) => a + json + b);
+        await artifactNS.publish(next);
+        return true; // views reload
+      } catch (e) {
+        if (String(e && (e.code || e.name || '')).includes('conflict')) { toast('Someone else saved first — reloading.'); return true; }
+        artifactNS = null; setMode('local');
+        toast('Shared save unavailable — keeping changes in this browser.');
+      }
     }
-    document.getElementById('savenote').textContent =
-      MONTH_NAMES[curMonth] + ' — marking as ' + BY_ID[curDoc].name;
+    lsSave(STATE);
+    return false;
+  }
+  function mergeLocal() {
+    const local = lsLoad();
+    if (local && local.gps) STATE = local;
   }
 
-  document.getElementById('savebtn').addEventListener('click', async () => {
-    STATE.months[curMonth].submitted[curDoc] = new Date().toISOString().slice(0, 10);
-    const reloading = await persist();
-    if (!reloading) { renderSubs(); toast('Saved for ' + BY_ID[curDoc].name + ' — ' + MONTH_NAMES[curMonth].split(' · ')[0]); }
-  });
-  document.getElementById('clearbtn').addEventListener('click', async () => {
-    delete STATE.months[curMonth].availability[curDoc];
-    delete STATE.months[curMonth].submitted[curDoc];
-    const reloading = await persist();
-    if (!reloading) { renderCal(); renderSubs(); toast('Cleared ' + BY_ID[curDoc].name + "'s month"); }
-  });
+  /* ---------- notifications ---------- */
+  function notify(userId, item) {
+    if (!STATE.notifications[userId]) STATE.notifications[userId] = [];
+    STATE.notifications[userId].unshift(Object.assign({ id: uid(), ts: today(), read: false }, item));
+  }
+  function myNotifs() { return STATE.notifications[me] || []; }
+  function unreadCount() { return myNotifs().filter(n => !n.read).length; }
 
-  /* ---------- the generator ---------- */
-  const SLOTS = [
-    { id:'GPO',   label:'GP obstetrician',    skill:'GPO', kind:'full' },
-    { id:'GPA',   label:'GP anaesthetist',    skill:'GPA', kind:'full' },
-    { id:'OBS',   label:'Obs support',        skill:'OBS', kind:'full' },
-    { id:'ED_JT_D', label:'ED Jamestown — day',      skill:'ED', kind:'day',   site:'JT' },
-    { id:'ED_CB_D', label:'ED Crystal Brook — day',  skill:'ED', kind:'day',   site:'CB' },
-    { id:'ED_JT_N', label:'ED Jamestown — night',    skill:'ED', kind:'night', site:'JT' },
-    { id:'ED_CB_N', label:'ED Crystal Brook — night','skill':'ED', kind:'night', site:'CB' }
-  ];
-  const MAX_CONSEC = 4;
+  /* ---------- availability ---------- */
+  function monthDays(key) { const [y, m] = key.split('-').map(Number); return new Date(y, m, 0).getDate(); }
+  function weekday(key, day) { const [y, m] = key.split('-').map(Number); return (new Date(y, m - 1, day).getDay() + 6) % 7; }
+  function stateFor(monthKey, docId, day) {
+    const a = STATE.months[monthKey] && STATE.months[monthKey].availability[docId];
+    return (a && a[String(day)]) || 'ok';
+  }
 
+  /* ---------- generator (in-page sibling of the CP-SAT solver) ---------- */
   function generate(monthKey) {
+    const DOCS = gps();
     const n = monthDays(monthKey);
-    const halvesTotal = n * 10; // 3 full roles (2 halves each) + 4 ED halves
+    const halvesTotal = n * 10;
     const weightSum = DOCS.reduce((s, d) => s + d.fte * (d.reduced ? 0.55 : 1), 0);
-    const target = {};
-    DOCS.forEach(d => { target[d.id] = halvesTotal * d.fte * (d.reduced ? 0.55 : 1) / weightSum; });
-
-    const halves = Object.fromEntries(DOCS.map(d => [d.id, 0]));
-    const consec = Object.fromEntries(DOCS.map(d => [d.id, 0]));
-    const grid = [];   // per day: {slotId: docId|'CLARE'|null}
-    let prevFull = {}; // continuity: yesterday's holder per full role
-
-    const SPLIT_PENALTY = 0.25; // secondary preference: one doctor covers a site's full 24h
+    const target = {}, halves = {}, consec = {};
+    DOCS.forEach(d => { target[d.id] = halvesTotal * d.fte * (d.reduced ? 0.55 : 1) / weightSum; halves[d.id] = 0; consec[d.id] = 0; });
+    const grid = [];
+    let prevFull = {};
+    const SPLIT_PENALTY = 0.25;
 
     for (let day = 1; day <= n; day++) {
-      const today = {};
+      const t = {};
       const busyFull = new Set(), busyDay = new Set(), busyNight = new Set();
-
-      function baseScore(d, site, forFullRole, slotId) {
+      const baseScore = (d, site, forFullRole, slotId) => {
         let s = halves[d.id] / Math.max(target[d.id], 0.5);
-        if (forFullRole && prevFull[slotId] === d.id && consec[d.id] < MAX_CONSEC) s -= 0.8; // continuity
+        if (forFullRole && prevFull[slotId] === d.id && consec[d.id] < MAX_CONSEC) s -= 0.8;
         if (site && d.home !== site) s += 0.12;
         if (d.reduced) s += 0.35;
         s += consec[d.id] * 0.05;
         return s;
-      }
-      function free(d) {
-        return !busyFull.has(d.id) &&
-          !(consec[d.id] >= MAX_CONSEC && !busyDay.has(d.id) && !busyNight.has(d.id));
-      }
-      function edEligible(d, half) { // half: 'day' | 'night' | 'both'
+      };
+      const free = d => !busyFull.has(d.id) && !(consec[d.id] >= MAX_CONSEC && !busyDay.has(d.id) && !busyNight.has(d.id));
+      const edEligible = (d, half) => {
         if (!d.skills.includes('ED') || !free(d)) return false;
         const st = stateFor(monthKey, d.id, day);
         if (st === 'off' || st === 'leave') return false;
         if (half === 'both') return st === 'ok' && !busyDay.has(d.id) && !busyNight.has(d.id);
         if (half === 'day') return st !== 'night' && !busyDay.has(d.id);
         return st !== 'day' && !busyNight.has(d.id);
-      }
+      };
 
-      // maternity roles first (24h, Clare fallback)
       SLOTS.filter(s => s.kind === 'full').forEach(slot => {
-        const cand = DOCS.filter(d => {
-          if (!d.skills.includes(slot.skill) || !free(d)) return false;
-          if (busyDay.has(d.id) || busyNight.has(d.id)) return false;
-          return stateFor(monthKey, d.id, day) === 'ok';
-        }).sort((a, b) => baseScore(a, null, true, slot.id) - baseScore(b, null, true, slot.id));
-        if (!cand.length) { today[slot.id] = 'CLARE'; return; }
+        const cand = DOCS.filter(d => d.skills.includes(slot.skill) && free(d) &&
+          !busyDay.has(d.id) && !busyNight.has(d.id) && stateFor(monthKey, d.id, day) === 'ok')
+          .sort((a, b) => baseScore(a, null, true, slot.id) - baseScore(b, null, true, slot.id));
+        if (!cand.length) { t[slot.id] = 'CLARE'; return; }
         const pick = cand[0];
-        today[slot.id] = pick.id;
-        busyFull.add(pick.id); halves[pick.id] += 2;
+        t[slot.id] = pick.id; busyFull.add(pick.id); halves[pick.id] += 2;
       });
 
-      // ED per site: prefer one doctor for the whole 24h; split day/night
-      // only when nobody can take the full day, or a split is clearly better
       ['JT', 'CB'].forEach(site => {
         const dSlot = 'ED_' + site + '_D', nSlot = 'ED_' + site + '_N';
-        const fullCand = DOCS.filter(d => edEligible(d, 'both'))
-          .sort((a, b) => baseScore(a, site) - baseScore(b, site));
-
-        // doctors who can ONLY offer part of this day - the reason splits exist
+        const fullCand = DOCS.filter(d => edEligible(d, 'both')).sort((a, b) => baseScore(a, site) - baseScore(b, site));
         const partOnly = DOCS.filter(d => {
           const st = stateFor(monthKey, d.id, day);
-          return (st === 'day' && edEligible(d, 'day')) ||
-                 (st === 'night' && edEligible(d, 'night'));
+          return (st === 'day' && edEligible(d, 'day')) || (st === 'night' && edEligible(d, 'night'));
         }).sort((a, b) => baseScore(a, site) - baseScore(b, site));
         const anchor = partOnly[0];
-
-        const preferSplit = !fullCand.length ||
-          (anchor && baseScore(anchor, site) + SPLIT_PENALTY < baseScore(fullCand[0], site));
-
+        const preferSplit = !fullCand.length || (anchor && baseScore(anchor, site) + SPLIT_PENALTY < baseScore(fullCand[0], site));
         if (!preferSplit && fullCand.length) {
           const pick = fullCand[0];
-          today[dSlot] = pick.id; today[nSlot] = pick.id;
+          t[dSlot] = pick.id; t[nSlot] = pick.id;
           busyDay.add(pick.id); busyNight.add(pick.id); halves[pick.id] += 2;
         } else {
           ['day', 'night'].forEach(half => {
             const slotId = half === 'day' ? dSlot : nSlot;
-            const cand = DOCS.filter(d => edEligible(d, half))
-              .sort((a, b) => baseScore(a, site) - baseScore(b, site));
-            // the anchoring part-day doctor takes their half when it's this one
-            const pick = (anchor && stateFor(monthKey, anchor.id, day) === half && edEligible(anchor, half))
-              ? anchor : cand[0];
-            if (pick) {
-              today[slotId] = pick.id;
-              (half === 'day' ? busyDay : busyNight).add(pick.id);
-              halves[pick.id] += 1;
-            } else today[slotId] = null;
+            const cand = DOCS.filter(d => edEligible(d, half)).sort((a, b) => baseScore(a, site) - baseScore(b, site));
+            const pick = (anchor && stateFor(monthKey, anchor.id, day) === half && edEligible(anchor, half)) ? anchor : cand[0];
+            if (pick) { t[slotId] = pick.id; (half === 'day' ? busyDay : busyNight).add(pick.id); halves[pick.id] += 1; }
+            else t[slotId] = null;
           });
         }
       });
@@ -588,53 +528,220 @@
         const on = busyFull.has(d.id) || busyDay.has(d.id) || busyNight.has(d.id);
         consec[d.id] = on ? consec[d.id] + 1 : 0;
       });
-      prevFull = { GPO: today.GPO, GPA: today.GPA, OBS: today.OBS };
-      grid.push(today);
+      prevFull = { GPO: t.GPO, GPA: t.GPA, OBS: t.OBS };
+      grid.push(t);
     }
     return grid;
   }
 
-  /* ---------- render results ---------- */
-  document.getElementById('genbtn').addEventListener('click', () => {
-    const grid = generate(curMonth);
-    const n = grid.length;
-    const results = document.getElementById('results');
-    results.hidden = false;
+  /* ---------- eligibility for taking a shift ---------- */
+  function canTake(docId, monthKey, day, slotId, grid) {
+    const d = gp(docId);
+    if (!d) return false;
+    const slot = SLOT[slotId];
+    if (!d.skills.includes(slot.skill)) return false;
+    const st = stateFor(monthKey, docId, day);
+    if (st === 'off' || st === 'leave') return false;
+    if (slot.kind === 'full' && st !== 'ok') return false;
+    if (slot.kind === 'day' && st === 'night') return false;
+    if (slot.kind === 'night' && st === 'day') return false;
+    const row = grid[day - 1];
+    const held = SLOTS.filter(s => row[s.id] === docId).map(s => s.id);
+    if (held.includes(slotId)) return false;
+    if (slot.kind === 'full' && held.length) return false;
+    if (held.some(h => SLOT[h].kind === 'full')) return false;
+    if (slot.kind === 'day' && held.some(h => SLOT[h].kind === 'day')) return false;
+    if (slot.kind === 'night' && held.some(h => SLOT[h].kind === 'night')) return false;
+    return true;
+  }
+  function pub(monthKey) { return STATE.published[monthKey]; }
 
-    // stats
-    const stat = {};
-    DOCS.forEach(d => { stat[d.id] = { days:0, fullDays:0, halfDays:0, earnings:0, edHalves:0, matDays:0 }; });
-    let clare = 0, gaps = 0, cost = 0;
-    grid.forEach(today => {
+  /* ---------- auth ---------- */
+  function users() {
+    if (!STATE.users) STATE.users = {};
+    gps().forEach(d => { if (!STATE.users[d.id]) STATE.users[d.id] = { pin: '1234' }; });
+    if (!STATE.users.admin) STATE.users.admin = { pin: '4321' };
+    return STATE.users;
+  }
+  function signIn(id, pin) {
+    const u = users()[id];
+    if (!u || u.pin !== pin) return false;
+    me = id;
+    try { sessionStorage.setItem('oncall-me', id); } catch (e) {}
+    return true;
+  }
+  function signOut() {
+    me = null;
+    try { sessionStorage.removeItem('oncall-me'); } catch (e) {}
+    renderAll();
+  }
+
+  /* ---------- login UI ---------- */
+  function renderLogin() {
+    const sel = document.getElementById('loginuser');
+    sel.innerHTML = '';
+    const oa = document.createElement('option'); oa.value = 'admin'; oa.textContent = 'Roster Admin';
+    sel.appendChild(oa);
+    gps().forEach(d => { const o = document.createElement('option'); o.value = d.id; o.textContent = d.name; sel.appendChild(o); });
+  }
+  document.getElementById('loginbtn').addEventListener('click', () => {
+    const id = document.getElementById('loginuser').value;
+    const pin = document.getElementById('loginpin').value;
+    if (signIn(id, pin)) { document.getElementById('loginpin').value = ''; renderAll(); }
+    else toast('Wrong PIN — demo PINs: GPs 1234, admin 4321');
+  });
+  document.getElementById('loginpin').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginbtn').click(); });
+  document.getElementById('logoutbtn').addEventListener('click', signOut);
+  document.getElementById('bellbtn').addEventListener('click', () => {
+    myNotifs().forEach(n => { n.read = true; });
+    renderNotifs(); renderBell();
+    document.getElementById('notifsec').scrollIntoView({ behavior: 'smooth' });
+    lsSave(STATE);
+  });
+
+  /* ---------- notifications UI ---------- */
+  function renderBell() {
+    const c = unreadCount();
+    const b = document.getElementById('bellbadge');
+    b.hidden = !c; b.textContent = String(c);
+  }
+  function renderNotifs() {
+    const sec = document.getElementById('notifsec');
+    const list = document.getElementById('nlist');
+    const items = myNotifs();
+    sec.hidden = !items.length;
+    list.innerHTML = '';
+    items.slice(0, 30).forEach(nf => {
+      const req = STATE.requests.find(r => r.id === nf.reqId);
+      const actionable = nf.needsAction && req && req.status === 'pending' &&
+        ((req.kind === 'change' && req.to === me) || (req.kind === 'swap' && req.to === me));
+      const card = el('div', 'notif' + (actionable ? ' action' : '') + (nf.read ? '' : ' unread'));
+      card.appendChild(el('span', 'when', nf.ts));
+      card.appendChild(el('p', null, nf.text));
+      if (actionable) {
+        const row = el('div', 'row');
+        const yes = el('button', 'primary small', req.kind === 'swap' ? 'Agree to swap' : 'Agree — take the shift');
+        const no = el('button', 'danger small', 'Decline');
+        yes.addEventListener('click', () => resolveRequest(req, true));
+        no.addEventListener('click', () => resolveRequest(req, false));
+        row.appendChild(yes); row.appendChild(no);
+        card.appendChild(row);
+      }
+      list.appendChild(card);
+    });
+  }
+
+  /* ---------- availability UI ---------- */
+  const tabsEl = document.getElementById('monthtabs');
+  MONTHS.forEach(m => {
+    const b = el('button', 'mtab', MONTH_NAMES[m]);
+    b.dataset.m = m; b.setAttribute('role', 'tab');
+    b.addEventListener('click', () => { curMonth = m; draftGrid = null; renderMain(); });
+    tabsEl.appendChild(b);
+  });
+
+  function renderAvail() {
+    [...tabsEl.children].forEach(b => b.setAttribute('aria-selected', String(b.dataset.m === curMonth)));
+    const adminRow = document.getElementById('availadminrow');
+    adminRow.hidden = !isAdmin();
+    if (isAdmin()) {
+      const sel = document.getElementById('availdoc');
+      if (!sel.options.length || sel.options.length !== gps().length) {
+        sel.innerHTML = '';
+        gps().forEach(d => { const o = document.createElement('option'); o.value = d.id; o.textContent = d.name; sel.appendChild(o); });
+        sel.onchange = () => { availTarget = sel.value; renderAvail(); };
+      }
+      availTarget = availTarget && gp(availTarget) ? availTarget : gps()[0].id;
+      sel.value = availTarget;
+    } else availTarget = me;
+    document.getElementById('availwho').textContent = isAdmin() ? ' (as admin)' : '';
+
+    const cal = document.getElementById('cal');
+    cal.innerHTML = '';
+    DOW.forEach(d => cal.appendChild(el('div', 'dow', d)));
+    const n = monthDays(curMonth), lead = weekday(curMonth, 1);
+    for (let i = 0; i < lead; i++) cal.appendChild(el('div', 'day blank'));
+    for (let day = 1; day <= n; day++) {
+      const wd = weekday(curMonth, day);
+      const st = stateFor(curMonth, availTarget, day);
+      const b = el('button', 'day' + (wd >= 5 ? ' wk' : ''));
+      b.appendChild(el('span', 'num', String(day)));
+      b.appendChild(el('span', 'state ' + STATE_META[st].cls, STATE_META[st].label));
+      b.addEventListener('click', () => {
+        const next = STATES[(STATES.indexOf(st) + 1) % STATES.length];
+        const av = STATE.months[curMonth].availability;
+        if (!av[availTarget]) av[availTarget] = {};
+        if (next === 'ok') delete av[availTarget][String(day)];
+        else av[availTarget][String(day)] = next;
+        renderAvail();
+      });
+      cal.appendChild(b);
+    }
+    document.getElementById('savenote').textContent = MONTH_NAMES[curMonth] + ' — ' + gp(availTarget).name;
+  }
+  document.getElementById('savebtn').addEventListener('click', async () => {
+    STATE.months[curMonth].submitted[availTarget] = today();
+    const reloading = await persist();
+    if (!reloading) toast('Availability saved — ' + gp(availTarget).name);
+  });
+
+  /* ---------- roster UI ---------- */
+  function gridStats(grid, monthKey) {
+    let cost = 0, clare = 0, gaps = 0;
+    grid.forEach(row => {
       const dayHalves = {};
       SLOTS.forEach(slot => {
-        const w = today[slot.id];
+        const w = row[slot.id];
         if (w === 'CLARE') { clare++; cost += RATE; return; }
         if (!w) { gaps++; return; }
         dayHalves[w] = (dayHalves[w] || 0) + (slot.kind === 'full' ? 2 : 1);
-        if (slot.kind === 'full') stat[w].matDays++;
-        else stat[w].edHalves++;
       });
-      Object.entries(dayHalves).forEach(([w, h]) => {
-        stat[w].days++;
-        const pay = h >= 2 ? RATE : HALF;
-        if (h >= 2) stat[w].fullDays++; else stat[w].halfDays++;
-        stat[w].earnings += pay; cost += pay;
-      });
+      Object.values(dayHalves).forEach(h => { cost += h >= 2 ? RATE : HALF; });
     });
-    const edSlots = 4 * n, edFilled = edSlots - gaps;
+    return { cost, clare, gaps, edSlots: 4 * grid.length };
+  }
 
-    const chips = document.getElementById('genchips');
+  function renderRoster() {
+    const p = pub(curMonth);
+    document.getElementById('rostermonthname').textContent = MONTH_NAMES[curMonth];
+    const adminRow = document.getElementById('adminrosterrow');
+    adminRow.hidden = !isAdmin();
+    document.getElementById('pubbtn').hidden = !draftGrid;
+    const note = document.getElementById('rosternote');
+    const grid = draftGrid || (p && p.grid);
+    if (!grid) {
+      note.textContent = isAdmin()
+        ? 'No published roster for this month yet — generate one from the saved availability, review it, then publish.'
+        : 'The roster for this month hasn’t been published yet.';
+      document.getElementById('rostertable').innerHTML = '';
+      document.getElementById('rchips').innerHTML = '';
+      return;
+    }
+    note.textContent = draftGrid
+      ? 'DRAFT — not visible to GPs until you publish. Publishing notifies everyone on it.'
+      : 'Published ' + p.at + '. ' + (isAdmin()
+          ? 'Click any cell to propose a reassignment — it takes effect when the incoming GP agrees.'
+          : 'Your shifts are highlighted. Click one to request cover or propose a swap.');
+
+    const s = gridStats(grid, curMonth);
+    const chips = document.getElementById('rchips');
     chips.innerHTML = '';
-    chips.appendChild(el('span', 'chip', 'ED halves filled <span class="num">' + edFilled + '/' + edSlots + '</span>'));
-    chips.appendChild(el('span', 'chip' + (gaps ? ' crit' : ''), 'Unfilled ED halves <span class="num">' + gaps + '</span>'));
-    chips.appendChild(el('span', 'chip' + (clare ? ' warn' : ''), 'Clare backup days <span class="num">' + clare + '</span>'));
-    chips.appendChild(el('span', 'chip', 'Sessional cost <span class="num">$' + (cost / 1000).toLocaleString('en-AU', { maximumFractionDigits: 1 }) + 'k</span>'));
-    chips.appendChild(el('span', 'chip', 'Flat-rate baseline <span class="num">$' + (n * 12.5).toLocaleString('en-AU') + 'k</span>'));
+    chips.appendChild(el('span', 'chip' + (s.gaps ? ' crit' : ''), 'Unfilled ED halves <span class="num">' + s.gaps + '</span>'));
+    chips.appendChild(el('span', 'chip' + (s.clare ? ' warn' : ''), 'Clare backup <span class="num">' + s.clare + '</span>'));
+    chips.appendChild(el('span', 'chip', 'Sessional cost <span class="num">$' + (s.cost / 1000).toLocaleString('en-AU', { maximumFractionDigits: 1 }) + 'k</span>'));
+    if (draftGrid) chips.appendChild(el('span', 'chip warn', 'DRAFT'));
 
-    // grid table
+    const pendingByCell = {}, coverByCell = {};
+    STATE.requests.filter(r => r.month === curMonth && r.status === 'pending').forEach(r => {
+      if (r.kind === 'change') pendingByCell[r.day + ':' + r.slot] = r;
+      if (r.kind === 'swap') { pendingByCell[r.day + ':' + r.slot] = r; pendingByCell[r.day2 + ':' + r.slot2] = r; }
+    });
+    STATE.requests.filter(r => r.month === curMonth && r.kind === 'cover' && r.status === 'open')
+      .forEach(r => { coverByCell[r.day + ':' + r.slot] = r; });
+
     const t = document.getElementById('rostertable');
     t.innerHTML = '';
+    const n = grid.length;
     const h1 = el('tr'); h1.appendChild(el('th', 'rolename', curMonth));
     const h2 = el('tr'); h2.appendChild(el('th', 'rolename', ''));
     for (let day = 1; day <= n; day++) {
@@ -645,22 +752,32 @@
     SLOTS.forEach(slot => {
       const tr = el('tr');
       tr.appendChild(el('td', 'rolename', slot.label));
-      grid.forEach((today, i) => {
-        const wd = weekday(curMonth, i + 1);
-        const w = today[slot.id];
+      for (let day = 1; day <= n; day++) {
+        const w = grid[day - 1][slot.id];
+        const wd = weekday(curMonth, day);
         const td = el('td', wd >= 5 ? 'wk' : '');
+        const key = day + ':' + slot.id;
         if (w === 'CLARE') { td.classList.add('clare'); td.textContent = 'CL'; td.title = 'Clare network backup'; }
-        else if (!w) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled — needs a manual tweak or extra availability'; }
+        else if (!w) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled'; }
         else {
-          const halfOnly = slot.kind !== 'full' &&
-            !SLOTS.some(s2 => s2.kind !== slot.kind && today[s2.id] === w);
-          td.textContent = halfOnly ? INITIALS[w].toLowerCase() : INITIALS[w];
+          const d = gp(w);
+          const halfOnly = slot.kind !== 'full' && !SLOTS.some(s2 => s2.kind !== slot.kind && s2.kind !== 'full' && grid[day - 1][s2.id] === w) && !SLOTS.some(s2 => s2.kind === 'full' && grid[day - 1][s2.id] === w);
+          td.textContent = d ? (halfOnly ? initials(d).toLowerCase() : initials(d)) : '?';
           if (halfOnly) td.classList.add('half');
           td.dataset.doc = w;
-          td.title = BY_ID[w].name + ' — ' + slot.label + (halfOnly ? ' (half-shift, $1,250)' : '');
+          td.title = (d ? d.name : w) + ' — ' + slot.label + ', ' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day;
+          if (w === me) td.classList.add('mine');
+        }
+        if (pendingByCell[key]) { td.classList.add('pending'); td.title += ' · change awaiting agreement'; }
+        if (coverByCell[key]) { td.classList.add('needcover'); td.title += ' · COVER NEEDED'; }
+        if (!draftGrid && p && w && w !== 'CLARE') {
+          if (isAdmin() || w === me) {
+            td.classList.add('clickable');
+            td.addEventListener('click', () => cellDialog(day, slot.id, w));
+          }
         }
         tr.appendChild(td);
-      });
+      }
       t.appendChild(tr);
     });
     t.onmouseover = e => {
@@ -669,46 +786,284 @@
       if (doc) t.querySelectorAll('td[data-doc="' + doc + '"]').forEach(c => c.classList.add('hl'));
     };
     t.onmouseleave = () => t.querySelectorAll('td.hl').forEach(c => c.classList.remove('hl'));
-
-    // per-doctor table
-    const lt = document.getElementById('loadtable');
-    lt.innerHTML = '';
-    const hr = el('tr');
-    ['Doctor', 'On-call days', 'Full days', 'Half-shifts', 'ED halves', 'Maternity days', 'Sessional earnings'].forEach(h => hr.appendChild(el('th', null, h)));
-    lt.appendChild(hr);
-    DOCS.slice().sort((a, b) => stat[b.id].earnings - stat[a.id].earnings).forEach(d => {
-      const s = stat[d.id];
-      if (!s.days) return;
-      const tr = el('tr');
-      tr.appendChild(el('td', null, INITIALS[d.id] + ' · ' + d.name + (d.reduced ? ' <span class="tag">reduced-load</span>' : '')));
-      [s.days, s.fullDays, s.halfDays, s.edHalves, s.matDays,
-       '$' + s.earnings.toLocaleString('en-AU')].forEach(v => tr.appendChild(el('td', null, String(v))));
-      lt.appendChild(tr);
-    });
-
-    document.getElementById('gennote').textContent =
-      'Built from ' + Object.keys(STATE.months[curMonth].submitted).length + ' saved availability sheets for ' + MONTH_NAMES[curMonth].split(' · ')[0] + '. Unmarked doctors count as fully available.';
-  });
-
-  /* ---------- boot ---------- */
-  function renderAll() {
-    docSel.value = curDoc;
-    renderDocMeta(); renderSubs(); renderCal();
-    document.getElementById('results').hidden = true;
-    document.getElementById('gennote').textContent = '';
   }
 
-  document.getElementById('deadlinebadge').textContent = 'October entries close 1 September · November entries close 1 October';
+  document.getElementById('genbtn').addEventListener('click', () => {
+    draftGrid = generate(curMonth);
+    document.getElementById('gennote').textContent = 'Draft built from ' +
+      Object.keys(STATE.months[curMonth].submitted).length + ' availability sheets.';
+    renderRoster();
+  });
+  document.getElementById('pubbtn').addEventListener('click', async () => {
+    STATE.published[curMonth] = { grid: draftGrid, at: today() };
+    const onIt = new Set();
+    draftGrid.forEach(row => SLOTS.forEach(s => { if (row[s.id] && row[s.id] !== 'CLARE') onIt.add(row[s.id]); }));
+    onIt.forEach(id => notify(id, { text: 'The ' + MONTH_NAMES[curMonth] + ' roster has been published — check your shifts on the board.' }));
+    draftGrid = null;
+    const reloading = await persist();
+    if (!reloading) { renderMain(); toast('Roster published — GPs notified.'); }
+  });
+
+  /* ---------- dialogs ---------- */
+  const dlg = document.getElementById('dlg');
+  function openDlg(html) { dlg.innerHTML = html; dlg.showModal(); }
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+  function cellDialog(day, slotId, holder) {
+    const slot = SLOT[slotId];
+    const label = slot.label + ' — ' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day + ' (' + DOW[weekday(curMonth, day)] + ')';
+    if (isAdmin()) {
+      const grid = pub(curMonth).grid;
+      const options = gps().filter(d => d.id !== holder && canTake(d.id, curMonth, day, slotId, grid))
+        .map(d => '<option value="' + d.id + '">' + d.name + '</option>').join('');
+      openDlg('<h3>Reassign shift</h3><p class="section-note">' + label + ' — currently ' + gp(holder).name +
+        '.</p><label>Reassign to</label><select id="dlgsel">' + options + '</select>' +
+        '<p class="section-note">The incoming GP is notified and must agree before the roster changes. ' + gp(holder).name + ' gets a heads-up.</p>' +
+        '<div class="row"><button class="primary" id="dlgok">Send for agreement</button><button class="ghost" id="dlgcancel">Cancel</button></div>');
+      document.getElementById('dlgcancel').onclick = () => dlg.close();
+      document.getElementById('dlgok').onclick = async () => {
+        const to = document.getElementById('dlgsel').value;
+        if (!to) { dlg.close(); return; }
+        const r = { id: uid(), kind: 'change', month: curMonth, day, slot: slotId, from: holder, to, status: 'pending', by: 'admin', ts: today() };
+        STATE.requests.unshift(r);
+        notify(to, { text: 'Admin asks you to take ' + label + ' (currently ' + gp(holder).name + '). Please agree or decline.', needsAction: true, reqId: r.id });
+        notify(holder, { text: 'Admin has proposed handing your shift (' + label + ') to ' + gp(to).name + ' — pending their agreement.' });
+        dlg.close();
+        const reloading = await persist();
+        if (!reloading) { renderMain(); toast('Sent to ' + gp(to).name + ' for agreement.'); }
+      };
+    } else {
+      openDlg('<h3>Your shift</h3><p class="section-note">' + label + '</p>' +
+        '<div class="row"><button class="primary" id="dlgcover">Request cover (short notice)</button></div>' +
+        '<div class="row"><button class="ghost" id="dlgswap">Propose a swap</button><button class="ghost" id="dlgcancel">Cancel</button></div>');
+      document.getElementById('dlgcancel').onclick = () => dlg.close();
+      document.getElementById('dlgcover').onclick = async () => {
+        const r = { id: uid(), kind: 'cover', month: curMonth, day, slot: slotId, from: me, status: 'open', ts: today() };
+        STATE.requests.unshift(r);
+        const grid = pub(curMonth).grid;
+        gps().filter(d => d.id !== me && canTake(d.id, curMonth, day, slotId, grid))
+          .forEach(d => notify(d.id, { text: gp(me).name + ' needs cover: ' + label + '. Take it from the “Shifts needing cover” board.' }));
+        notify('admin', { text: gp(me).name + ' requested short-notice cover for ' + label + '.' });
+        dlg.close();
+        const reloading = await persist();
+        if (!reloading) { renderMain(); toast('Cover request sent to eligible GPs.'); }
+      };
+      document.getElementById('dlgswap').onclick = () => swapDialog(day, slotId);
+    }
+  }
+
+  function swapDialog(day, slotId) {
+    const grid = pub(curMonth).grid;
+    const myLabel = SLOT[slotId].label + ' — ' + day;
+    const options = [];
+    grid.forEach((row, i) => {
+      SLOTS.forEach(s => {
+        const w = row[s.id];
+        if (!w || w === 'CLARE' || w === me) return;
+        // both directions must be workable
+        if (!canTake(me, curMonth, i + 1, s.id, grid)) return;
+        if (!canTake(w, curMonth, day, slotId, grid)) return;
+        options.push({ day2: i + 1, slot2: s.id, to: w });
+      });
+    });
+    if (!options.length) { openDlg('<h3>No workable swaps</h3><p class="section-note">Nobody else’s shift this month is a legal two-way swap with yours (skills, availability and clashes considered).</p><div class="row"><button class="ghost" id="dlgcancel">Close</button></div>'); document.getElementById('dlgcancel').onclick = () => dlg.close(); return; }
+    const opts = options.map((o, i) => '<option value="' + i + '">' + gp(o.to).name + ' — ' + SLOT[o.slot2].label + ', day ' + o.day2 + '</option>').join('');
+    openDlg('<h3>Propose a swap</h3><p class="section-note">Your shift: ' + myLabel + '. Pick the shift you’d take in exchange — the other GP must agree.</p>' +
+      '<label>Swap with</label><select id="dlgsel">' + opts + '</select>' +
+      '<div class="row"><button class="primary" id="dlgok">Send proposal</button><button class="ghost" id="dlgcancel">Cancel</button></div>');
+    document.getElementById('dlgcancel').onclick = () => dlg.close();
+    document.getElementById('dlgok').onclick = async () => {
+      const o = options[+document.getElementById('dlgsel').value];
+      const r = { id: uid(), kind: 'swap', month: curMonth, day, slot: slotId, from: me, day2: o.day2, slot2: o.slot2, to: o.to, status: 'pending', ts: today() };
+      STATE.requests.unshift(r);
+      notify(o.to, { text: gp(me).name + ' proposes a swap: you take ' + SLOT[slotId].label + ' (day ' + day + '), they take your ' + SLOT[o.slot2].label + ' (day ' + o.day2 + '). Agree or decline.', needsAction: true, reqId: r.id });
+      notify('admin', { text: 'Swap proposed: ' + gp(me).name + ' ↔ ' + gp(o.to).name + ' (' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day + '/' + o.day2 + ').' });
+      dlg.close();
+      const reloading = await persist();
+      if (!reloading) { renderMain(); toast('Swap proposed to ' + gp(o.to).name + '.'); }
+    };
+  }
+
+  /* ---------- resolving requests ---------- */
+  async function resolveRequest(req, agreed) {
+    const p = pub(req.month);
+    if (!p) return;
+    const grid = p.grid;
+    if (agreed && req.kind === 'change') {
+      grid[req.day - 1][req.slot] = req.to;
+      req.status = 'agreed'; req.resolved = today();
+      notify(req.from, { text: 'Confirmed: your ' + SLOT[req.slot].label + ' on day ' + req.day + ' has moved to ' + gp(req.to).name + '.' });
+      notify('admin', { text: gp(req.to).name + ' agreed to the reassignment (' + SLOT[req.slot].label + ', day ' + req.day + '). Roster updated.' });
+    } else if (agreed && req.kind === 'swap') {
+      grid[req.day - 1][req.slot] = req.to;
+      grid[req.day2 - 1][req.slot2] = req.from;
+      req.status = 'agreed'; req.resolved = today();
+      notify(req.from, { text: gp(req.to).name + ' agreed to your swap — the roster has been updated.' });
+      notify('admin', { text: 'Swap completed: ' + gp(req.from).name + ' ↔ ' + gp(req.to).name + '.' });
+    } else {
+      req.status = 'declined'; req.resolved = today();
+      const who = req.kind === 'change' ? 'admin' : req.from;
+      notify(who, { text: gp(me).name + ' declined: ' + (req.kind === 'swap' ? 'swap proposal' : 'shift reassignment') + ' (' + SLOT[req.slot].label + ', day ' + req.day + ').' });
+    }
+    const reloading = await persist();
+    if (!reloading) { renderMain(); toast(agreed ? 'Agreed — roster updated.' : 'Declined.'); }
+  }
+
+  async function takeCover(req) {
+    const p = pub(req.month);
+    if (!p || req.status !== 'open') return;
+    if (!canTake(me, req.month, req.day, req.slot, p.grid)) { toast('You’re no longer eligible for that shift.'); return; }
+    p.grid[req.day - 1][req.slot] = me;
+    req.status = 'covered'; req.coveredBy = me; req.resolved = today();
+    notify(req.from, { text: gp(me).name + ' has taken your ' + SLOT[req.slot].label + ' on day ' + req.day + '. You’re off the hook.' });
+    notify('admin', { text: 'Cover resolved: ' + gp(me).name + ' took ' + SLOT[req.slot].label + ' day ' + req.day + ' from ' + gp(req.from).name + '.' });
+    const reloading = await persist();
+    if (!reloading) { renderMain(); toast('Shift is yours — thanks for covering.'); }
+  }
+
+  /* ---------- cover & swap board ---------- */
+  function renderBoard() {
+    const board = document.getElementById('board');
+    board.innerHTML = '';
+    const items = STATE.requests.filter(r => (r.kind === 'cover' && (r.status === 'open' || r.status === 'covered')) || (r.kind === 'swap' && r.status === 'pending')).slice(0, 20);
+    if (!items.length) { board.appendChild(el('p', 'section-note', 'Nothing needs cover right now.')); return; }
+    items.forEach(r => {
+      const done = r.status !== 'open' && r.status !== 'pending';
+      const card = el('div', 'req' + (r.kind === 'swap' ? ' swap' : '') + (done ? ' done' : ''));
+      card.appendChild(el('span', 'meta', (r.kind === 'cover' ? 'COVER · ' : 'SWAP · ') + MONTH_NAMES[r.month] + ' · requested ' + r.ts));
+      if (r.kind === 'cover') {
+        card.appendChild(el('p', null, '<strong>' + gp(r.from).name + '</strong> needs cover: ' + SLOT[r.slot].label + ', day ' + r.day + '.' + (done ? ' <strong>Covered by ' + gp(r.coveredBy).name + '.</strong>' : '')));
+        if (!done && me && me !== 'admin' && me !== r.from && pub(r.month) && canTake(me, r.month, r.day, r.slot, pub(r.month).grid)) {
+          const b = el('button', 'primary small', "I'll cover it");
+          b.addEventListener('click', () => takeCover(r));
+          card.appendChild(b);
+        }
+        if (!done && (me === r.from || isAdmin())) {
+          const c = el('button', 'ghost small', 'Cancel request');
+          c.addEventListener('click', async () => { r.status = 'cancelled'; const rl = await persist(); if (!rl) renderMain(); });
+          card.appendChild(c);
+        }
+      } else {
+        card.appendChild(el('p', null, '<strong>' + gp(r.from).name + '</strong> ⇄ <strong>' + gp(r.to).name + '</strong>: ' + SLOT[r.slot].label + ' (day ' + r.day + ') for ' + SLOT[r.slot2].label + ' (day ' + r.day2 + ') — awaiting ' + gp(r.to).name + '.'));
+      }
+      board.appendChild(card);
+    });
+  }
+
+  /* ---------- admin: workforce ---------- */
+  function renderWorkforce() {
+    const secVisible = isAdmin();
+    document.getElementById('wfsec').hidden = !secVisible;
+    document.getElementById('reqsec').hidden = !secVisible;
+    if (!secVisible) return;
+    const t = document.getElementById('wftable');
+    t.innerHTML = '';
+    const hr = el('tr');
+    ['GP', 'Home', 'ED scope', 'GPO', 'GPA', 'Obs support', 'Reduced load', 'FTE'].forEach(h => hr.appendChild(el('th', null, h)));
+    t.appendChild(hr);
+    gps().forEach(d => {
+      const tr = el('tr');
+      tr.appendChild(el('td', 'name', d.name));
+      tr.appendChild(el('td', null, d.home));
+      ['ED', 'GPO', 'GPA', 'OBS'].forEach(skill => {
+        const td = el('td');
+        const cb = document.createElement('input');
+        cb.type = 'checkbox'; cb.checked = d.skills.includes(skill);
+        cb.setAttribute('aria-label', d.name + ' ' + skill + ' scope');
+        cb.addEventListener('change', async () => {
+          if (cb.checked) { if (!d.skills.includes(skill)) d.skills.push(skill); }
+          else d.skills = d.skills.filter(s => s !== skill);
+          notify(d.id, { text: 'Admin updated your roster scope: ' + (cb.checked ? 'added ' : 'removed ') + (skill === 'ED' ? 'ED' : skill) + '. This applies to future rosters and cover eligibility.' });
+          const rl = await persist(); if (!rl) toast(d.name + ' — ' + skill + (cb.checked ? ' added' : ' removed'));
+        });
+        td.appendChild(cb);
+        tr.appendChild(td);
+      });
+      const tdR = el('td');
+      const cbR = document.createElement('input');
+      cbR.type = 'checkbox'; cbR.checked = !!d.reduced;
+      cbR.setAttribute('aria-label', d.name + ' reduced load');
+      cbR.addEventListener('change', async () => { d.reduced = cbR.checked; const rl = await persist(); if (!rl) toast(d.name + ' reduced-load ' + (d.reduced ? 'on' : 'off')); });
+      tdR.appendChild(cbR); tr.appendChild(tdR);
+      tr.appendChild(el('td', null, String(d.fte)));
+      t.appendChild(tr);
+    });
+  }
+  document.getElementById('addgpbtn').addEventListener('click', () => {
+    openDlg('<h3>Add a GP</h3><label>Name</label><input type="text" id="ngname" placeholder="Dr …">' +
+      '<label>Home site</label><select id="nghome"><option value="JT">Jamestown</option><option value="CB">Crystal Brook</option></select>' +
+      '<label>FTE (0.1–1.0)</label><input type="number" id="ngfte" min="0.1" max="1" step="0.1" value="1.0">' +
+      '<label>Scope</label><div class="row">' +
+      '<label style="display:inline;margin:0"><input type="checkbox" id="ngED" checked> ED</label>' +
+      '<label style="display:inline;margin:0"><input type="checkbox" id="ngGPO"> GPO</label>' +
+      '<label style="display:inline;margin:0"><input type="checkbox" id="ngGPA"> GPA</label>' +
+      '<label style="display:inline;margin:0"><input type="checkbox" id="ngOBS"> Obs support</label></div>' +
+      '<div class="row"><button class="primary" id="dlgok">Add GP</button><button class="ghost" id="dlgcancel">Cancel</button></div>');
+    document.getElementById('dlgcancel').onclick = () => dlg.close();
+    document.getElementById('dlgok').onclick = async () => {
+      const name = document.getElementById('ngname').value.trim();
+      if (!name) { toast('Name required'); return; }
+      const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+      if (gp(id)) { toast('That GP already exists'); return; }
+      const skills = ['ED', 'GPO', 'GPA', 'OBS'].filter(s => document.getElementById('ng' + s).checked);
+      STATE.gps.push({ id, name, home: document.getElementById('nghome').value, skills: skills.length ? skills : ['ED'], reduced: false, fte: +document.getElementById('ngfte').value || 1 });
+      users()[id] = { pin: '1234' };
+      notify(id, { text: 'Welcome aboard — you’ve been added to the on-call board. Mark your availability for the coming months.' });
+      dlg.close();
+      const rl = await persist();
+      if (!rl) { renderMain(); renderLogin(); toast(name + ' added — they sign in with PIN 1234.'); }
+    };
+  });
+
+  function renderReqLog() {
+    if (!isAdmin()) return;
+    const log = document.getElementById('reqlog');
+    log.innerHTML = '';
+    if (!STATE.requests.length) { log.appendChild(el('p', 'section-note', 'No changes, cover requests or swaps yet.')); return; }
+    STATE.requests.slice(0, 30).forEach(r => {
+      const line = el('p', 'section-note');
+      const what = r.kind === 'change'
+        ? 'Reassignment: ' + SLOT[r.slot].label + ' day ' + r.day + ', ' + gp(r.from).name + ' → ' + gp(r.to).name
+        : r.kind === 'swap'
+          ? 'Swap: ' + gp(r.from).name + ' ⇄ ' + gp(r.to).name + ' (days ' + r.day + '/' + r.day2 + ')'
+          : 'Cover: ' + gp(r.from).name + ', ' + SLOT[r.slot].label + ' day ' + r.day + (r.coveredBy ? ' → ' + gp(r.coveredBy).name : '');
+      const st = r.status.toUpperCase() + (r.resolved ? ' · ' + r.resolved : '');
+      line.innerHTML = '<strong>' + MONTH_NAMES[r.month].split(' ')[0] + '</strong> — ' + what + ' · <strong>' + st + '</strong>';
+      log.appendChild(line);
+    });
+  }
+
+  /* ---------- top-level render ---------- */
+  function renderMain() {
+    renderNotifs(); renderBell(); renderAvail(); renderRoster(); renderBoard(); renderWorkforce(); renderReqLog();
+  }
+  function renderAll() {
+    users();
+    renderLogin();
+    const signedIn = !!me;
+    document.getElementById('login').hidden = signedIn;
+    document.getElementById('app').hidden = !signedIn;
+    if (!signedIn) return;
+    document.getElementById('whoami').textContent = isAdmin() ? 'Roster Admin' : gp(me).name;
+    document.getElementById('roletag').textContent = isAdmin() ? 'admin' : 'GP';
+    document.getElementById('availsec').hidden = false;
+    renderMain();
+  }
+
+  /* ---------- boot ---------- */
+  try { const saved = sessionStorage.getItem('oncall-me'); if (saved && (saved === 'admin' || gp(saved))) me = saved; } catch (e) {}
+  // sample published roster so the demo is alive on first open
+  if (!STATE.published['2026-10']) {
+    STATE.published['2026-10'] = { grid: generate('2026-10'), at: 'sample' };
+  }
   renderAll();
 
   (async () => {
     try {
-      if (window.claude && typeof window.claude.use === 'function') {
-        artifactNS = await window.claude.use('artifact');
-      }
+      if (window.claude && typeof window.claude.use === 'function') artifactNS = await window.claude.use('artifact');
     } catch (e) { artifactNS = null; }
     if (artifactNS) setMode('shared');
-    else { setMode('local'); mergeLocal(); renderAll(); }
+    else { setMode('local'); mergeLocal(); if (!STATE.published['2026-10']) STATE.published['2026-10'] = { grid: generate('2026-10'), at: 'sample' }; renderAll(); }
   })();
 })();
 </script>
