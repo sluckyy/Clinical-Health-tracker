@@ -197,6 +197,13 @@
   table.wf { border-collapse: collapse; width: 100%; font-size: 13.5px; margin-top: 10px; }
   table.wf th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); padding: 6px 8px; border-bottom: 1px solid var(--hairline); }
   table.wf td { padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+  table.loads { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  table.loads th { text-align: right; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); padding: 6px 10px; border-bottom: 1px solid var(--hairline); }
+  table.loads th:first-child, table.loads td:first-child { text-align: left; }
+  table.loads td { padding: 6px 10px; text-align: right; border-bottom: none; font-variant-numeric: tabular-nums; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  table.loads td:first-child { font-family: "Public Sans", sans-serif; font-weight: 600; font-size: 13.5px; white-space: nowrap; }
+  table.loads tr.shiftdetail td { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink-3); text-align: left; padding: 0 10px 8px; border-bottom: 1px solid var(--grid); }
+  table.wf input[type="number"] { width: 66px; padding: 4px 6px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
   table.wf input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
   table.wf .name { font-weight: 600; white-space: nowrap; }
 
@@ -332,6 +339,13 @@
       </div>
     </section>
 
+    <!-- admin: shifts by doctor -->
+    <section id="shiftsec" hidden>
+      <h2>Shifts by doctor — <span id="shiftmonthname"></span> <span class="roletag">admin</span></h2>
+      <p class="section-note">Counted from the roster above (the draft if one is open, otherwise the published roster). GPO/GPA/obs support are 24-hour days; ED counts days, with half-shifts noted. The detail line lists the actual dates.</p>
+      <div class="card"><table class="loads" id="shifttable"></table></div>
+    </section>
+
     <!-- admin: requests overview -->
     <section id="reqsec" hidden>
       <h2>Change log &amp; acknowledgements <span class="roletag">admin</span></h2>
@@ -390,7 +404,9 @@
   const gp = id => STATE.gps.find(d => d.id === id);
   const isAdmin = () => me === 'admin';
 
+  const INIT_OVERRIDES = { rowena_conway: 'RW', rick_chalwin: 'RC' };
   function initials(d) {
+    if (INIT_OVERRIDES[d.id]) return INIT_OVERRIDES[d.id];
     if (d.initials) return d.initials;
     const parts = d.name.replace(/[^A-Za-z ]/g, '').split(/\s+/).filter(Boolean);
     return ((parts[0] || 'X')[0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
@@ -985,7 +1001,19 @@
       cbR.setAttribute('aria-label', d.name + ' reduced load');
       cbR.addEventListener('change', async () => { d.reduced = cbR.checked; const rl = await persist(); if (!rl) toast(d.name + ' reduced-load ' + (d.reduced ? 'on' : 'off')); });
       tdR.appendChild(cbR); tr.appendChild(tdR);
-      tr.appendChild(el('td', null, String(d.fte)));
+      const tdF = el('td');
+      const inF = document.createElement('input');
+      inF.type = 'number'; inF.min = '0.1'; inF.max = '1'; inF.step = '0.1'; inF.value = String(d.fte);
+      inF.setAttribute('aria-label', d.name + ' FTE');
+      inF.addEventListener('change', async () => {
+        const v = Math.round(Math.min(1, Math.max(0.1, parseFloat(inF.value) || d.fte)) * 10) / 10;
+        inF.value = String(v);
+        if (v === d.fte) return;
+        d.fte = v;
+        const rl = await persist();
+        if (!rl) toast(d.name + ' FTE set to ' + v + ' — applies to the next generated roster.');
+      });
+      tdF.appendChild(inF); tr.appendChild(tdF);
       t.appendChild(tr);
     });
   }
@@ -1015,6 +1043,80 @@
     };
   });
 
+  /* ---------- admin: shifts by doctor ---------- */
+  function renderShifts() {
+    const sec = document.getElementById('shiftsec');
+    sec.hidden = !isAdmin();
+    if (!isAdmin()) return;
+    document.getElementById('shiftmonthname').textContent = MONTH_NAMES[curMonth] + (draftGrid ? ' (draft)' : '');
+    const t = document.getElementById('shifttable');
+    t.innerHTML = '';
+    const grid = draftGrid || (pub(curMonth) && pub(curMonth).grid);
+    if (!grid) { t.innerHTML = '<tr><td class="section-note">No roster for this month yet.</td></tr>'; return; }
+
+    const per = {};
+    gps().forEach(d => { per[d.id] = { gpo: [], gpa: [], obs: [], ed: {} }; });
+    grid.forEach((row, i) => {
+      const day = i + 1;
+      if (per[row.GPO]) per[row.GPO].gpo.push(day);
+      if (per[row.GPA]) per[row.GPA].gpa.push(day);
+      if (per[row.OBS]) per[row.OBS].obs.push(day);
+      ['JT', 'CB'].forEach(site => {
+        const dHalf = row['ED_' + site + '_D'], nHalf = row['ED_' + site + '_N'];
+        [[dHalf, 'day'], [nHalf, 'night']].forEach(([w, half]) => {
+          if (!per[w]) return;
+          if (!per[w].ed[day]) per[w].ed[day] = [];
+          per[w].ed[day].push(site + ':' + half);
+        });
+      });
+    });
+
+    const hr = el('tr');
+    ['Doctor', 'GPO', 'GPA', 'Obs support', 'ED', 'Total days'].forEach(h => hr.appendChild(el('th', null, h)));
+    t.appendChild(hr);
+
+    const rows = gps().map(d => {
+      const p = per[d.id];
+      const edDays = Object.keys(p.ed).map(Number).sort((a, b) => a - b);
+      const fullEdDays = edDays.filter(day => p.ed[day].length >= 2);
+      const total = p.gpo.length + p.gpa.length + p.obs.length + edDays.length;
+      return { d, p, edDays, halves: edDays.length - fullEdDays.length, total };
+    }).filter(r => r.total > 0).sort((a, b) => b.total - a.total);
+
+    if (!rows.length) { t.innerHTML = '<tr><td class="section-note">Nobody is rostered this month.</td></tr>'; return; }
+
+    const fmtDays = arr => arr.join(', ');
+    rows.forEach(({ d, p, edDays, halves, total }) => {
+      const tr = el('tr');
+      tr.appendChild(el('td', null, initials(d) + ' · ' + d.name + (d.reduced ? ' <span class="tag">reduced-load</span>' : '')));
+      tr.appendChild(el('td', null, String(p.gpo.length)));
+      tr.appendChild(el('td', null, String(p.gpa.length)));
+      tr.appendChild(el('td', null, String(p.obs.length)));
+      tr.appendChild(el('td', null, String(edDays.length) + (halves ? ' (' + halves + ' half)' : '')));
+      tr.appendChild(el('td', null, String(total)));
+      t.appendChild(tr);
+
+      const bits = [];
+      if (p.gpo.length) bits.push('GPO: ' + fmtDays(p.gpo));
+      if (p.gpa.length) bits.push('GPA: ' + fmtDays(p.gpa));
+      if (p.obs.length) bits.push('Obs: ' + fmtDays(p.obs));
+      if (edDays.length) {
+        const ed = edDays.map(day => {
+          const parts = p.ed[day];
+          const sites = [...new Set(parts.map(x => x.split(':')[0]))].join('+');
+          const full = parts.length >= 2 && new Set(parts.map(x => x.split(':')[1])).size === 2;
+          return day + ' ' + sites + (full ? '' : ' (' + parts[0].split(':')[1] + ')');
+        });
+        bits.push('ED: ' + ed.join(', '));
+      }
+      const dr = el('tr', 'shiftdetail');
+      const td = el('td', null, bits.join('  ·  '));
+      td.colSpan = 6;
+      dr.appendChild(td);
+      t.appendChild(dr);
+    });
+  }
+
   function renderReqLog() {
     if (!isAdmin()) return;
     const log = document.getElementById('reqlog');
@@ -1035,7 +1137,7 @@
 
   /* ---------- top-level render ---------- */
   function renderMain() {
-    renderNotifs(); renderBell(); renderAvail(); renderRoster(); renderBoard(); renderWorkforce(); renderReqLog();
+    renderNotifs(); renderBell(); renderAvail(); renderRoster(); renderBoard(); renderWorkforce(); renderShifts(); renderReqLog();
   }
   function renderAll() {
     users();
