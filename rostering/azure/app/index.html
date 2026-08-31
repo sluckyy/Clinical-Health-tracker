@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>On-Call Availability Board</title>
+<title>YNLHN On-Call Board</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
@@ -240,7 +240,7 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Mid North GP rostering · availability, roster &amp; cover — demo</div>
+    <div class="eyebrow">YNLHN · Mid North GP rostering · availability, roster &amp; cover — demo</div>
     <h1>The on-call board: sign in, mark your month, manage your shifts.</h1>
     <p class="lede">GPs mark availability a month ahead and manage cover and swaps on their own shifts. The roster admin sets each GP’s scope, adds GPs, and edits the published roster — <strong>every roster change needs the affected GP’s agreement before it lands</strong>.</p>
   </header>
@@ -257,7 +257,7 @@
         <button class="primary" id="loginbtn">Sign in</button>
         <span class="hint">Demo PINs — GPs: <span style="font-family:'IBM Plex Mono',monospace">1234</span> · Admin: <span style="font-family:'IBM Plex Mono',monospace">4321</span></span>
       </div>
-      <p class="hint" style="margin-top:12px">Demo-grade sign-in: PINs live in the page, not a real identity service. A production build would use the LHN’s single sign-on and send SMS/email notifications.</p>
+      <p class="hint" style="margin-top:12px">Demo-grade sign-in: PINs live in the page, not a real identity service. A production build would use YNLHN single sign-on and send SMS/email notifications.</p>
     </div>
   </section>
 
@@ -359,10 +359,10 @@
       <div class="card" id="reqlog"></div>
     </section>
 
-    <div class="caveat"><strong>Demo scope.</strong> Sign-in is PIN-based inside the page (production: LHN single sign-on). Notifications are the in-app inbox with the bell badge (production: SMS/email push as well). Entries and changes persist to this shared board when your account can save it; otherwise they stay in your browser and the badge at the top says so. The generator is the in-page sibling of the production CP-SAT solver; sessional fees: $2,500/day, split $1,250 per half when a day is shared.</div>
+    <div class="caveat"><strong>Demo scope.</strong> Sign-in is PIN-based inside the page (production: YNLHN single sign-on). Notifications are the in-app inbox with the bell badge (production: SMS/email push as well). Entries and changes persist to this shared board when your account can save it; otherwise they stay in your browser and the badge at the top says so. The generator is the in-page sibling of the production CP-SAT solver; sessional fees: $2,500/day, split $1,250 per half when a day is shared.</div>
   </div>
 
-  <footer>Companion to the “One Team, Two Towns” briefing · branch claude/gp-rostering-ed-obstetrics-wlsndd</footer>
+  <footer>Yorke and Northern Local Health Network · Mid North GP rostering · companion to the “One Team, Two Towns” briefing</footer>
 </div>
 
 <dialog id="dlg"></dialog>
@@ -475,20 +475,6 @@
         lsSave(STATE);
         toast('Could not reach the board service — change kept in this browser; it will not be visible to others until saved again.');
         return false;
-      }
-    }
-    if (artifactNS) {
-      try {
-        const res = await fetch(location.href, { cache: 'no-store' });
-        const srcText = await res.text();
-        const json = JSON.stringify(STATE).replace(/<\//g, '<\\/');
-        const next = srcText.replace(/(<script type="application\/json" id="app-state">)[\s\S]*?(<\/script>)/, (m0, a, b) => a + json + b);
-        await artifactNS.publish(next);
-        return true;
-      } catch (e) {
-        if (String(e && (e.code || e.name || '')).includes('conflict')) { toast('Someone else saved first — reloading.'); return true; }
-        artifactNS = null; setMode('local');
-        toast('Shared save unavailable — keeping changes in this browser.');
       }
     }
     lsSave(STATE);
@@ -1218,11 +1204,9 @@
         return;
       }
     } catch (e) { /* no backend - fall through */ }
-    try {
-      if (window.claude && typeof window.claude.use === 'function') artifactNS = await window.claude.use('artifact');
-    } catch (e) { artifactNS = null; }
-    if (artifactNS) setMode('shared');
-    else { setMode('local'); mergeLocal(); if (!STATE.published['2026-10']) STATE.published['2026-10'] = { grid: generate('2026-10'), at: 'sample' }; renderAll(); }
+    setMode('local'); mergeLocal();
+    if (!STATE.published['2026-10']) STATE.published['2026-10'] = { grid: generate('2026-10'), at: 'sample' };
+    renderAll();
   })();
 })();
 </script>

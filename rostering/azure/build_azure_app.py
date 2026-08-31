@@ -67,20 +67,6 @@ new_persist = """  async function persist() {
         return false;
       }
     }
-    if (artifactNS) {
-      try {
-        const res = await fetch(location.href, { cache: 'no-store' });
-        const srcText = await res.text();
-        const json = JSON.stringify(STATE).replace(/<\\//g, '<\\\\/');
-        const next = srcText.replace(/(<script type="application\\/json" id="app-state">)[\\s\\S]*?(<\\/script>)/, (m0, a, b) => a + json + b);
-        await artifactNS.publish(next);
-        return true;
-      } catch (e) {
-        if (String(e && (e.code || e.name || '')).includes('conflict')) { toast('Someone else saved first — reloading.'); return true; }
-        artifactNS = null; setMode('local');
-        toast('Shared save unavailable — keeping changes in this browser.');
-      }
-    }
     lsSave(STATE);
     return false;
   }
@@ -107,11 +93,9 @@ new_boot = """  (async () => {
         return;
       }
     } catch (e) { /* no backend - fall through */ }
-    try {
-      if (window.claude && typeof window.claude.use === 'function') artifactNS = await window.claude.use('artifact');
-    } catch (e) { artifactNS = null; }
-    if (artifactNS) setMode('shared');
-    else { setMode('local'); mergeLocal(); if (!STATE.published['2026-10']) STATE.published['2026-10'] = { grid: generate('2026-10'), at: 'sample' }; renderAll(); }
+    setMode('local'); mergeLocal();
+    if (!STATE.published['2026-10']) STATE.published['2026-10'] = { grid: generate('2026-10'), at: 'sample' };
+    renderAll();
   })();
 })();"""
 src = src[:m.start()] + new_boot + src[m.end():]
