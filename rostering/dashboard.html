@@ -270,38 +270,11 @@
     </div>
   </section>
 
-  <section>
-    <div class="kicker">The dollars</div>
-    <h2>Five payments a day instead of six-plus</h2>
-    <p class="section-note">Each doctor on call attracts one <strong>$2,500 off-site sessional payment per day, no matter how many hats they wear</strong>. That makes the old roster’s multi-hatting look free — a doctor holding three lines is still one payment. But it isn’t cheaper: because the old roster runs 9–10 lines a day, it still needs <strong>6.2 paid doctors a day in July and 5.7 in August</strong> even after all the multi-hatting collapses lines together. The new model needs <strong>exactly 5, every day</strong> — it can’t need more, because one role per doctor is a hard rule and there are only five roles.</p>
-    <div class="tiles">
-      <div class="tile">
-        <div class="label">Sessional cost / day</div>
-        <div class="value">$12.5k</div>
-        <div class="sub">Flat, predictable — vs an actual July–August average of <strong>$14.9k/day</strong></div>
-      </div>
-      <div class="tile">
-        <div class="label">Saving / month</div>
-        <div class="value">≈$75<span class="unit">k</span></div>
-        <div class="sub"><span class="delta-good">−$95k vs a July-style month, −$55k vs August</span> (which had Laura’s line already unrostered)</div>
-      </div>
-      <div class="tile">
-        <div class="label">Saving / year</div>
-        <div class="value">≈$0.9<span class="unit">M</span></div>
-        <div class="sub">At the July–August run-rate: $5.45M/yr → $4.56M/yr in sessional payments</div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Sessional payments per month (distinct paid doctors × $2,500)</h3>
-      <div class="costchart" id="costchart" style="margin-top:14px"></div>
-    </div>
-    <p class="section-note">And the two models buy different things with those dollars. The old roster averages 1.5 covered lines per payment — but a third of those payments buy a doctor who is holding several pagers, sometimes from the wrong town, sometimes on day 20 of an unbroken stretch. The new model’s $12,500/day buys five rested, single-role doctors and a roster with no quiet holes. The figures above also flatter the status quo: the locum days patching it (6 across July–August) are counted at the standard $2,500 though agency rates usually run higher, DIVERT days cost Port Pirie’s goodwill rather than nothing, and the 16 unfilled cells were “free” only because nobody was covering them.</p>
-  </section>
 
   <section>
     <div class="kicker">Scenario explorer</div>
     <h2>The actual roster, side by side with generated months</h2>
-    <p class="section-note">The first two tabs are the real July and August rosters exactly as worked. The rest were produced by the constraint solver. Hover any cell to trace one doctor’s month — try Holly Deer or KC Chen in August, then in September.</p>
+    <p class="section-note">The first two tabs are the real July and August rosters exactly as worked. The rest were produced by the constraint solver. Laura and Orroroo cover is linked to the Crystal Brook and Jamestown ED lines, so they aren’t shown as separate rows. Hover any cell to trace one doctor’s month — try Holly Deer or KC Chen in August, then in September.</p>
     <div class="tabs" role="tablist" id="tabs"></div>
     <div class="card">
       <div class="chips" id="chips"></div>
@@ -351,7 +324,6 @@
     <div class="caveat"><strong>The baseline is now the real roster.</strong> July and August 2026 actuals are parsed straight from the roster spreadsheet, including its typos, its “Rowena Conway (SJ)/(HD)” backup annotations (counted as Rowena, with the bracketed doctor treated as backstop), Michelle and Ben as locums, and the DIVERT days. Weekend shading uses the roster’s own weekday row. Future-month leave is assumed for the demo — swap in real requests before circulating individual numbers.</div>
     <div class="caveat"><strong>FTE estimates are inferred, not payroll.</strong> Doctors who appear rarely on the actual roster (Rick, Gareth, Nikki, Cynthia, Josh, Nitya) are modelled part-time so the fairness targets are realistic. If someone’s availability is materially different, it’s one number in the config.</div>
     <div class="caveat"><strong>Laura and Orroroo are folded into the CB and JT ED lines</strong>, matching the stated practice (CB covers Laura remotely, JT covers Orroroo) and the fact that Laura’s separate line was already unrostered in August. Reliable Webex/DTN from doctors’ homes makes this fold safer and benefits either model. If separate lines must stay, the pool is 15 ED doctors for 4 lines — the generator can be re-run that way.</div>
-    <div class="caveat"><strong>Cost figures assume every rostered on-call line-day attracts one $2,500 off-site sessional payment per doctor</strong>, including locum and Clare backup days at the same rate, and that a multi-hatted day is still a single payment. If some doctors are salaried or on different arrangements, adjust before quoting the totals — the <em>relative</em> saving (6.2 → 5.0 paid doctors a day) holds regardless of rate.</div>
     <div class="caveat"><strong>Consolidation helps, but doesn’t solve, the birthing-experience finding.</strong> Fewer than 50 births a year split across two teams means each roster line attends very few. One team concentrates that exposure, but ~50/year is still low. Structured Port Pirie rotations are the credible answer for accreditation — and the new roster’s slack (Holly and Simon at 7 days, obs-support doctors at 4–13) is what makes them schedulable at all.</div>
   </section>
 
@@ -380,7 +352,7 @@
     ED_LAURA: 'ED — Laura', ED_ORROROO: 'ED — Orroroo'
   };
   const NEW_ROLE_LABELS = {
-    ED_JT: 'ED — Jamestown (+ Orroroo)', ED_CB: 'ED — Crystal Brook (+ Laura)',
+    ED_JT: 'ED — Jamestown', ED_CB: 'ED — Crystal Brook',
     GPO: 'GP obstetrician', GPA: 'GP anaesthetist', OBS: 'Obs support'
   };
   const SCENARIO_NOTES = {
@@ -452,44 +424,6 @@
     ['Stress month', 'generated, new model', byId.new_stress.summary.total_gaps, 'new']
   ]);
 
-  /* ---- sessional cost ---- */
-  const RATE = 2500;
-  function scenarioCost(r) {
-    let paid = 0, clare = 0;
-    r.roster.forEach(d => {
-      const who = new Set(r.roles.map(x => d[x]).filter(w => w && w !== 'GAP' && w !== 'DIVERT'));
-      if (who.has('CLARE')) { clare++; who.delete('CLARE'); }
-      paid += who.size;
-    });
-    return { paid, clare, total: (paid + clare) * RATE };
-  }
-  const fmtK = n => '$' + (n / 1000).toLocaleString('en-AU', { maximumFractionDigits: 1 }) + 'k';
-
-  (function () {
-    const rows = [
-      ['July 2026', 'actual — 6.23 paid doctors/day', byId.actual_07, 'old'],
-      ['August 2026', 'actual — 5.71 paid doctors/day', byId.actual_08, 'old'],
-      ['September 2026', 'generated — 5 paid doctors/day', byId.new_sep, 'new'],
-      ['October 2026', 'generated — 5 paid doctors/day (31 days)', byId.new_oct, 'new'],
-      ['Stress month', 'generated — incl. 2 Clare backup days', byId.new_stress, 'new']
-    ];
-    const costs = rows.map(([, , r]) => scenarioCost(r).total);
-    const max = Math.max(...costs);
-    const chart = document.getElementById('costchart');
-    rows.forEach(([label, sub, r, cls], i) => {
-      chart.appendChild(el('div', 'glabel', label + '<small>' + sub + '</small>'));
-      const row = el('div', 'bar-row');
-      const bar = el('div', 'bar ' + cls);
-      bar.style.width = (costs[i] / max * 100) + '%';
-      const c = scenarioCost(r);
-      bar.title = label + ': ' + c.paid + ' paid person-days'
-        + (c.clare ? ' + ' + c.clare + ' Clare days' : '') + ' × $2,500 = ' + fmtK(c.total);
-      row.appendChild(bar);
-      row.appendChild(el('span', 'bar-val', fmtK(costs[i])));
-      chart.appendChild(row);
-    });
-  })();
-
   /* ---- scenario explorer ---- */
   const ORDER = ['actual_07', 'actual_08', 'new_sep', 'new_oct', 'new_stress', 'new_lauren'];
   const TAB_LABELS = {
@@ -513,6 +447,9 @@
 
   function render(r) {
     const labels = r.model === 'actual' ? ACTUAL_ROLE_LABELS : NEW_ROLE_LABELS;
+    // Laura and Orroroo cover is linked to the CB and JT lines - their
+    // separate historical rows are hidden to keep the grid comparable
+    const visRoles = r.roles.filter(x => x !== 'ED_LAURA' && x !== 'ED_ORROROO');
 
     /* chips */
     const chips = document.getElementById('chips');
@@ -524,8 +461,6 @@
     chips.appendChild(el('span', 'chip' + (s.clare_backup_days ? ' warn' : ''), 'Clare backup <span class="num">' + s.clare_backup_days + '</span>'));
     chips.appendChild(el('span', 'chip' + (s.double_hatted_days ? ' crit' : ''), 'Multi-hatted days <span class="num">' + s.double_hatted_days + '</span>'));
     if (r.model === 'new') chips.appendChild(el('span', 'chip', 'Active birthing site: ' + (r.active_site === 'JT' ? 'Jamestown' : 'Crystal Brook')));
-    const c = scenarioCost(r);
-    chips.appendChild(el('span', 'chip', 'Sessional cost <span class="num">' + fmtK(c.total) + '</span>'));
     document.getElementById('scenario-note').textContent = SCENARIO_NOTES[r.scenario] || r.label;
 
     /* roster grid */
@@ -540,7 +475,7 @@
     });
     t.appendChild(head1); t.appendChild(head2);
 
-    r.roles.forEach(role => {
+    visRoles.forEach(role => {
       const tr = el('tr');
       tr.appendChild(el('td', 'rolename', labels[role] || role));
       days.forEach(d => {
@@ -551,7 +486,7 @@
         else if (who === 'DIVERT') { td.classList.add('clare'); td.textContent = 'DV'; td.title = 'Diverted to Port Pirie'; }
         else if (who === 'GAP' || who == null) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled'; }
         else {
-          const n = r.roles.filter(x => d[x] === who).length;
+          const n = visRoles.filter(x => d[x] === who).length;
           td.textContent = (INITIALS[who] || '?') + (n > 1 ? '×' + n : '');
           td.dataset.doc = who;
           td.title = (r.doctor_stats[who] ? r.doctor_stats[who].name : who) + ' — ' + (labels[role] || role) + (n > 1 ? ' (holding ' + n + ' lines today)' : '');

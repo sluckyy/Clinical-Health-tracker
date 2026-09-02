@@ -282,7 +282,7 @@
     <!-- availability -->
     <section id="availsec">
       <h2>Mark availability<span id="availwho"></span></h2>
-      <p class="section-note">Click a day to cycle: available → day only → nights only → not available → leave. Save when done.</p>
+      <p class="section-note">Click a day to cycle: available → not available → leave. Save when done. All on-call shifts are full 24-hour cover.</p>
       <div class="monthtabs" id="monthtabs" role="tablist"></div>
       <div class="card">
         <div class="row" id="availadminrow" hidden>
@@ -291,8 +291,6 @@
         </div>
         <div class="legend">
           <span class="key"><span class="pill st-ok">✓</span> Available</span>
-          <span class="key"><span class="pill st-day">D</span> Day only</span>
-          <span class="key"><span class="pill st-night">N</span> Nights only</span>
           <span class="key"><span class="pill st-off">✕</span> Not available</span>
           <span class="key"><span class="pill st-leave">L</span> Leave</span>
         </div>
@@ -349,7 +347,7 @@
     <!-- admin: shifts by doctor -->
     <section id="shiftsec" hidden>
       <h2>Shifts by doctor — <span id="shiftmonthname"></span> <span class="roletag">admin</span></h2>
-      <p class="section-note">Counted from the roster above (the draft if one is open, otherwise the published roster). GPO/GPA/obs support are 24-hour days; ED counts days, with half-shifts noted. The detail line lists the actual dates.</p>
+      <p class="section-note">Counted from the roster above (the draft if one is open, otherwise the published roster). Every shift is a 24-hour day. The detail line lists the actual dates.</p>
       <div class="card"><table class="loads" id="shifttable"></table></div>
     </section>
 
@@ -359,7 +357,7 @@
       <div class="card" id="reqlog"></div>
     </section>
 
-    <div class="caveat"><strong>Demo scope.</strong> Sign-in is PIN-based inside the page (production: YNLHN single sign-on). Notifications are the in-app inbox with the bell badge (production: SMS/email push as well). Entries and changes persist to this shared board when your account can save it; otherwise they stay in your browser and the badge at the top says so. The generator is the in-page sibling of the production CP-SAT solver; sessional fees: $2,500/day, split $1,250 per half when a day is shared.</div>
+    <div class="caveat"><strong>Demo scope.</strong> Sign-in is PIN-based inside the page (production: YNLHN single sign-on). Notifications are the in-app inbox with the bell badge (production: SMS/email push as well). Entries and changes persist to this shared board when your account can save it; otherwise they stay in your browser and the badge at the top says so. The generator is the in-page sibling of the production CP-SAT solver. Each town’s ED line is covered by that town’s own GP group.</div>
   </div>
 
   <footer>Yorke and Northern Local Health Network · Mid North GP rostering · companion to the “One Team, Two Towns” briefing</footer>
@@ -368,20 +366,17 @@
 <dialog id="dlg"></dialog>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="application/json" id="app-state">{"gps":[{"id":"holly_deer","name":"Holly Deer","home":"CB","skills":["ED","GPO"],"reduced":true,"fte":1.0},{"id":"simon_jackson","name":"Simon Jackson","home":"JT","skills":["ED","GPO"],"reduced":true,"fte":1.0},{"id":"rowena_conway","name":"Rowena Conway","home":"JT","skills":["ED","GPO","GPA"],"reduced":false,"fte":1.0},{"id":"kc_chen","name":"KC Chen","home":"CB","skills":["ED","GPA"],"reduced":false,"fte":1.0},{"id":"niall_fostyk","name":"Niall Fostyk","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"michael_macpherson","name":"Michael MacPherson","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"krishna_bayley","name":"Krishna Bayley","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":0.7},{"id":"fiona_forrester","name":"Fiona Forrester","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"lauren_mclean","name":"Lauren McLean","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":0.7},{"id":"li_chei_lee","name":"Li Chei Lee","home":"CB","skills":["OBS"],"reduced":false,"fte":0.4},{"id":"josh_smith","name":"Josh Smith","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"nitya_sukheja","name":"Nitya Sukheja","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"rick_chalwin","name":"Rick Chalwin","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"gareth_oreilly","name":"Gareth O'Reilly","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"cynthia_paredes","name":"Cynthia Paredes","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":0.4},{"id":"nikki_pennifold","name":"Nikki Pennifold","home":"CB","skills":["ED"],"reduced":false,"fte":0.4}],"users":{},"months":{"2026-10":{"availability":{"josh_smith":{"1":"day","2":"day","3":"day","4":"day","5":"day","6":"day","7":"day","8":"day","9":"day","10":"day","11":"day","12":"day","13":"day","14":"day","15":"day","16":"day","17":"day","18":"day","19":"off","20":"off","21":"off","22":"day","23":"day","24":"day","25":"day","26":"day","27":"day","28":"day","29":"day","30":"day","31":"day"},"nitya_sukheja":{"1":"night","2":"night","3":"night","4":"night","5":"night","6":"night","7":"night","8":"night","9":"night","10":"night","11":"night","12":"night","13":"night","14":"night","15":"night","16":"night","17":"night","18":"night","19":"night","20":"night","21":"night","22":"night","23":"night","24":"night","25":"night","26":"night","27":"night","28":"night","29":"night","30":"night","31":"night"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","nitya_sukheja":"sample","holly_deer":"sample","rick_chalwin":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}},"published":{},"notifications":{},"requests":[]}</script>
+<script type="application/json" id="app-state">{"gps":[{"id":"holly_deer","name":"Holly Deer","home":"CB","skills":["ED","GPO"],"reduced":true,"fte":1.0},{"id":"simon_jackson","name":"Simon Jackson","home":"JT","skills":["ED","GPO"],"reduced":true,"fte":1.0},{"id":"rowena_conway","name":"Rowena Conway","home":"JT","skills":["ED","GPO","GPA"],"reduced":false,"fte":1.0},{"id":"kc_chen","name":"KC Chen","home":"CB","skills":["ED","GPA"],"reduced":false,"fte":1.0},{"id":"niall_fostyk","name":"Niall Fostyk","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"michael_macpherson","name":"Michael MacPherson","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"krishna_bayley","name":"Krishna Bayley","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":0.7},{"id":"fiona_forrester","name":"Fiona Forrester","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"lauren_mclean","name":"Lauren McLean","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":0.7},{"id":"li_chei_lee","name":"Li Chei Lee","home":"CB","skills":["OBS"],"reduced":false,"fte":0.4},{"id":"josh_smith","name":"Josh Smith","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"nitya_sukheja","name":"Nitya Sukheja","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"rick_chalwin","name":"Rick Chalwin","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"gareth_oreilly","name":"Gareth O'Reilly","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"cynthia_paredes","name":"Cynthia Paredes","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":0.4},{"id":"nikki_pennifold","name":"Nikki Pennifold","home":"CB","skills":["ED"],"reduced":false,"fte":0.4}],"users":{},"months":{"2026-10":{"availability":{"josh_smith":{"19":"off","20":"off","21":"off"},"nitya_sukheja":{"1":"off","2":"off","3":"off","4":"off","5":"off","6":"off","7":"off"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","nitya_sukheja":"sample","holly_deer":"sample","rick_chalwin":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}},"published":{},"notifications":{},"requests":[]}</script>
 <script>
 (function () {
   'use strict';
 
   /* ---------- constants ---------- */
-  const RATE = 2500, HALF = 1250;
   const MONTHS = ['2026-10', '2026-11'];
   const MONTH_NAMES = { '2026-10': 'October 2026', '2026-11': 'November 2026' };
-  const STATES = ['ok', 'day', 'night', 'off', 'leave'];
+  const STATES = ['ok', 'off', 'leave'];
   const STATE_META = {
     ok: { cls: 'st-ok', label: '✓ Available' },
-    day: { cls: 'st-day', label: 'D · Day only' },
-    night: { cls: 'st-night', label: 'N · Nights only' },
     off: { cls: 'st-off', label: '✕ Not available' },
     leave: { cls: 'st-leave', label: 'L · Leave' }
   };
@@ -389,10 +384,8 @@
     { id: 'GPO', label: 'GP obstetrician', skill: 'GPO', kind: 'full' },
     { id: 'GPA', label: 'GP anaesthetist', skill: 'GPA', kind: 'full' },
     { id: 'OBS', label: 'Obs support', skill: 'OBS', kind: 'full' },
-    { id: 'ED_JT_D', label: 'ED Jamestown — day', skill: 'ED', kind: 'day', site: 'JT' },
-    { id: 'ED_CB_D', label: 'ED Crystal Brook — day', skill: 'ED', kind: 'day', site: 'CB' },
-    { id: 'ED_JT_N', label: 'ED Jamestown — night', skill: 'ED', kind: 'night', site: 'JT' },
-    { id: 'ED_CB_N', label: 'ED Crystal Brook — night', skill: 'ED', kind: 'night', site: 'CB' }
+    { id: 'ED_JT', label: 'ED — Jamestown', skill: 'ED', kind: 'full', site: 'JT' },
+    { id: 'ED_CB', label: 'ED — Crystal Brook', skill: 'ED', kind: 'full', site: 'CB' }
   ];
   const SLOT = Object.fromEntries(SLOTS.map(s => [s.id, s]));
   const MAX_CONSEC = 4;
@@ -498,80 +491,45 @@
   function weekday(key, day) { const [y, m] = key.split('-').map(Number); return (new Date(y, m - 1, day).getDay() + 6) % 7; }
   function stateFor(monthKey, docId, day) {
     const a = STATE.months[monthKey] && STATE.months[monthKey].availability[docId];
-    return (a && a[String(day)]) || 'ok';
+    const v = (a && a[String(day)]) || 'ok';
+    // legacy day-only/night-only marks (from before shifts became 24h) read as available
+    return (v === 'day' || v === 'night') ? 'ok' : v;
   }
 
   /* ---------- generator (in-page sibling of the CP-SAT solver) ---------- */
   function generate(monthKey) {
     const DOCS = gps();
     const n = monthDays(monthKey);
-    const halvesTotal = n * 10;
+    const slotsTotal = n * SLOTS.length;
     const weightSum = DOCS.reduce((s, d) => s + d.fte * (d.reduced ? 0.55 : 1), 0);
-    const target = {}, halves = {}, consec = {};
-    DOCS.forEach(d => { target[d.id] = halvesTotal * d.fte * (d.reduced ? 0.55 : 1) / weightSum; halves[d.id] = 0; consec[d.id] = 0; });
+    const target = {}, load = {}, consec = {};
+    DOCS.forEach(d => { target[d.id] = slotsTotal * d.fte * (d.reduced ? 0.55 : 1) / weightSum; load[d.id] = 0; consec[d.id] = 0; });
     const grid = [];
-    let prevFull = {};
-    const SPLIT_PENALTY = 0.25;
+    let prev = {};
 
     for (let day = 1; day <= n; day++) {
       const t = {};
-      const busyFull = new Set(), busyDay = new Set(), busyNight = new Set();
-      const baseScore = (d, site, forFullRole, slotId) => {
-        let s = halves[d.id] / Math.max(target[d.id], 0.5);
-        if (forFullRole && prevFull[slotId] === d.id && consec[d.id] < MAX_CONSEC) s -= 0.8;
-        if (site && d.home !== site) s += 0.12;
+      const busy = new Set();
+      const baseScore = (d, slot) => {
+        let s = load[d.id] / Math.max(target[d.id], 0.5);
+        if (prev[slot.id] === d.id && consec[d.id] < MAX_CONSEC) s -= 0.8; // continuity blocks
         if (d.reduced) s += 0.35;
         s += consec[d.id] * 0.05;
         return s;
       };
-      const free = d => !busyFull.has(d.id) && !(consec[d.id] >= MAX_CONSEC && !busyDay.has(d.id) && !busyNight.has(d.id));
-      const edEligible = (d, half) => {
-        if (!d.skills.includes('ED') || !free(d)) return false;
-        const st = stateFor(monthKey, d.id, day);
-        if (st === 'off' || st === 'leave') return false;
-        if (half === 'both') return st === 'ok' && !busyDay.has(d.id) && !busyNight.has(d.id);
-        if (half === 'day') return st !== 'night' && !busyDay.has(d.id);
-        return st !== 'day' && !busyNight.has(d.id);
-      };
-
-      SLOTS.filter(s => s.kind === 'full').forEach(slot => {
-        const cand = DOCS.filter(d => d.skills.includes(slot.skill) && free(d) &&
-          !busyDay.has(d.id) && !busyNight.has(d.id) && stateFor(monthKey, d.id, day) === 'ok')
-          .sort((a, b) => baseScore(a, null, true, slot.id) - baseScore(b, null, true, slot.id));
-        if (!cand.length) { t[slot.id] = 'CLARE'; return; }
+      SLOTS.forEach(slot => {
+        const cand = DOCS.filter(d => {
+          if (!d.skills.includes(slot.skill) || busy.has(d.id)) return false;
+          if (slot.site && d.home !== slot.site) return false; // each town's ED is covered by its own GP group
+          if (consec[d.id] >= MAX_CONSEC) return false;
+          return stateFor(monthKey, d.id, day) === 'ok';
+        }).sort((a, b) => baseScore(a, slot) - baseScore(b, slot));
+        if (!cand.length) { t[slot.id] = slot.skill === 'ED' ? null : 'CLARE'; return; }
         const pick = cand[0];
-        t[slot.id] = pick.id; busyFull.add(pick.id); halves[pick.id] += 2;
+        t[slot.id] = pick.id; busy.add(pick.id); load[pick.id] += 1;
       });
-
-      ['JT', 'CB'].forEach(site => {
-        const dSlot = 'ED_' + site + '_D', nSlot = 'ED_' + site + '_N';
-        const fullCand = DOCS.filter(d => edEligible(d, 'both')).sort((a, b) => baseScore(a, site) - baseScore(b, site));
-        const partOnly = DOCS.filter(d => {
-          const st = stateFor(monthKey, d.id, day);
-          return (st === 'day' && edEligible(d, 'day')) || (st === 'night' && edEligible(d, 'night'));
-        }).sort((a, b) => baseScore(a, site) - baseScore(b, site));
-        const anchor = partOnly[0];
-        const preferSplit = !fullCand.length || (anchor && baseScore(anchor, site) + SPLIT_PENALTY < baseScore(fullCand[0], site));
-        if (!preferSplit && fullCand.length) {
-          const pick = fullCand[0];
-          t[dSlot] = pick.id; t[nSlot] = pick.id;
-          busyDay.add(pick.id); busyNight.add(pick.id); halves[pick.id] += 2;
-        } else {
-          ['day', 'night'].forEach(half => {
-            const slotId = half === 'day' ? dSlot : nSlot;
-            const cand = DOCS.filter(d => edEligible(d, half)).sort((a, b) => baseScore(a, site) - baseScore(b, site));
-            const pick = (anchor && stateFor(monthKey, anchor.id, day) === half && edEligible(anchor, half)) ? anchor : cand[0];
-            if (pick) { t[slotId] = pick.id; (half === 'day' ? busyDay : busyNight).add(pick.id); halves[pick.id] += 1; }
-            else t[slotId] = null;
-          });
-        }
-      });
-
-      DOCS.forEach(d => {
-        const on = busyFull.has(d.id) || busyDay.has(d.id) || busyNight.has(d.id);
-        consec[d.id] = on ? consec[d.id] + 1 : 0;
-      });
-      prevFull = { GPO: t.GPO, GPA: t.GPA, OBS: t.OBS };
+      DOCS.forEach(d => { consec[d.id] = busy.has(d.id) ? consec[d.id] + 1 : 0; });
+      prev = t;
       grid.push(t);
     }
     return grid;
@@ -582,22 +540,35 @@
     const d = gp(docId);
     if (!d) return false;
     const slot = SLOT[slotId];
-    if (!d.skills.includes(slot.skill)) return false;
-    const st = stateFor(monthKey, docId, day);
-    if (st === 'off' || st === 'leave') return false;
-    if (slot.kind === 'full' && st !== 'ok') return false;
-    if (slot.kind === 'day' && st === 'night') return false;
-    if (slot.kind === 'night' && st === 'day') return false;
+    if (!slot || !d.skills.includes(slot.skill)) return false;
+    if (slot.site && d.home !== slot.site) return false; // town-based ED groups
+    if (stateFor(monthKey, docId, day) !== 'ok') return false;
     const row = grid[day - 1];
-    const held = SLOTS.filter(s => row[s.id] === docId).map(s => s.id);
-    if (held.includes(slotId)) return false;
-    if (slot.kind === 'full' && held.length) return false;
-    if (held.some(h => SLOT[h].kind === 'full')) return false;
-    if (slot.kind === 'day' && held.some(h => SLOT[h].kind === 'day')) return false;
-    if (slot.kind === 'night' && held.some(h => SLOT[h].kind === 'night')) return false;
+    if (SLOTS.some(s => row[s.id] === docId)) return false; // one 24h role per day
     return true;
   }
   function pub(monthKey) { return STATE.published[monthKey]; }
+
+  // one-way migration for boards saved before ED became a single 24h line:
+  // ED_JT_D/ED_JT_N collapse into ED_JT (day-half holder preferred), and
+  // requests pointing at half slots re-point at the merged line
+  function migrateState() {
+    Object.values(STATE.published || {}).forEach(p => {
+      (p.grid || []).forEach(row => {
+        ['JT', 'CB'].forEach(site => {
+          const k = 'ED_' + site;
+          if (row[k] === undefined && (row[k + '_D'] !== undefined || row[k + '_N'] !== undefined)) {
+            row[k] = row[k + '_D'] || row[k + '_N'] || null;
+          }
+          delete row[k + '_D']; delete row[k + '_N'];
+        });
+      });
+    });
+    (STATE.requests || []).forEach(r => {
+      if (r.slot) r.slot = r.slot.replace(/^(ED_(?:JT|CB))_(?:D|N)$/, '$1');
+      if (r.slot2) r.slot2 = r.slot2.replace(/^(ED_(?:JT|CB))_(?:D|N)$/, '$1');
+    });
+  }
 
   /* ---------- auth ---------- */
   function users() {
@@ -730,18 +701,15 @@
 
   /* ---------- roster UI ---------- */
   function gridStats(grid, monthKey) {
-    let cost = 0, clare = 0, gaps = 0;
+    let clare = 0, gaps = 0;
     grid.forEach(row => {
-      const dayHalves = {};
       SLOTS.forEach(slot => {
         const w = row[slot.id];
-        if (w === 'CLARE') { clare++; cost += RATE; return; }
-        if (!w) { gaps++; return; }
-        dayHalves[w] = (dayHalves[w] || 0) + (slot.kind === 'full' ? 2 : 1);
+        if (w === 'CLARE') clare++;
+        else if (!w) gaps++;
       });
-      Object.values(dayHalves).forEach(h => { cost += h >= 2 ? RATE : HALF; });
     });
-    return { cost, clare, gaps, edSlots: 4 * grid.length };
+    return { clare, gaps, edSlots: 2 * grid.length };
   }
 
   function renderRoster() {
@@ -769,9 +737,8 @@
     const s = gridStats(grid, curMonth);
     const chips = document.getElementById('rchips');
     chips.innerHTML = '';
-    chips.appendChild(el('span', 'chip' + (s.gaps ? ' crit' : ''), 'Unfilled ED halves <span class="num">' + s.gaps + '</span>'));
+    chips.appendChild(el('span', 'chip' + (s.gaps ? ' crit' : ''), 'Unfilled ED days <span class="num">' + s.gaps + '</span>'));
     chips.appendChild(el('span', 'chip' + (s.clare ? ' warn' : ''), 'Clare backup <span class="num">' + s.clare + '</span>'));
-    chips.appendChild(el('span', 'chip', 'Sessional cost <span class="num">$' + (s.cost / 1000).toLocaleString('en-AU', { maximumFractionDigits: 1 }) + 'k</span>'));
     if (draftGrid) chips.appendChild(el('span', 'chip warn', 'DRAFT'));
 
     const pendingByCell = {}, coverByCell = {};
@@ -804,9 +771,7 @@
         else if (!w) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled'; }
         else {
           const d = gp(w);
-          const halfOnly = slot.kind !== 'full' && !SLOTS.some(s2 => s2.kind !== slot.kind && s2.kind !== 'full' && grid[day - 1][s2.id] === w) && !SLOTS.some(s2 => s2.kind === 'full' && grid[day - 1][s2.id] === w);
-          td.textContent = d ? (halfOnly ? initials(d).toLowerCase() : initials(d)) : '?';
-          if (halfOnly) td.classList.add('half');
+          td.textContent = d ? initials(d) : '?';
           td.dataset.doc = w;
           td.title = (d ? d.name : w) + ' — ' + slot.label + ', ' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day;
           if (w === me) td.classList.add('mine');
@@ -835,7 +800,7 @@
     draftGrid = generate(curMonth);
     document.getElementById('gennote').textContent = 'Draft built from ' +
       Object.keys(STATE.months[curMonth].submitted).length + ' availability sheets.';
-    renderRoster();
+    renderRoster(); renderShifts();
   });
   document.getElementById('pubbtn').addEventListener('click', async () => {
     STATE.published[curMonth] = { grid: draftGrid, at: today() };
@@ -1089,12 +1054,8 @@
       if (per[row.GPA]) per[row.GPA].gpa.push(day);
       if (per[row.OBS]) per[row.OBS].obs.push(day);
       ['JT', 'CB'].forEach(site => {
-        const dHalf = row['ED_' + site + '_D'], nHalf = row['ED_' + site + '_N'];
-        [[dHalf, 'day'], [nHalf, 'night']].forEach(([w, half]) => {
-          if (!per[w]) return;
-          if (!per[w].ed[day]) per[w].ed[day] = [];
-          per[w].ed[day].push(site + ':' + half);
-        });
+        const w = row['ED_' + site];
+        if (per[w]) per[w].ed[day] = site;
       });
     });
 
@@ -1105,21 +1066,20 @@
     const rows = gps().map(d => {
       const p = per[d.id];
       const edDays = Object.keys(p.ed).map(Number).sort((a, b) => a - b);
-      const fullEdDays = edDays.filter(day => p.ed[day].length >= 2);
       const total = p.gpo.length + p.gpa.length + p.obs.length + edDays.length;
-      return { d, p, edDays, halves: edDays.length - fullEdDays.length, total };
+      return { d, p, edDays, total };
     }).filter(r => r.total > 0).sort((a, b) => b.total - a.total);
 
     if (!rows.length) { t.innerHTML = '<tr><td class="section-note">Nobody is rostered this month.</td></tr>'; return; }
 
     const fmtDays = arr => arr.join(', ');
-    rows.forEach(({ d, p, edDays, halves, total }) => {
+    rows.forEach(({ d, p, edDays, total }) => {
       const tr = el('tr');
       tr.appendChild(el('td', null, initials(d) + ' · ' + d.name + (d.reduced ? ' <span class="tag">reduced-load</span>' : '')));
       tr.appendChild(el('td', null, String(p.gpo.length)));
       tr.appendChild(el('td', null, String(p.gpa.length)));
       tr.appendChild(el('td', null, String(p.obs.length)));
-      tr.appendChild(el('td', null, String(edDays.length) + (halves ? ' (' + halves + ' half)' : '')));
+      tr.appendChild(el('td', null, String(edDays.length)));
       tr.appendChild(el('td', null, String(total)));
       t.appendChild(tr);
 
@@ -1127,15 +1087,7 @@
       if (p.gpo.length) bits.push('GPO: ' + fmtDays(p.gpo));
       if (p.gpa.length) bits.push('GPA: ' + fmtDays(p.gpa));
       if (p.obs.length) bits.push('Obs: ' + fmtDays(p.obs));
-      if (edDays.length) {
-        const ed = edDays.map(day => {
-          const parts = p.ed[day];
-          const sites = [...new Set(parts.map(x => x.split(':')[0]))].join('+');
-          const full = parts.length >= 2 && new Set(parts.map(x => x.split(':')[1])).size === 2;
-          return day + ' ' + sites + (full ? '' : ' (' + parts[0].split(':')[1] + ')');
-        });
-        bits.push('ED: ' + ed.join(', '));
-      }
+      if (edDays.length) bits.push('ED: ' + edDays.map(day => day + ' ' + p.ed[day]).join(', '));
       const dr = el('tr', 'shiftdetail');
       const td = el('td', null, bits.join('  ·  '));
       td.colSpan = 6;
@@ -1167,6 +1119,7 @@
     renderNotifs(); renderBell(); renderAvail(); renderRoster(); renderBoard(); renderWorkforce(); renderShifts(); renderReqLog();
   }
   function renderAll() {
+    migrateState();
     users();
     renderLogin();
     const signedIn = !!me;
