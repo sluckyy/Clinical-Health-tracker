@@ -494,7 +494,6 @@
     const grid = [];
     let prev = {};
 
-    const activeSite = MONTH_SITE[monthKey];
     for (let day = 1; day <= n; day++) {
       const t = {};
       const busy = new Set();
@@ -503,9 +502,6 @@
         if (prev[slot.id] === d.id) s -= 0.8; // continuity blocks
         if (d.reduced) s += 0.35;
         s += consec[d.id] * 0.15; // soft brake on long stretches - never a hard block
-        // prefer NALS-credentialed (obs-support scope) doctors on the birthing
-        // site's ED line, so the obs-assist pairing can happen
-        if (slot.site && slot.site === activeSite && d.skills.includes('OBS')) s -= 0.4;
         return s;
       };
       const eligible = slot => DOCS.filter(d => {
@@ -513,12 +509,10 @@
         if (slot.site && d.home !== slot.site) return false; // each town's ED is covered by its own GP group
         return stateFor(monthKey, d.id, day) === 'ok';
       });
+      // one doctor, one role, one site: every line gets its own doctor.
       // fill the scarcest line first, so a doctor who is the only option
-      // for one line (e.g. the last free GPA) isn't spent on another;
-      // obs assist is filled last - at the active birthing site it pairs
-      // with that town's ED doctor (one doctor, both lines, low workload)
-      const todaysOrder = SLOTS.filter(s => s.id !== 'OBS')
-        .map(s => [s, eligible(s).length])
+      // for one line (e.g. the last free GPA) isn't spent on another
+      const todaysOrder = SLOTS.map(s => [s, eligible(s).length])
         .sort((a, b) => a[1] - b[1]).map(x => x[0]);
       todaysOrder.forEach(slot => {
         const cand = eligible(slot).sort((a, b) => baseScore(a, slot) - baseScore(b, slot));
@@ -526,17 +520,7 @@
         const pick = cand[0];
         t[slot.id] = pick.id; busy.add(pick.id); load[pick.id] += 1;
       });
-      const edLocal = activeSite && gp(t['ED_' + activeSite]);
-      if (edLocal && edLocal.skills.includes('OBS')) {
-        // pairing requires NALS (obs-support scope)
-        t.OBS = edLocal.id; // paired with their ED day - no extra load counted
-      } else {
-        const slot = SLOT.OBS;
-        const cand = eligible(slot).sort((a, b) => baseScore(a, slot) - baseScore(b, slot));
-        if (cand.length) { t.OBS = cand[0].id; busy.add(cand[0].id); load[cand[0].id] += 1; }
-        else t.OBS = 'CLARE';
-      }
-      DOCS.forEach(d => { consec[d.id] = busy.has(d.id) || t.OBS === d.id ? consec[d.id] + 1 : 0; });
+      DOCS.forEach(d => { consec[d.id] = busy.has(d.id) ? consec[d.id] + 1 : 0; });
       prev = t;
       grid.push(t);
     }
@@ -761,8 +745,8 @@
       banner.appendChild(left);
       banner.appendChild(el('div', 'sitenote',
         'All births this month are at ' + SITE_NAMES[site] +
-        '. Obs assist is covered by the ' + SITE_NAMES[site] +
-        ' ED doctor when they hold NALS (obs-support scope).'));
+        '. One doctor, one role, one site — every line has its own doctor. ' +
+        'The ED lines also cover Laura (from Crystal Brook) and Orroroo (from Jamestown) remotely.'));
     }
 
     const pendingByCell = {}, coverByCell = {};
@@ -802,9 +786,7 @@
           const d = gp(w);
           td.textContent = d ? initials(d) : '?';
           td.dataset.doc = w;
-          const paired = slot.id === 'OBS' && MONTH_SITE[curMonth] && grid[day - 1]['ED_' + MONTH_SITE[curMonth]] === w;
-          td.title = (d ? d.name : w) + ' — ' + slot.label + ', ' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day +
-            (paired ? ' (paired with their ' + SITE_NAMES[MONTH_SITE[curMonth]] + ' ED day)' : '');
+          td.title = (d ? d.name : w) + ' — ' + slot.label + ', ' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day;
           if (w === me) td.classList.add('mine');
         }
         if (pendingByCell[key]) { td.classList.add('pending'); td.title += ' · change awaiting agreement'; }
