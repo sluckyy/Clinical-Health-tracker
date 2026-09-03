@@ -517,13 +517,18 @@
         s += consec[d.id] * 0.05;
         return s;
       };
-      SLOTS.forEach(slot => {
-        const cand = DOCS.filter(d => {
-          if (!d.skills.includes(slot.skill) || busy.has(d.id)) return false;
-          if (slot.site && d.home !== slot.site) return false; // each town's ED is covered by its own GP group
-          if (consec[d.id] >= MAX_CONSEC) return false;
-          return stateFor(monthKey, d.id, day) === 'ok';
-        }).sort((a, b) => baseScore(a, slot) - baseScore(b, slot));
+      const eligible = slot => DOCS.filter(d => {
+        if (!d.skills.includes(slot.skill) || busy.has(d.id)) return false;
+        if (slot.site && d.home !== slot.site) return false; // each town's ED is covered by its own GP group
+        if (consec[d.id] >= MAX_CONSEC) return false;
+        return stateFor(monthKey, d.id, day) === 'ok';
+      });
+      // fill the scarcest line first, so a doctor who is the only option
+      // for one line (e.g. the last free GPA) isn't spent on another
+      const todaysOrder = SLOTS.map(s => [s, eligible(s).length])
+        .sort((a, b) => a[1] - b[1]).map(x => x[0]);
+      todaysOrder.forEach(slot => {
+        const cand = eligible(slot).sort((a, b) => baseScore(a, slot) - baseScore(b, slot));
         if (!cand.length) { t[slot.id] = slot.skill === 'ED' ? null : 'CLARE'; return; }
         const pick = cand[0];
         t[slot.id] = pick.id; busy.add(pick.id); load[pick.id] += 1;
@@ -767,7 +772,7 @@
         const wd = weekday(curMonth, day);
         const td = el('td', wd >= 5 ? 'wk' : '');
         const key = day + ':' + slot.id;
-        if (w === 'CLARE') { td.classList.add('clare'); td.textContent = 'CL'; td.title = 'Clare network backup'; }
+        if (w === 'CLARE') { td.classList.add('clare'); td.textContent = 'CL'; td.title = 'Clare network backup — no local doctor could take this line today: everyone credentialed for it is on leave, unavailable, already on another line, or due rest after 4 consecutive on-call days'; }
         else if (!w) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled'; }
         else {
           const d = gp(w);
