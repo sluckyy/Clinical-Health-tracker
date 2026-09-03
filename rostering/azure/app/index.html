@@ -374,6 +374,8 @@
   /* ---------- constants ---------- */
   const MONTHS = ['2026-10', '2026-11'];
   const MONTH_NAMES = { '2026-10': 'October 2026', '2026-11': 'November 2026' };
+  const MONTH_SITE = { '2026-10': 'CB', '2026-11': 'JT' }; // active birthing site
+  const SITE_NAMES = { JT: 'Jamestown', CB: 'Crystal Brook' };
   const STATES = ['ok', 'off', 'leave'];
   const STATE_META = {
     ok: { cls: 'st-ok', label: '✓ Available' },
@@ -388,7 +390,8 @@
     { id: 'ED_CB', label: 'ED — Crystal Brook', skill: 'ED', kind: 'full', site: 'CB' }
   ];
   const SLOT = Object.fromEntries(SLOTS.map(s => [s.id, s]));
-  const MAX_CONSEC = 4;
+  // no hard fatigue cap: long stretches are discouraged (score penalty)
+  // but never force outside backup while a local doctor is available
   const DOW = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   /* ---------- state ---------- */
@@ -507,25 +510,28 @@
     const grid = [];
     let prev = {};
 
+    const activeSite = MONTH_SITE[monthKey];
     for (let day = 1; day <= n; day++) {
       const t = {};
       const busy = new Set();
       const baseScore = (d, slot) => {
         let s = load[d.id] / Math.max(target[d.id], 0.5);
-        if (prev[slot.id] === d.id && consec[d.id] < MAX_CONSEC) s -= 0.8; // continuity blocks
+        if (prev[slot.id] === d.id) s -= 0.8; // continuity blocks
         if (d.reduced) s += 0.35;
-        s += consec[d.id] * 0.05;
+        s += consec[d.id] * 0.15; // soft brake on long stretches - never a hard block
         return s;
       };
       const eligible = slot => DOCS.filter(d => {
         if (!d.skills.includes(slot.skill) || busy.has(d.id)) return false;
         if (slot.site && d.home !== slot.site) return false; // each town's ED is covered by its own GP group
-        if (consec[d.id] >= MAX_CONSEC) return false;
         return stateFor(monthKey, d.id, day) === 'ok';
       });
       // fill the scarcest line first, so a doctor who is the only option
-      // for one line (e.g. the last free GPA) isn't spent on another
-      const todaysOrder = SLOTS.map(s => [s, eligible(s).length])
+      // for one line (e.g. the last free GPA) isn't spent on another;
+      // obs assist is filled last - at the active birthing site it pairs
+      // with that town's ED doctor (one doctor, both lines, low workload)
+      const todaysOrder = SLOTS.filter(s => s.id !== 'OBS')
+        .map(s => [s, eligible(s).length])
         .sort((a, b) => a[1] - b[1]).map(x => x[0]);
       todaysOrder.forEach(slot => {
         const cand = eligible(slot).sort((a, b) => baseScore(a, slot) - baseScore(b, slot));
@@ -533,7 +539,16 @@
         const pick = cand[0];
         t[slot.id] = pick.id; busy.add(pick.id); load[pick.id] += 1;
       });
-      DOCS.forEach(d => { consec[d.id] = busy.has(d.id) ? consec[d.id] + 1 : 0; });
+      const edLocal = activeSite && gp(t['ED_' + activeSite]);
+      if (edLocal) {
+        t.OBS = edLocal.id; // paired with their ED day - no extra load counted
+      } else {
+        const slot = SLOT.OBS;
+        const cand = eligible(slot).sort((a, b) => baseScore(a, slot) - baseScore(b, slot));
+        if (cand.length) { t.OBS = cand[0].id; busy.add(cand[0].id); load[cand[0].id] += 1; }
+        else t.OBS = 'CLARE';
+      }
+      DOCS.forEach(d => { consec[d.id] = busy.has(d.id) || t.OBS === d.id ? consec[d.id] + 1 : 0; });
       prev = t;
       grid.push(t);
     }
@@ -744,6 +759,7 @@
     chips.innerHTML = '';
     chips.appendChild(el('span', 'chip' + (s.gaps ? ' crit' : ''), 'Unfilled ED days <span class="num">' + s.gaps + '</span>'));
     chips.appendChild(el('span', 'chip' + (s.clare ? ' warn' : ''), 'Clare backup <span class="num">' + s.clare + '</span>'));
+    if (MONTH_SITE[curMonth]) chips.appendChild(el('span', 'chip', 'Active birthing site: ' + SITE_NAMES[MONTH_SITE[curMonth]] + ' — obs assist pairs with its ED doctor'));
     if (draftGrid) chips.appendChild(el('span', 'chip warn', 'DRAFT'));
 
     const pendingByCell = {}, coverByCell = {};
@@ -772,13 +788,15 @@
         const wd = weekday(curMonth, day);
         const td = el('td', wd >= 5 ? 'wk' : '');
         const key = day + ':' + slot.id;
-        if (w === 'CLARE') { td.classList.add('clare'); td.textContent = 'CL'; td.title = 'Clare network backup — no local doctor could take this line today: everyone credentialed for it is on leave, unavailable, already on another line, or due rest after 4 consecutive on-call days'; }
+        if (w === 'CLARE') { td.classList.add('clare'); td.textContent = 'CL'; td.title = 'Clare network backup — no local doctor could take this line today: everyone credentialed for it is on leave, unavailable, or already on another line'; }
         else if (!w) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled'; }
         else {
           const d = gp(w);
           td.textContent = d ? initials(d) : '?';
           td.dataset.doc = w;
-          td.title = (d ? d.name : w) + ' — ' + slot.label + ', ' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day;
+          const paired = slot.id === 'OBS' && MONTH_SITE[curMonth] && grid[day - 1]['ED_' + MONTH_SITE[curMonth]] === w;
+          td.title = (d ? d.name : w) + ' — ' + slot.label + ', ' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day +
+            (paired ? ' (paired with their ' + SITE_NAMES[MONTH_SITE[curMonth]] + ' ED day)' : '');
           if (w === me) td.classList.add('mine');
         }
         if (pendingByCell[key]) { td.classList.add('pending'); td.title += ' · change awaiting agreement'; }
@@ -1071,7 +1089,9 @@
     const rows = gps().map(d => {
       const p = per[d.id];
       const edDays = Object.keys(p.ed).map(Number).sort((a, b) => a - b);
-      const total = p.gpo.length + p.gpa.length + p.obs.length + edDays.length;
+      // total = distinct days on call (an obs-assist day paired with an ED
+      // day at the active site counts once)
+      const total = new Set([...p.gpo, ...p.gpa, ...p.obs, ...edDays]).size;
       return { d, p, edDays, total };
     }).filter(r => r.total > 0).sort((a, b) => b.total - a.total);
 
