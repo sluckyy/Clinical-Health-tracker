@@ -187,6 +187,16 @@
   table.roster td.pending { box-shadow: inset 0 0 0 2px var(--day-edge); }
   table.roster td.needcover { box-shadow: inset 0 0 0 2px var(--off-edge); }
 
+  .sitebanner {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    background: var(--accent-wash); border: 1.5px solid var(--accent); border-radius: 10px;
+    padding: 12px 18px; margin: 4px 0 12px;
+  }
+  .sitebanner .sitelabel { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); }
+  .sitebanner .sitename { font-family: "Bricolage Grotesque", "Public Sans", sans-serif; font-size: 24px; font-weight: 800; color: var(--accent-ink); line-height: 1.1; }
+  .sitebanner .sitenote { font-size: 13px; color: var(--ink-2); max-width: 46ch; }
+  table.roster td.rolename.activeline { background: var(--accent-wash); color: var(--accent-ink); box-shadow: inset 3px 0 0 var(--accent); }
+  .sitetag { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-ink); display: block; }
   .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 4px; }
   .chip { font-size: 13px; font-weight: 600; border-radius: 999px; padding: 5px 12px; background: var(--accent-wash); color: var(--accent-ink); border: 1px solid transparent; }
   .chip.warn { background: var(--day-wash); color: var(--ink); border-color: var(--day-edge); }
@@ -305,6 +315,7 @@
           <button class="ghost" id="pubbtn" hidden>Publish this roster</button>
           <span class="section-note" id="gennote"></span>
         </div>
+        <div class="sitebanner" id="sitebanner" hidden></div>
         <div class="chips" id="rchips"></div>
         <div class="roster-scroll"><table class="roster" id="rostertable"></table></div>
         <div class="legend" style="margin-top:10px">
@@ -492,6 +503,9 @@
         if (prev[slot.id] === d.id) s -= 0.8; // continuity blocks
         if (d.reduced) s += 0.35;
         s += consec[d.id] * 0.15; // soft brake on long stretches - never a hard block
+        // prefer NALS-credentialed (obs-support scope) doctors on the birthing
+        // site's ED line, so the obs-assist pairing can happen
+        if (slot.site && slot.site === activeSite && d.skills.includes('OBS')) s -= 0.4;
         return s;
       };
       const eligible = slot => DOCS.filter(d => {
@@ -513,7 +527,8 @@
         t[slot.id] = pick.id; busy.add(pick.id); load[pick.id] += 1;
       });
       const edLocal = activeSite && gp(t['ED_' + activeSite]);
-      if (edLocal) {
+      if (edLocal && edLocal.skills.includes('OBS')) {
+        // pairing requires NALS (obs-support scope)
         t.OBS = edLocal.id; // paired with their ED day - no extra load counted
       } else {
         const slot = SLOT.OBS;
@@ -641,7 +656,8 @@
   /* ---------- availability UI ---------- */
   const tabsEl = document.getElementById('monthtabs');
   MONTHS.forEach(m => {
-    const b = el('button', 'mtab', MONTH_NAMES[m]);
+    const site = MONTH_SITE[m];
+    const b = el('button', 'mtab', MONTH_NAMES[m] + (site ? ' · births at ' + site : ''));
     b.dataset.m = m; b.setAttribute('role', 'tab');
     b.addEventListener('click', () => { curMonth = m; draftGrid = null; renderMain(); });
     tabsEl.appendChild(b);
@@ -732,8 +748,22 @@
     chips.innerHTML = '';
     chips.appendChild(el('span', 'chip' + (s.gaps ? ' crit' : ''), 'Unfilled ED days <span class="num">' + s.gaps + '</span>'));
     chips.appendChild(el('span', 'chip' + (s.clare ? ' warn' : ''), 'Clare backup <span class="num">' + s.clare + '</span>'));
-    if (MONTH_SITE[curMonth]) chips.appendChild(el('span', 'chip', 'Active birthing site: ' + SITE_NAMES[MONTH_SITE[curMonth]] + ' — obs assist pairs with its ED doctor'));
     if (draftGrid) chips.appendChild(el('span', 'chip warn', 'DRAFT'));
+
+    const banner = document.getElementById('sitebanner');
+    const site = MONTH_SITE[curMonth];
+    banner.hidden = !site;
+    if (site) {
+      banner.innerHTML = '';
+      const left = el('div');
+      left.appendChild(el('div', 'sitelabel', 'Active birthing site — ' + MONTH_NAMES[curMonth]));
+      left.appendChild(el('div', 'sitename', SITE_NAMES[site]));
+      banner.appendChild(left);
+      banner.appendChild(el('div', 'sitenote',
+        'All births this month are at ' + SITE_NAMES[site] +
+        '. Obs assist is covered by the ' + SITE_NAMES[site] +
+        ' ED doctor when they hold NALS (obs-support scope).'));
+    }
 
     const pendingByCell = {}, coverByCell = {};
     STATE.requests.filter(r => r.month === curMonth && r.status === 'pending').forEach(r => {
@@ -755,7 +785,12 @@
     t.appendChild(h1); t.appendChild(h2);
     SLOTS.forEach(slot => {
       const tr = el('tr');
-      tr.appendChild(el('td', 'rolename', slot.label));
+      const site = MONTH_SITE[curMonth];
+      const isActiveLine = site && (slot.id === 'ED_' + site || (slot.id === 'OBS' && site));
+      const roleTd = el('td', 'rolename' + (isActiveLine ? ' activeline' : ''), slot.label);
+      if (site && slot.id === 'ED_' + site) roleTd.appendChild(el('span', 'sitetag', '★ birthing site'));
+      if (site && slot.id === 'OBS') roleTd.appendChild(el('span', 'sitetag', 'at ' + SITE_NAMES[site]));
+      tr.appendChild(roleTd);
       for (let day = 1; day <= n; day++) {
         const w = grid[day - 1][slot.id];
         const wd = weekday(curMonth, day);
@@ -963,7 +998,7 @@
     const t = document.getElementById('wftable');
     t.innerHTML = '';
     const hr = el('tr');
-    ['GP', 'Home', 'ED scope', 'GPO', 'GPA', 'Obs support', 'Reduced load', 'FTE'].forEach(h => hr.appendChild(el('th', null, h)));
+    ['GP', 'Home', 'ED scope', 'GPO', 'GPA', 'Obs support (NALS)', 'Reduced load', 'FTE'].forEach(h => hr.appendChild(el('th', null, h)));
     t.appendChild(hr);
     gps().forEach(d => {
       const tr = el('tr');
@@ -1013,7 +1048,7 @@
       '<label style="display:inline;margin:0"><input type="checkbox" id="ngED" checked> ED</label>' +
       '<label style="display:inline;margin:0"><input type="checkbox" id="ngGPO"> GPO</label>' +
       '<label style="display:inline;margin:0"><input type="checkbox" id="ngGPA"> GPA</label>' +
-      '<label style="display:inline;margin:0"><input type="checkbox" id="ngOBS"> Obs support</label></div>' +
+      '<label style="display:inline;margin:0"><input type="checkbox" id="ngOBS"> Obs support (NALS)</label></div>' +
       '<div class="row"><button class="primary" id="dlgok">Add GP</button><button class="ghost" id="dlgcancel">Cancel</button></div>');
     document.getElementById('dlgcancel').onclick = () => dlg.close();
     document.getElementById('dlgok').onclick = async () => {
