@@ -191,6 +191,7 @@
   table.roster td.gapcell { background: var(--off-wash); box-shadow: inset 0 0 0 1.5px var(--off-edge); font-weight: 600; }
   table.roster td.pending { box-shadow: inset 0 0 0 2px var(--day-edge); }
   table.roster td.needcover { box-shadow: inset 0 0 0 2px var(--off-edge); }
+  table.roster td.norun { background: var(--leave-wash); color: var(--ink-3); }
 
   .sitebanner {
     display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
@@ -377,7 +378,7 @@
 <dialog id="dlg"></dialog>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="application/json" id="app-state">{"gps":[{"id":"holly_deer","name":"Holly Deer","home":"CB","skills":["ED","GPO"],"reduced":true,"fte":1.0},{"id":"simon_jackson","name":"Simon Jackson","home":"JT","skills":["ED","GPO"],"reduced":true,"fte":1.0},{"id":"rowena_conway","name":"Rowena Conway","home":"JT","skills":["ED","GPO","GPA"],"reduced":false,"fte":1.0},{"id":"kc_chen","name":"KC Chen","home":"CB","skills":["ED","GPA"],"reduced":false,"fte":1.0},{"id":"niall_fostyk","name":"Niall Fostyk","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"michael_macpherson","name":"Michael MacPherson","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"krishna_bayley","name":"Krishna Bayley","home":"JT","skills":["ED","OBS"],"reduced":false,"fte":0.7},{"id":"fiona_forrester","name":"Fiona Forrester","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":1.0},{"id":"lauren_mclean","name":"Lauren McLean","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":0.7},{"id":"li_chei_lee","name":"Li Chei Lee","home":"CB","skills":["OBS"],"reduced":false,"fte":0.4},{"id":"josh_smith","name":"Josh Smith","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"nitya_sukheja","name":"Nitya Sukheja","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"rick_chalwin","name":"Rick Chalwin","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"gareth_oreilly","name":"Gareth O'Reilly","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"cynthia_paredes","name":"Cynthia Paredes","home":"CB","skills":["ED","OBS"],"reduced":false,"fte":0.4},{"id":"nikki_pennifold","name":"Nikki Pennifold","home":"CB","skills":["ED"],"reduced":false,"fte":0.4}],"users":{},"months":{"2026-10":{"availability":{"josh_smith":{"19":"off","20":"off","21":"off"},"nitya_sukheja":{"1":"off","2":"off","3":"off","4":"off","5":"off","6":"off","7":"off"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","nitya_sukheja":"sample","holly_deer":"sample","rick_chalwin":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}},"published":{},"notifications":{},"requests":[]}</script>
+<script type="application/json" id="app-state">{"gps":[{"id":"holly_deer","name":"Holly Deer","home":"CB","skills":["ED","GPO","LAURA"],"reduced":true,"fte":1.0,"adv":true},{"id":"simon_jackson","name":"Simon Jackson","home":"JT","skills":["ED","GPO","ORROROO"],"reduced":true,"fte":1.0,"adv":true},{"id":"rowena_conway","name":"Rowena Conway","home":"JT","skills":["ED","GPO","GPA","ORROROO"],"reduced":false,"fte":1.0},{"id":"kc_chen","name":"KC Chen","home":"CB","skills":["ED","GPA"],"reduced":false,"fte":1.0},{"id":"niall_fostyk","name":"Niall Fostyk","home":"JT","skills":["ED","OBS","ORROROO"],"reduced":false,"fte":1.0},{"id":"michael_macpherson","name":"Michael MacPherson","home":"JT","skills":["ED","OBS","ORROROO"],"reduced":false,"fte":1.0},{"id":"krishna_bayley","name":"Krishna Bayley","home":"JT","skills":["ED","OBS","ORROROO"],"reduced":false,"fte":0.7},{"id":"fiona_forrester","name":"Fiona Forrester","home":"CB","skills":["ED","OBS","LAURA"],"reduced":false,"fte":1.0},{"id":"lauren_mclean","name":"Lauren McLean","home":"CB","skills":["ED","OBS","LAURA"],"reduced":false,"fte":0.7},{"id":"li_chei_lee","name":"Li Chei Lee","home":"CB","skills":["OBS"],"reduced":false,"fte":0.4},{"id":"josh_smith","name":"Josh Smith","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"nitya_sukheja","name":"Nitya Sukheja","home":"CB","skills":["ED"],"reduced":false,"fte":0.5},{"id":"rick_chalwin","name":"Rick Chalwin","home":"CB","skills":["ED"],"reduced":false,"fte":0.4},{"id":"gareth_oreilly","name":"Gareth O'Reilly","home":"CB","skills":["ED","LAURA"],"reduced":false,"fte":0.4},{"id":"cynthia_paredes","name":"Cynthia Paredes","home":"CB","skills":["ED","OBS","LAURA"],"reduced":false,"fte":0.4},{"id":"nikki_pennifold","name":"Nikki Pennifold","home":"CB","skills":["ED","LAURA"],"reduced":false,"fte":0.4}],"users":{},"months":{"2026-10":{"availability":{"josh_smith":{"19":"off","20":"off","21":"off"},"nitya_sukheja":{"1":"off","2":"off","3":"off","4":"off","5":"off","6":"off","7":"off"},"holly_deer":{"12":"leave","13":"leave","14":"leave","15":"leave","16":"leave","17":"leave","18":"leave"},"rick_chalwin":{"1":"off","2":"off","3":"off","4":"off","19":"off","20":"off","21":"off","22":"off","23":"off","24":"off","25":"off"},"kc_chen":{"22":"leave","23":"leave","24":"leave","25":"leave"},"gareth_oreilly":{"8":"off","9":"off","10":"off","11":"off","12":"off","13":"off","14":"off"}},"submitted":{"josh_smith":"sample","nitya_sukheja":"sample","holly_deer":"sample","rick_chalwin":"sample","kc_chen":"sample","gareth_oreilly":"sample"}},"2026-11":{"availability":{},"submitted":{}}},"published":{},"notifications":{},"requests":[],"schemaV3":true}</script>
 <script>
 (function () {
   'use strict';
@@ -394,13 +395,18 @@
     leave: { cls: 'st-leave', label: 'L · Leave' }
   };
   const SLOTS = [
-    { id: 'GPO', label: 'GP obstetrician', skill: 'GPO', kind: 'full' },
-    { id: 'GPA', label: 'GP anaesthetist', skill: 'GPA', kind: 'full' },
-    { id: 'OBS', label: 'Obs support', skill: 'OBS', kind: 'full' },
-    { id: 'ED_JT', label: 'ED — Jamestown', skill: 'ED', kind: 'full', site: 'JT' },
-    { id: 'ED_CB', label: 'ED — Crystal Brook', skill: 'ED', kind: 'full', site: 'CB' }
+    { id: 'GPO_CB', label: 'GPO — Crystal Brook', skill: 'GPO' },
+    { id: 'GPO_JT', label: 'GPO — Jamestown', skill: 'GPO' },
+    { id: 'GPA', label: 'GP anaesthetist', skill: 'GPA' },
+    { id: 'OBS', label: 'Obs support', skill: 'OBS' },
+    { id: 'ED_JT', label: 'ED — Jamestown', skill: 'ED' },
+    { id: 'ED_CB', label: 'ED — Crystal Brook', skill: 'ED' },
+    { id: 'ED_LAURA', label: 'ED — Laura', skill: 'LAURA' },
+    { id: 'ED_ORROROO', label: 'ED — Orroroo', skill: 'ORROROO' }
   ];
   const SLOT = Object.fromEntries(SLOTS.map(s => [s.id, s]));
+  const MATERNITY = ['GPO_CB', 'GPO_JT', 'GPA', 'OBS'];
+  const SKILL_LABELS = { ED: 'ED', LAURA: 'Laura ED', ORROROO: 'Orroroo ED', GPO: 'GPO', GPA: 'GPA', OBS: 'Obs support' };
   // no hard fatigue cap: long stretches are discouraged (score penalty)
   // but never force outside backup while a local doctor is available
   const DOW = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -510,11 +516,43 @@
     return (v === 'day' || v === 'night') ? 'ok' : v;
   }
 
+  /* ---------- day types & line rules ----------
+     Mon 8am - Fri 8am (cells Mon-Thu): both towns birth. GPO at each site
+     (its own town's GPO), at least one advanced (C-sections); 1 GPA and
+     1 obs support from wherever.
+     Fri 8am - Mon 8am (cells Fri-Sun): single team, births at the month's
+     designated site only. The one GPO must be an advanced GPO.
+     A doctor on any maternity line never holds an ED line the same day
+     (one doctor, one role). ED runs 4 lines every day: JT, CB, Laura,
+     Orroroo - Laura/Orroroo go to doctors ticked for those sites. */
+  const isWeekendBlock = (mk, day) => weekday(mk, day) >= 4; // Fri, Sat, Sun
+  function lineActive(mk, day, slotId) {
+    if (!isWeekendBlock(mk, day)) return true;
+    if (slotId === 'GPO_CB') return MONTH_SITE[mk] === 'CB';
+    if (slotId === 'GPO_JT') return MONTH_SITE[mk] === 'JT';
+    return true;
+  }
+  function slotEligible(d, mk, day, slotId) {
+    const wk = isWeekendBlock(mk, day);
+    switch (slotId) {
+      case 'GPO_CB': return d.skills.includes('GPO') && (wk ? !!d.adv : d.home === 'CB');
+      case 'GPO_JT': return d.skills.includes('GPO') && (wk ? !!d.adv : d.home === 'JT');
+      case 'GPA': return d.skills.includes('GPA');
+      case 'OBS': return d.skills.includes('OBS');
+      case 'ED_JT': return d.skills.includes('ED') && d.home === 'JT';
+      case 'ED_CB': return d.skills.includes('ED') && d.home === 'CB';
+      case 'ED_LAURA': return d.skills.includes('LAURA');
+      case 'ED_ORROROO': return d.skills.includes('ORROROO');
+    }
+    return false;
+  }
+
   /* ---------- generator (in-page sibling of the CP-SAT solver) ---------- */
   function generate(monthKey) {
     const DOCS = gps();
     const n = monthDays(monthKey);
-    const slotsTotal = n * SLOTS.length;
+    let slotsTotal = 0;
+    for (let day = 1; day <= n; day++) slotsTotal += SLOTS.filter(s => lineActive(monthKey, day, s.id)).length;
     const weightSum = DOCS.reduce((s, d) => s + d.fte * (d.reduced ? 0.55 : 1), 0);
     const target = {}, load = {}, consec = {};
     DOCS.forEach(d => { target[d.id] = slotsTotal * d.fte * (d.reduced ? 0.55 : 1) / weightSum; load[d.id] = 0; consec[d.id] = 0; });
@@ -531,22 +569,48 @@
         s += consec[d.id] * 0.15; // soft brake on long stretches - never a hard block
         return s;
       };
-      const eligible = slot => DOCS.filter(d => {
-        if (!d.skills.includes(slot.skill) || busy.has(d.id)) return false;
-        if (slot.site && d.home !== slot.site) return false; // each town's ED is covered by its own GP group
-        return stateFor(monthKey, d.id, day) === 'ok';
-      });
-      // one doctor, one role, one site: every line gets its own doctor.
+      const eligible = slot => DOCS.filter(d => !busy.has(d.id) &&
+        slotEligible(d, monthKey, day, slot.id) &&
+        stateFor(monthKey, d.id, day) === 'ok');
+      const active = SLOTS.filter(s => lineActive(monthKey, day, s.id));
       // fill the scarcest line first, so a doctor who is the only option
       // for one line (e.g. the last free GPA) isn't spent on another
-      const todaysOrder = SLOTS.map(s => [s, eligible(s).length])
+      const todaysOrder = active.map(s => [s, eligible(s).length])
         .sort((a, b) => a[1] - b[1]).map(x => x[0]);
       todaysOrder.forEach(slot => {
         const cand = eligible(slot).sort((a, b) => baseScore(a, slot) - baseScore(b, slot));
-        if (!cand.length) { t[slot.id] = slot.skill === 'ED' ? null : 'CLARE'; return; }
+        if (!cand.length) { t[slot.id] = MATERNITY.includes(slot.id) ? 'CLARE' : null; return; }
         const pick = cand[0];
         t[slot.id] = pick.id; busy.add(pick.id); load[pick.id] += 1;
       });
+
+      // weekday rule: at least one of the two GPOs must be advanced (C/S).
+      // Clare backup counts as advanced. If neither is, try to swap one
+      // line to an available advanced GPO; failing that, flag the day.
+      if (!isWeekendBlock(monthKey, day)) {
+        const a = gp(t.GPO_CB), b = gp(t.GPO_JT);
+        const hasAdv = t.GPO_CB === 'CLARE' || t.GPO_JT === 'CLARE' || (a && a.adv) || (b && b.adv);
+        if (!hasAdv) {
+          let best = null;
+          ['GPO_CB', 'GPO_JT'].forEach(line => {
+            DOCS.filter(d => d.adv && !busy.has(d.id) &&
+              slotEligible(d, monthKey, day, line) &&
+              stateFor(monthKey, d.id, day) === 'ok')
+              .forEach(d => {
+                const s = baseScore(d, SLOT[line]);
+                if (!best || s < best.s) best = { line, d, s };
+              });
+          });
+          if (best) {
+            const old = t[best.line];
+            if (old && old !== 'CLARE') { busy.delete(old); load[old] -= 1; }
+            t[best.line] = best.d.id; busy.add(best.d.id); load[best.d.id] += 1;
+          } else {
+            t._noAdv = true; // no advanced GPO on - needs attention
+          }
+        }
+      }
+
       DOCS.forEach(d => { consec[d.id] = busy.has(d.id) ? consec[d.id] + 1 : 0; });
       prev = t;
       grid.push(t);
@@ -557,13 +621,12 @@
   /* ---------- eligibility for taking a shift ---------- */
   function canTake(docId, monthKey, day, slotId, grid) {
     const d = gp(docId);
-    if (!d) return false;
-    const slot = SLOT[slotId];
-    if (!slot || !d.skills.includes(slot.skill)) return false;
-    if (slot.site && d.home !== slot.site) return false; // town-based ED groups
+    if (!d || !SLOT[slotId]) return false;
+    if (!lineActive(monthKey, day, slotId)) return false;
+    if (!slotEligible(d, monthKey, day, slotId)) return false;
     if (stateFor(monthKey, docId, day) !== 'ok') return false;
     const row = grid[day - 1];
-    if (SLOTS.some(s => row[s.id] === docId)) return false; // one 24h role per day
+    if (SLOTS.some(s => row[s.id] === docId)) return false; // one doctor, one role per day
     return true;
   }
   function pub(monthKey) { return STATE.published[monthKey]; }
@@ -572,6 +635,20 @@
   // ED_JT_D/ED_JT_N collapse into ED_JT (day-half holder preferred), and
   // requests pointing at half slots re-point at the merged line
   function migrateState() {
+    // one-time seeding of the trial-model attributes on boards saved before
+    // them: advanced-GPO flags and Laura/Orroroo coverage ticks (from the
+    // historical rosters - admin can adjust in Workforce & scope)
+    if (!STATE.schemaV3) {
+      const ADV = ['holly_deer', 'simon_jackson'];
+      const LA = ['nikki_pennifold', 'cynthia_paredes', 'gareth_oreilly', 'lauren_mclean', 'fiona_forrester', 'holly_deer'];
+      const OR = ['niall_fostyk', 'michael_macpherson', 'rowena_conway', 'krishna_bayley', 'simon_jackson'];
+      (STATE.gps || []).forEach(d => {
+        if (ADV.includes(d.id)) d.adv = true;
+        if (LA.includes(d.id) && !d.skills.includes('LAURA')) d.skills.push('LAURA');
+        if (OR.includes(d.id) && !d.skills.includes('ORROROO')) d.skills.push('ORROROO');
+      });
+      STATE.schemaV3 = true;
+    }
     Object.values(STATE.published || {}).forEach(p => {
       (p.grid || []).forEach(row => {
         ['JT', 'CB'].forEach(site => {
@@ -581,11 +658,23 @@
           }
           delete row[k + '_D']; delete row[k + '_N'];
         });
+        if ('GPO' in row) { // single-GPO era: file under the holder's home town
+          const w = row.GPO;
+          const d = w && w !== 'CLARE' ? gp(w) : null;
+          row['GPO_' + ((d && d.home) || 'CB')] = w;
+          delete row.GPO;
+        }
       });
     });
     (STATE.requests || []).forEach(r => {
-      if (r.slot) r.slot = r.slot.replace(/^(ED_(?:JT|CB))_(?:D|N)$/, '$1');
-      if (r.slot2) r.slot2 = r.slot2.replace(/^(ED_(?:JT|CB))_(?:D|N)$/, '$1');
+      ['slot', 'slot2'].forEach(k => {
+        if (!r[k]) return;
+        r[k] = r[k].replace(/^(ED_(?:JT|CB))_(?:D|N)$/, '$1');
+        if (r[k] === 'GPO') {
+          const d = gp(r.from);
+          r[k] = 'GPO_' + ((d && d.home) || 'CB');
+        }
+      });
     });
   }
 
@@ -721,15 +810,17 @@
 
   /* ---------- roster UI ---------- */
   function gridStats(grid, monthKey) {
-    let clare = 0, gaps = 0;
-    grid.forEach(row => {
+    let clare = 0, gaps = 0, noAdv = 0;
+    grid.forEach((row, i) => {
+      if (row._noAdv) noAdv++;
       SLOTS.forEach(slot => {
+        if (!(slot.id in row)) return; // line not run that day
         const w = row[slot.id];
         if (w === 'CLARE') clare++;
         else if (!w) gaps++;
       });
     });
-    return { clare, gaps, edSlots: 2 * grid.length };
+    return { clare, gaps, noAdv };
   }
 
   function renderRoster() {
@@ -757,8 +848,9 @@
     const s = gridStats(grid, curMonth);
     const chips = document.getElementById('rchips');
     chips.innerHTML = '';
-    chips.appendChild(el('span', 'chip' + (s.gaps ? ' crit' : ''), 'Unfilled ED days <span class="num">' + s.gaps + '</span>'));
+    chips.appendChild(el('span', 'chip' + (s.gaps ? ' crit' : ''), 'Unfilled days <span class="num">' + s.gaps + '</span>'));
     chips.appendChild(el('span', 'chip' + (s.clare ? ' warn' : ''), 'Clare backup <span class="num">' + s.clare + '</span>'));
+    chips.appendChild(el('span', 'chip' + (s.noAdv ? ' crit' : ''), 'Weekdays without an advanced GPO <span class="num">' + s.noAdv + '</span>'));
     if (draftGrid) chips.appendChild(el('span', 'chip warn', 'DRAFT'));
 
     const banner = document.getElementById('sitebanner');
@@ -767,13 +859,13 @@
     if (site) {
       banner.innerHTML = '';
       const left = el('div');
-      left.appendChild(el('div', 'sitelabel', 'Active birthing site — ' + MONTH_NAMES[curMonth]));
+      left.appendChild(el('div', 'sitelabel', 'Weekend birthing site — ' + MONTH_NAMES[curMonth]));
       left.appendChild(el('div', 'sitename', SITE_NAMES[site]));
       banner.appendChild(left);
       banner.appendChild(el('div', 'sitenote',
-        'All births this month are at ' + SITE_NAMES[site] +
-        '. One doctor, one role, one site — every line has its own doctor. ' +
-        'The ED lines also cover Laura (from Crystal Brook) and Orroroo (from Jamestown) remotely.'));
+        'Mon 8am–Fri 8am: both towns birth — a GPO at each site, at least one advanced (C-sections). ' +
+        'Fri 8am–Mon 8am: single team, births at ' + SITE_NAMES[site] + ' only, advanced GPO required. ' +
+        'Maternity-rostered doctors never hold an ED line the same day. All shifts run 8am–8am.'));
     }
 
     const pendingByCell = {}, coverByCell = {};
@@ -796,17 +888,26 @@
     t.appendChild(h1); t.appendChild(h2);
     SLOTS.forEach(slot => {
       const tr = el('tr');
-      const site = MONTH_SITE[curMonth];
-      const isActiveLine = site && (slot.id === 'ED_' + site || (slot.id === 'OBS' && site));
+      const isActiveLine = site && slot.id === 'GPO_' + site;
       const roleTd = el('td', 'rolename' + (isActiveLine ? ' activeline' : ''), slot.label);
-      if (site && slot.id === 'ED_' + site) roleTd.appendChild(el('span', 'sitetag', '★ birthing site'));
-      if (site && slot.id === 'OBS') roleTd.appendChild(el('span', 'sitetag', 'at ' + SITE_NAMES[site]));
+      if (isActiveLine) roleTd.appendChild(el('span', 'sitetag', '★ weekend birthing site'));
       tr.appendChild(roleTd);
       for (let day = 1; day <= n; day++) {
-        const w = grid[day - 1][slot.id];
+        const row = grid[day - 1];
+        const w = row[slot.id];
         const wd = weekday(curMonth, day);
         const td = el('td', wd >= 5 ? 'wk' : '');
         const key = day + ':' + slot.id;
+        if (!lineActive(curMonth, day, slot.id)) {
+          td.classList.add('norun'); td.textContent = '·';
+          td.title = 'No ' + slot.label + ' line Fri 8am–Mon 8am — single weekend team at ' + SITE_NAMES[site];
+          tr.appendChild(td); continue;
+        }
+        if (!(slot.id in row)) {
+          td.classList.add('norun'); td.textContent = '·';
+          td.title = 'Line not in this published roster — regenerate and republish to add it';
+          tr.appendChild(td); continue;
+        }
         if (w === 'CLARE') { td.classList.add('clare'); td.textContent = 'CL'; td.title = 'Clare network backup — no local doctor could take this line today: everyone credentialed for it is on leave, unavailable, or already on another line'; }
         else if (!w) { td.classList.add('gapcell'); td.textContent = '—'; td.title = 'Unfilled'; }
         else {
@@ -814,7 +915,12 @@
           td.textContent = d ? initials(d) : '?';
           td.dataset.doc = w;
           td.title = (d ? d.name : w) + ' — ' + slot.label + ', ' + MONTH_NAMES[curMonth].split(' ')[0] + ' ' + day;
+          if (d && d.adv && slot.id.startsWith('GPO')) td.title += ' · advanced GPO (C/S)';
           if (w === me) td.classList.add('mine');
+        }
+        if (row._noAdv && slot.id.startsWith('GPO')) {
+          td.classList.add('pending');
+          td.title += ' · NO ADVANCED GPO ON THIS WEEKDAY — needs attention';
         }
         if (pendingByCell[key]) { td.classList.add('pending'); td.title += ' · change awaiting agreement'; }
         if (coverByCell[key]) { td.classList.add('needcover'); td.title += ' · COVER NEEDED'; }
@@ -1007,26 +1113,38 @@
     const t = document.getElementById('wftable');
     t.innerHTML = '';
     const hr = el('tr');
-    ['GP', 'Home', 'ED scope', 'GPO', 'GPA', 'Obs support (NALS)', 'Reduced load', 'FTE'].forEach(h => hr.appendChild(el('th', null, h)));
+    ['GP', 'Home', 'ED', 'Laura ED', 'Orroroo ED', 'GPO', 'Advanced GPO (C/S)', 'GPA', 'Obs support (NALS)', 'Reduced load', 'FTE'].forEach(h => hr.appendChild(el('th', null, h)));
     t.appendChild(hr);
     gps().forEach(d => {
       const tr = el('tr');
       tr.appendChild(el('td', 'name', d.name));
       tr.appendChild(el('td', null, d.home));
-      ['ED', 'GPO', 'GPA', 'OBS'].forEach(skill => {
+      const skillCell = skill => {
         const td = el('td');
         const cb = document.createElement('input');
         cb.type = 'checkbox'; cb.checked = d.skills.includes(skill);
-        cb.setAttribute('aria-label', d.name + ' ' + skill + ' scope');
+        cb.setAttribute('aria-label', d.name + ' ' + SKILL_LABELS[skill] + ' scope');
         cb.addEventListener('change', async () => {
           if (cb.checked) { if (!d.skills.includes(skill)) d.skills.push(skill); }
           else d.skills = d.skills.filter(s => s !== skill);
-          notify(d.id, { text: 'Admin updated your roster scope: ' + (cb.checked ? 'added ' : 'removed ') + (skill === 'ED' ? 'ED' : skill) + '. This applies to future rosters and cover eligibility.' });
-          const rl = await persist(); if (!rl) toast(d.name + ' — ' + skill + (cb.checked ? ' added' : ' removed'));
+          notify(d.id, { text: 'Admin updated your roster scope: ' + (cb.checked ? 'added ' : 'removed ') + SKILL_LABELS[skill] + '. This applies to future rosters and cover eligibility.' });
+          const rl = await persist(); if (!rl) toast(d.name + ' — ' + SKILL_LABELS[skill] + (cb.checked ? ' added' : ' removed'));
         });
         td.appendChild(cb);
-        tr.appendChild(td);
+        return td;
+      };
+      ['ED', 'LAURA', 'ORROROO', 'GPO'].forEach(s => tr.appendChild(skillCell(s)));
+      const tdA = el('td');
+      const cbA = document.createElement('input');
+      cbA.type = 'checkbox'; cbA.checked = !!d.adv;
+      cbA.setAttribute('aria-label', d.name + ' advanced GPO');
+      cbA.addEventListener('change', async () => {
+        d.adv = cbA.checked;
+        notify(d.id, { text: 'Admin ' + (d.adv ? 'marked you as an advanced GPO (C-sections)' : 'removed your advanced-GPO marking') + '.' });
+        const rl = await persist(); if (!rl) toast(d.name + ' — advanced GPO ' + (d.adv ? 'on' : 'off'));
       });
+      tdA.appendChild(cbA); tr.appendChild(tdA);
+      ['GPA', 'OBS'].forEach(s => tr.appendChild(skillCell(s)));
       const tdR = el('td');
       const cbR = document.createElement('input');
       cbR.type = 'checkbox'; cbR.checked = !!d.reduced;
@@ -1055,7 +1173,10 @@
       '<label>FTE (0.1–1.0)</label><input type="number" id="ngfte" min="0.1" max="1" step="0.1" value="1.0">' +
       '<label>Scope</label><div class="row">' +
       '<label style="display:inline;margin:0"><input type="checkbox" id="ngED" checked> ED</label>' +
+      '<label style="display:inline;margin:0"><input type="checkbox" id="ngLAURA"> Laura ED</label>' +
+      '<label style="display:inline;margin:0"><input type="checkbox" id="ngORROROO"> Orroroo ED</label>' +
       '<label style="display:inline;margin:0"><input type="checkbox" id="ngGPO"> GPO</label>' +
+      '<label style="display:inline;margin:0"><input type="checkbox" id="ngADV"> Advanced GPO (C/S)</label>' +
       '<label style="display:inline;margin:0"><input type="checkbox" id="ngGPA"> GPA</label>' +
       '<label style="display:inline;margin:0"><input type="checkbox" id="ngOBS"> Obs support (NALS)</label></div>' +
       '<div class="row"><button class="primary" id="dlgok">Add GP</button><button class="ghost" id="dlgcancel">Cancel</button></div>');
@@ -1065,8 +1186,8 @@
       if (!name) { toast('Name required'); return; }
       const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
       if (gp(id)) { toast('That GP already exists'); return; }
-      const skills = ['ED', 'GPO', 'GPA', 'OBS'].filter(s => document.getElementById('ng' + s).checked);
-      STATE.gps.push({ id, name, home: document.getElementById('nghome').value, skills: skills.length ? skills : ['ED'], reduced: false, fte: +document.getElementById('ngfte').value || 1 });
+      const skills = ['ED', 'LAURA', 'ORROROO', 'GPO', 'GPA', 'OBS'].filter(s => document.getElementById('ng' + s).checked);
+      STATE.gps.push({ id, name, home: document.getElementById('nghome').value, skills: skills.length ? skills : ['ED'], adv: document.getElementById('ngADV').checked, reduced: false, fte: +document.getElementById('ngfte').value || 1 });
       users()[id] = { pin: '1234' };
       notify(id, { text: 'Welcome aboard — you’ve been added to the on-call board. Mark your availability for the coming months.' });
       dlg.close();
@@ -1088,14 +1209,16 @@
 
     const per = {};
     gps().forEach(d => { per[d.id] = { gpo: [], gpa: [], obs: [], ed: {} }; });
+    const ED_SITES = { ED_JT: 'JT', ED_CB: 'CB', ED_LAURA: 'Laura', ED_ORROROO: 'Orroroo' };
     grid.forEach((row, i) => {
       const day = i + 1;
-      if (per[row.GPO]) per[row.GPO].gpo.push(day);
+      if (per[row.GPO_CB]) per[row.GPO_CB].gpo.push(day);
+      if (per[row.GPO_JT]) per[row.GPO_JT].gpo.push(day);
       if (per[row.GPA]) per[row.GPA].gpa.push(day);
       if (per[row.OBS]) per[row.OBS].obs.push(day);
-      ['JT', 'CB'].forEach(site => {
-        const w = row['ED_' + site];
-        if (per[w]) per[w].ed[day] = site;
+      Object.entries(ED_SITES).forEach(([slotId, label]) => {
+        const w = row[slotId];
+        if (per[w]) per[w].ed[day] = label;
       });
     });
 
