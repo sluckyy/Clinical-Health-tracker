@@ -222,6 +222,7 @@
   table.wf input[type="number"] { width: 66px; padding: 4px 6px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
   table.wf input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
   table.wf .name { font-weight: 600; white-space: nowrap; }
+  table.wf input.nameinput { width: 150px; font-weight: 600; padding: 5px 8px; }
 
   /* boards */
   .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; margin-top: 12px; }
@@ -319,10 +320,11 @@
       <p class="section-note" id="rosternote"></p>
       <div class="card">
         <div class="row" id="adminrosterrow" hidden>
-          <button class="primary" id="genbtn">Generate from availability</button>
-          <button class="ghost" id="pubbtn" hidden>Publish this roster</button>
+          <button class="primary" id="genbtn">Generate 4 roster options</button>
+          <button class="ghost" id="pubbtn" hidden>Publish this option</button>
           <span class="section-note" id="gennote"></span>
         </div>
+        <div class="monthtabs" id="varianttabs" hidden></div>
         <div class="sitebanner" id="sitebanner" hidden></div>
         <div class="chips" id="rchips"></div>
         <div class="roster-scroll"><table class="roster" id="rostertable"></table></div>
@@ -386,8 +388,44 @@
   /* ---------- constants ---------- */
   const MONTHS = ['2026-10', '2026-11'];
   const MONTH_NAMES = { '2026-10': 'October 2026', '2026-11': 'November 2026' };
-  const MONTH_SITE = { '2026-10': 'CB', '2026-11': 'JT' }; // active birthing site
   const SITE_NAMES = { JT: 'Jamestown', CB: 'Crystal Brook' };
+  const SITE_PATTERNS = [
+    { id: 'alt-cb-first', label: 'Alternating — Crystal Brook first' },
+    { id: 'alt-jt-first', label: 'Alternating — Jamestown first' },
+    { id: 'all-cb', label: 'Crystal Brook — every weekend' },
+    { id: 'all-jt', label: 'Jamestown — every weekend' }
+  ];
+  function sitePattern(pattern, blockIdx) {
+    if (pattern === 'all-cb') return 'CB';
+    if (pattern === 'all-jt') return 'JT';
+    const first = pattern === 'alt-jt-first' ? 'JT' : 'CB';
+    const second = first === 'CB' ? 'JT' : 'CB';
+    return blockIdx % 2 === 0 ? first : second;
+  }
+  // groups the month's days into Fri-Sat-Sun weekend blocks (a block can be
+  // shorter at the very start/end of a month) - the unit a birthing site
+  // pattern assigns to, since a whole weekend births at one site
+  function weekendBlocks(monthKey) {
+    const n = monthDays(monthKey);
+    const blocks = [];
+    let cur = null;
+    for (let day = 1; day <= n; day++) {
+      if (weekday(monthKey, day) >= 4) {
+        if (!cur) { cur = { start: day, end: day }; blocks.push(cur); }
+        else cur.end = day;
+      } else cur = null;
+    }
+    return blocks;
+  }
+  function siteMap(monthKey, pattern) {
+    const blocks = weekendBlocks(monthKey);
+    const map = {};
+    blocks.forEach((b, i) => {
+      const site = sitePattern(pattern, i);
+      for (let d = b.start; d <= b.end; d++) map[d] = site;
+    });
+    return { blocks, map };
+  }
   const STATES = ['ok', 'off', 'leave'];
   const STATE_META = {
     ok: { cls: 'st-ok', label: '✓ Available' },
@@ -416,7 +454,9 @@
   let me = null;          // signed-in user id ('admin' or gp id)
   let curMonth = MONTHS[0];
   let availTarget = null; // whose availability the calendar edits
-  let draftGrid = null;   // admin-generated, unpublished roster
+  let draftGrid = null;   // admin-generated, unpublished roster (the selected variant)
+  let draftVariants = null; // { patternId: grid } - the 4 generated options, pre-publish
+  let draftPattern = null;  // which variant is currently selected/shown
 
   const gps = () => STATE.gps;
   const gp = id => STATE.gps.find(d => d.id === id);
@@ -518,22 +558,26 @@
      Mon 8am - Fri 8am (cells Mon-Thu): both towns birth. GPO at each site
      (its own town's GPO), at least one advanced (C-sections); 1 GPA and
      1 obs support from wherever.
-     Fri 8am - Mon 8am (cells Fri-Sun): single team, births at the month's
-     designated site only. The one GPO must be an advanced GPO.
+     Fri 8am - Mon 8am (cells Fri-Sun): single team, births at that
+     weekend's designated site only - which site can alternate weekend to
+     weekend within the month (see SITE_PATTERNS). The one GPO must be an
+     advanced GPO.
      A doctor on any maternity line never holds an ED line the same day
      (one doctor, one role). ED runs 2 linked lines every day: the
      Jamestown ED doctor also covers Orroroo, the Crystal Brook ED doctor
      also covers Laura - the remote-coverage tick gates who can hold
-     each linked line. */
-  const isWeekendBlock = (mk, day) => weekday(mk, day) >= 4; // Fri, Sat, Sun
-  function lineActive(mk, day, slotId) {
-    if (!isWeekendBlock(mk, day)) return true;
-    if (slotId === 'GPO_CB') return MONTH_SITE[mk] === 'CB';
-    if (slotId === 'GPO_JT') return MONTH_SITE[mk] === 'JT';
+     each linked line.
+     A generated row carries its own weekend site as row._site (undefined
+     on weekdays), so eligibility and rendering never need to recompute a
+     month-wide site - each published roster is self-describing. */
+  function lineActive(row, slotId) {
+    if (!row._site) return true;
+    if (slotId === 'GPO_CB') return row._site === 'CB';
+    if (slotId === 'GPO_JT') return row._site === 'JT';
     return true;
   }
-  function slotEligible(d, mk, day, slotId) {
-    const wk = isWeekendBlock(mk, day);
+  function slotEligible(d, row, slotId) {
+    const wk = !!row._site;
     switch (slotId) {
       case 'GPO_CB': return d.skills.includes('GPO') && (wk ? !!d.adv : d.home === 'CB');
       case 'GPO_JT': return d.skills.includes('GPO') && (wk ? !!d.adv : d.home === 'JT');
@@ -548,11 +592,15 @@
   }
 
   /* ---------- generator (in-page sibling of the CP-SAT solver) ---------- */
-  function generate(monthKey) {
+  function generate(monthKey, pattern) {
     const DOCS = gps();
     const n = monthDays(monthKey);
+    const { map: siteForDay } = siteMap(monthKey, pattern);
     let slotsTotal = 0;
-    for (let day = 1; day <= n; day++) slotsTotal += SLOTS.filter(s => lineActive(monthKey, day, s.id)).length;
+    for (let day = 1; day <= n; day++) {
+      const row0 = { _site: siteForDay[day] };
+      slotsTotal += SLOTS.filter(s => lineActive(row0, s.id)).length;
+    }
     const weightSum = DOCS.reduce((s, d) => s + d.fte * (d.reduced ? 0.55 : 1), 0);
     const target = {}, load = {}, consec = {};
     DOCS.forEach(d => { target[d.id] = slotsTotal * d.fte * (d.reduced ? 0.55 : 1) / weightSum; load[d.id] = 0; consec[d.id] = 0; });
@@ -560,7 +608,7 @@
     let prev = {};
 
     for (let day = 1; day <= n; day++) {
-      const t = {};
+      const t = { _site: siteForDay[day] || undefined };
       const busy = new Set();
       const baseScore = (d, slot) => {
         let s = load[d.id] / Math.max(target[d.id], 0.5);
@@ -570,9 +618,9 @@
         return s;
       };
       const eligible = slot => DOCS.filter(d => !busy.has(d.id) &&
-        slotEligible(d, monthKey, day, slot.id) &&
+        slotEligible(d, t, slot.id) &&
         stateFor(monthKey, d.id, day) === 'ok');
-      const active = SLOTS.filter(s => lineActive(monthKey, day, s.id));
+      const active = SLOTS.filter(s => lineActive(t, s.id));
       // fill the scarcest line first, so a doctor who is the only option
       // for one line (e.g. the last free GPA) isn't spent on another
       const todaysOrder = active.map(s => [s, eligible(s).length])
@@ -587,14 +635,14 @@
       // weekday rule: at least one of the two GPOs must be advanced (C/S).
       // Clare backup counts as advanced. If neither is, try to swap one
       // line to an available advanced GPO; failing that, flag the day.
-      if (!isWeekendBlock(monthKey, day)) {
+      if (!t._site) {
         const a = gp(t.GPO_CB), b = gp(t.GPO_JT);
         const hasAdv = t.GPO_CB === 'CLARE' || t.GPO_JT === 'CLARE' || (a && a.adv) || (b && b.adv);
         if (!hasAdv) {
           let best = null;
           ['GPO_CB', 'GPO_JT'].forEach(line => {
             DOCS.filter(d => d.adv && !busy.has(d.id) &&
-              slotEligible(d, monthKey, day, line) &&
+              slotEligible(d, t, line) &&
               stateFor(monthKey, d.id, day) === 'ok')
               .forEach(d => {
                 const s = baseScore(d, SLOT[line]);
@@ -621,11 +669,11 @@
   /* ---------- eligibility for taking a shift ---------- */
   function canTake(docId, monthKey, day, slotId, grid) {
     const d = gp(docId);
-    if (!d || !SLOT[slotId]) return false;
-    if (!lineActive(monthKey, day, slotId)) return false;
-    if (!slotEligible(d, monthKey, day, slotId)) return false;
-    if (stateFor(monthKey, docId, day) !== 'ok') return false;
     const row = grid[day - 1];
+    if (!d || !SLOT[slotId] || !row) return false;
+    if (!lineActive(row, slotId)) return false;
+    if (!slotEligible(d, row, slotId)) return false;
+    if (stateFor(monthKey, docId, day) !== 'ok') return false;
     if (SLOTS.some(s => row[s.id] === docId)) return false; // one doctor, one role per day
     return true;
   }
@@ -659,8 +707,8 @@
       });
       STATE.schemaV4 = true;
     }
-    Object.values(STATE.published || {}).forEach(p => {
-      (p.grid || []).forEach(row => {
+    Object.entries(STATE.published || {}).forEach(([mk, p]) => {
+      (p.grid || []).forEach((row, i) => {
         ['JT', 'CB'].forEach(site => {
           const k = 'ED_' + site;
           if (row[k] === undefined && (row[k + '_D'] !== undefined || row[k + '_N'] !== undefined)) {
@@ -673,6 +721,12 @@
           const d = w && w !== 'CLARE' ? gp(w) : null;
           row['GPO_' + ((d && d.home) || 'CB')] = w;
           delete row.GPO;
+        }
+        // pre-per-row-site era: infer the weekend's site from which GPO
+        // line the generator actually ran (the other was simply absent)
+        if (row._site === undefined && weekday(mk, i + 1) >= 4) {
+          if ('GPO_CB' in row && !('GPO_JT' in row)) row._site = 'CB';
+          else if ('GPO_JT' in row && !('GPO_CB' in row)) row._site = 'JT';
         }
       });
     });
@@ -768,10 +822,9 @@
   /* ---------- availability UI ---------- */
   const tabsEl = document.getElementById('monthtabs');
   MONTHS.forEach(m => {
-    const site = MONTH_SITE[m];
-    const b = el('button', 'mtab', MONTH_NAMES[m] + (site ? ' · births at ' + site : ''));
+    const b = el('button', 'mtab', MONTH_NAMES[m]);
     b.dataset.m = m; b.setAttribute('role', 'tab');
-    b.addEventListener('click', () => { curMonth = m; draftGrid = null; renderMain(); });
+    b.addEventListener('click', () => { curMonth = m; draftGrid = null; draftVariants = null; renderMain(); });
     tabsEl.appendChild(b);
   });
 
@@ -841,19 +894,41 @@
     const adminRow = document.getElementById('adminrosterrow');
     adminRow.hidden = !isAdmin();
     document.getElementById('pubbtn').hidden = !draftGrid;
+
+    const variantTabs = document.getElementById('varianttabs');
+    if (isAdmin() && draftVariants) {
+      variantTabs.hidden = false;
+      variantTabs.innerHTML = '';
+      SITE_PATTERNS.forEach(sp => {
+        const b = el('button', 'mtab', sp.label);
+        b.setAttribute('aria-selected', String(sp.id === draftPattern));
+        b.addEventListener('click', () => {
+          draftPattern = sp.id; draftGrid = draftVariants[sp.id];
+          renderRoster(); renderShifts();
+        });
+        variantTabs.appendChild(b);
+      });
+    } else {
+      variantTabs.hidden = true;
+    }
+
     const note = document.getElementById('rosternote');
     const grid = draftGrid || (p && p.grid);
     if (!grid) {
       note.textContent = isAdmin()
-        ? 'No published roster for this month yet — generate one from the saved availability, review it, then publish.'
+        ? 'No published roster for this month yet — generate the 4 weekend-site options from saved availability, compare them, then publish one.'
         : 'The roster for this month hasn’t been published yet.';
       document.getElementById('rostertable').innerHTML = '';
       document.getElementById('rchips').innerHTML = '';
+      document.getElementById('sitebanner').hidden = true;
       return;
     }
+    const patternLabel = draftGrid
+      ? (SITE_PATTERNS.find(sp => sp.id === draftPattern) || {}).label
+      : p.patternLabel;
     note.textContent = draftGrid
-      ? 'DRAFT — not visible to GPs until you publish. Publishing notifies everyone on it.'
-      : 'Published ' + p.at + '. ' + (isAdmin()
+      ? 'DRAFT — ' + patternLabel + '. Not visible to GPs until you publish. Publishing notifies everyone on it.'
+      : 'Published ' + p.at + (patternLabel ? ' · ' + patternLabel : '') + '. ' + (isAdmin()
           ? 'Click any cell to propose a reassignment — it takes effect when the incoming GP agrees.'
           : 'Your shifts are highlighted. Click one to request cover or propose a swap.');
 
@@ -865,18 +940,22 @@
     chips.appendChild(el('span', 'chip' + (s.noAdv ? ' crit' : ''), 'Weekdays without an advanced GPO <span class="num">' + s.noAdv + '</span>'));
     if (draftGrid) chips.appendChild(el('span', 'chip warn', 'DRAFT'));
 
+    // banner: read each weekend block's site straight off the grid, so it's
+    // correct whether the pattern is alternating or fixed
     const banner = document.getElementById('sitebanner');
-    const site = MONTH_SITE[curMonth];
-    banner.hidden = !site;
-    if (site) {
+    const blocks = weekendBlocks(curMonth).map(b => ({ ...b, site: grid[b.start - 1] && grid[b.start - 1]._site }));
+    const anySite = blocks.some(b => b.site);
+    banner.hidden = !anySite;
+    if (anySite) {
       banner.innerHTML = '';
       const left = el('div');
-      left.appendChild(el('div', 'sitelabel', 'Weekend birthing site — ' + MONTH_NAMES[curMonth]));
-      left.appendChild(el('div', 'sitename', SITE_NAMES[site]));
+      left.appendChild(el('div', 'sitelabel', 'Weekend birthing sites — ' + MONTH_NAMES[curMonth]));
+      left.appendChild(el('div', 'sitename',
+        blocks.map(b => (b.start === b.end ? b.start : b.start + '–' + b.end) + ': ' + (b.site ? SITE_NAMES[b.site] : '—')).join('   ')));
       banner.appendChild(left);
       banner.appendChild(el('div', 'sitenote',
         'Mon 8am–Fri 8am: both towns birth — a GPO at each site, at least one advanced (C-sections). ' +
-        'Fri 8am–Mon 8am: single team, births at ' + SITE_NAMES[site] + ' only, advanced GPO required. ' +
+        'Fri 8am–Mon 8am: single team at that weekend’s site only, advanced GPO required. ' +
         'ED lines are linked: the Jamestown ED doctor also covers Orroroo, the Crystal Brook ED doctor covers Laura. ' +
         'Maternity-rostered doctors never hold an ED line the same day. All shifts run 8am–8am.'));
     }
@@ -901,19 +980,16 @@
     t.appendChild(h1); t.appendChild(h2);
     SLOTS.forEach(slot => {
       const tr = el('tr');
-      const isActiveLine = site && slot.id === 'GPO_' + site;
-      const roleTd = el('td', 'rolename' + (isActiveLine ? ' activeline' : ''), slot.label);
-      if (isActiveLine) roleTd.appendChild(el('span', 'sitetag', '★ weekend birthing site'));
-      tr.appendChild(roleTd);
+      tr.appendChild(el('td', 'rolename', slot.label));
       for (let day = 1; day <= n; day++) {
         const row = grid[day - 1];
         const w = row[slot.id];
         const wd = weekday(curMonth, day);
         const td = el('td', wd >= 5 ? 'wk' : '');
         const key = day + ':' + slot.id;
-        if (!lineActive(curMonth, day, slot.id)) {
+        if (!lineActive(row, slot.id)) {
           td.classList.add('norun'); td.textContent = '·';
-          td.title = 'No ' + slot.label + ' line Fri 8am–Mon 8am — single weekend team at ' + SITE_NAMES[site];
+          td.title = 'No ' + slot.label + ' line Fri 8am–Mon 8am — single weekend team at ' + SITE_NAMES[row._site];
           tr.appendChild(td); continue;
         }
         if (!(slot.id in row)) {
@@ -956,17 +1032,21 @@
   }
 
   document.getElementById('genbtn').addEventListener('click', () => {
-    draftGrid = generate(curMonth);
-    document.getElementById('gennote').textContent = 'Draft built from ' +
-      Object.keys(STATE.months[curMonth].submitted).length + ' availability sheets.';
+    draftVariants = {};
+    SITE_PATTERNS.forEach(sp => { draftVariants[sp.id] = generate(curMonth, sp.id); });
+    draftPattern = SITE_PATTERNS[0].id;
+    draftGrid = draftVariants[draftPattern];
+    document.getElementById('gennote').textContent = 'Built from ' +
+      Object.keys(STATE.months[curMonth].submitted).length + ' availability sheets — compare the 4 tabs, then publish the one you want.';
     renderRoster(); renderShifts();
   });
   document.getElementById('pubbtn').addEventListener('click', async () => {
-    STATE.published[curMonth] = { grid: draftGrid, at: today() };
+    const patternLabel = (SITE_PATTERNS.find(sp => sp.id === draftPattern) || {}).label;
+    STATE.published[curMonth] = { grid: draftGrid, at: today(), pattern: draftPattern, patternLabel };
     const onIt = new Set();
     draftGrid.forEach(row => SLOTS.forEach(s => { if (row[s.id] && row[s.id] !== 'CLARE') onIt.add(row[s.id]); }));
     onIt.forEach(id => notify(id, { text: 'The ' + MONTH_NAMES[curMonth] + ' roster has been published — check your shifts on the board.' }));
-    draftGrid = null;
+    draftGrid = null; draftVariants = null; draftPattern = null;
     const reloading = await persist();
     if (!reloading) { renderMain(); toast('Roster published — GPs notified.'); }
   });
@@ -1130,7 +1210,21 @@
     t.appendChild(hr);
     gps().forEach(d => {
       const tr = el('tr');
-      tr.appendChild(el('td', 'name', d.name));
+      const tdName = el('td', 'name');
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text'; nameInput.value = d.name; nameInput.className = 'nameinput';
+      nameInput.setAttribute('aria-label', 'Edit name for ' + d.name);
+      nameInput.addEventListener('change', async () => {
+        const newName = nameInput.value.trim();
+        if (!newName || newName === d.name) { nameInput.value = d.name; return; }
+        const oldName = d.name;
+        d.name = newName;
+        notify(d.id, { text: 'Admin renamed your profile from ' + oldName + ' to ' + newName + '.' });
+        const rl = await persist();
+        if (!rl) { renderMain(); renderLogin(); toast(oldName + ' renamed to ' + newName); }
+      });
+      tdName.appendChild(nameInput);
+      tr.appendChild(tdName);
       tr.appendChild(el('td', null, d.home));
       const skillCell = skill => {
         const td = el('td');
